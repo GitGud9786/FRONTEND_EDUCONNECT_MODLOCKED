@@ -1,0 +1,24 @@
+.todolist{
+    width: 300px;
+    margin-left: auto;
+    padding-right: 20px;
+    font-family: Arial, sans-serif;
+  }
+  .todolist ul {
+    padding: 0; /* Remove default padding for the list */
+}
+.todoheader{
+    font-size: 20px;
+}
+
+.todolist ul li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 2px solid #040273;
+    background-color: #f9f9f9;
+    transition: background-color 0.5s ease;
+}
+ .todolist ul li:hover {
+    color: #ffffff;
+    background-color: #040273; /* Change color on hover */
+  }
