@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
 import bike_icon from '../Assets/bike.png';
@@ -8,16 +8,39 @@ import logo from '../Assets/logo.jpg';
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // State to handle error messages
   
-  const navigate = useNavigate(); // for programmatic navigation
+  const navigate = useNavigate(); // For navigation after login success
 
-  const handleLogin = (e) => {
-    e.preventDefault(); // prevent the default form submission behavior
-    console.log("Email:", email);
-    console.log("Password:", password);
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
 
-    // After logging in, you can navigate to the dashboard
-    navigate('/dash');
+    try {
+      // Make the POST request to your backend
+      const response = await fetch('https://your-backend-url.com/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password }) // Send email and password in the request body
+      });
+
+      if (!response.ok) {
+        throw new Error('Login failed. Please check your credentials.');
+      }
+
+      const data = await response.json(); // Assuming the response will be JSON
+      console.log("Server Response:", data);
+
+      // Example of handling a successful login (e.g., token received)
+      // Redirect to the dashboard
+      navigate('/dash');
+
+    } catch (err) {
+      // Handle errors here (e.g., login failed)
+      console.error(err.message);
+      setError(err.message); // Display error message to the user
+    }
   };
 
   return (
@@ -49,9 +72,10 @@ const Login = () => {
             />
           </div>
 
+          {error && <div className="error">{error}</div>} {/* Display error if login fails */}
+
           <div className="submit-container">
             <div className="submit" onClick={handleLogin}>
-              {/* Removed the <Link> and used navigate directly in handleLogin */}
               Login
             </div>
           </div>
