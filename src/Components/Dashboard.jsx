@@ -46,7 +46,7 @@ const Dashboard = () => {
 
         <div className="border-shahir"></div>
 
-        <div className="menu-shahir">GENERAL</div>
+        <div className="menu">GENERAL</div>
         <div className="sidebar-shahir">
       <ul>
       <li>
