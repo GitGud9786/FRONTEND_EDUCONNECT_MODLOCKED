@@ -10,7 +10,7 @@
     width: 18%;
     display: flex;
     border-right: 1px solid #a8a4a4;
-    flex-direction: column;
+    flex-direction: column; 
 }
 
 .header
@@ -168,4 +168,12 @@
     color: #1a1382;
     border-bottom: 1px solid #a8a4a4;
     padding-bottom: 10px;
+}
+
+.course-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-around;
+  margin-top: 20px;
 }
