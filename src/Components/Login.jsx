@@ -21,14 +21,6 @@ const Login = () => {
     navigate('/dash');
   };
 
-  const AnimatedImage = () => {
-    return (
-      <div>
-        <img src={std} alt="Expanding Image" className='bulb-login'/>
-      </div>
-    );
-  };
-
   return (
     <div className="container">
       <div className="left">
