@@ -107,8 +107,13 @@ const Dashboard = () => {
                 <FontAwesomeIcon icon={faList} className="icon-home" />
                 <span>ListView</span>
               </button>
-            </div>
-            
+            </div> 
+          </div>
+
+          <div className="cards-home">
+            {courses.map((course, index) => (
+              <CourseCard key={index} {...course}/>
+            ))}
           </div>
         </div>
       </div>
