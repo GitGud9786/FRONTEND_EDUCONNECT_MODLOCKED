@@ -3,7 +3,8 @@ import '../styles/Dashboard.css'
 import CourseCard from './CourseCard';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDashboard, faCalendar, faCheckSquare, faUsers, faEnvelope, faChartBar, faCog, faAddressBook, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCalendar, faCheckSquare, faUsers, faEnvelope, faChartBar, faCog, faAddressBook, faSearch } from '@fortawesome/free-solid-svg-icons';
+import logo from '../Assets/logo.jpg';
 
 const Dashboard = () => {
 
@@ -44,85 +45,18 @@ const Dashboard = () => {
 
 
   return (
-    <div className= "container">
-      <div className="menubar">
-        <div className="header">EDUCONNECT</div>
-        <div className="menu">MENU</div>
-        <div className="sidebar-shahir">
-      <ul>
-      <li>
-          <FontAwesomeIcon icon={faDashboard} className="icon-shahir" />
-          <span>Dashboard</span>
-        </li>
-        <li>
-          <FontAwesomeIcon icon={faCalendar} className="icon-shahir" />
-          <span>Schedule</span>
-        </li>
-        <li>
-          <FontAwesomeIcon icon={faCheckSquare} className="icon-shahir" />
-          <Link to="/course" className="link">Course</Link>
-        </li>
-        <li>
-          <FontAwesomeIcon icon={faUsers} className="icon-shahir" />
-          <span>Students</span>
-        </li>
-        <li className="messages-shahir">
-          <FontAwesomeIcon icon={faEnvelope} className="icon-shahir" />
-          <span>Messages</span>
-          <span className="badge-shahir">2</span>
-        </li>
-        <li>
-          <FontAwesomeIcon icon={faChartBar} className="icon-shahir" />
-          <span>Assignments</span>
-        </li>
-      </ul>
-        </div>
-
-        <div className="border-shahir"></div>
-
-        <div className="menu">GENERAL</div>
-        <div className="sidebar-shahir">
-      <ul>
-      <li>
-          <FontAwesomeIcon icon={faCog} className="icon-shahir" />
-          <span>Settings</span>
-        </li>
-        <li>
-          <FontAwesomeIcon icon={faAddressBook} className="icon-shahir" />
-          <span>Contact</span>
-        </li>
-        
-      </ul>
-        </div>
+    <div className="container-home">
+      <div className="topbar-home">
+        <img src={logo} alt="" className="logo-home" />
+        <ul>
+          <li>
+          <button className="nav-home-selected">
+            <FontAwesomeIcon icon={faHome} className="icon-home" />
+            <span>Home</span>
+          </button>
+          </li>
+        </ul>
       </div>
-      
-
-      <div className="main-shahir">
-        <div className="top-shahir">
-            <div className="search-shahir">
-                <input type="Search-shahir" placeholder="Search"/>
-                <FontAwesomeIcon icon={faSearch} className="seicon-shahir"/>
-            </div>
-
-            <div className="detes-shahir">
-                <span>Oshayer Siddique</span>
-                <span><strong>Student</strong></span>
-            </div>
-                
-            <div className="dates-shahir">
-                <span className="date-shahir">{formattedDate}</span>
-            </div>
-        </div>
-        
-        <div className="header2-shahir">Dashboard</div>
-        <h2>Courses</h2>
-                <div className="course-grid">
-                    {courses.map((course, index) => (
-                        <CourseCard key={index} {...course} />
-                    ))}
-                </div>
-      </div>
-      
     </div>
   )
 }

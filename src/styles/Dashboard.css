@@ -1,16 +1,22 @@
-.container
+.container-home
 {
     height: 100vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    background-color: #0a242e;
 }
 
-.menubar
+.topbar-home
 {
-    width: 18%;
-    display: flex;
-    border-right: 1px solid #a8a4a4;
-    flex-direction: column; 
+  background-color: #14445a;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.logo-home
+{
+  width: 70px;
 }
 
 .header
@@ -39,22 +45,17 @@
     border-bottom: 1px solid #a8a4a4;
 }
 
-.sidebar-shahir {
-    width: 90%px;
-    padding: 0 20px 30px ;
-  }
  
 
-  .sidebar-shahir ul {
+  .topbar-home ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
   }
   
-  .sidebar-shahir ul li {
+  .topbar-home ul li {
     display: flex;
     align-items: center;
-    padding: 10px 0;
     font-size: 16px;
     color: #333;
     cursor: pointer;
@@ -62,14 +63,40 @@
     border-radius: 5px;
   }
 
-  .sidebar-shahir ul li .icon-shahir {
+  .topbar-home ul li .nav-home
+  {
+    font-size: 20px;           
+    display: flex;
+    align-items: center;       
+    justify-content: center;   
+    background-color: #14445a;
+    padding: 13.5px 20px;    
+    border: none;  
+    color: white;
+  }
+
+  .topbar-home ul li .icon-home {
     margin-right: 10px;
     font-size: 20px;
-    color: #555;
   }
-  .sidebar-shahir ul li:hover {
-    background-color:  #0000ff;
-    color: white;
+  .topbar-home ul li .nav-home:hover {
+    background-color:  #0a242e;
+  }
+
+  .topbar-home ul li .nav-home-selected
+  {
+    font-size: 20px;           
+    display: flex;
+    align-items: center;       
+    justify-content: center;   
+    background-color: #14445a;
+    padding: 13.5px 20px;    
+    border: none;  
+    color: #f5bc16;
+  }
+
+  .topbar-home ul li .nav-home-selected:hover {
+    background-color:  #0a242e;
   }
   
   .sidebar-shahir ul li.messages {
