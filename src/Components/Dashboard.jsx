@@ -9,7 +9,8 @@ import logo from '../Assets/logo.jpg';
 const Dashboard = () => {
 
     const currentDate = new Date();
-    const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+    const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+
     
 
     const courses = [

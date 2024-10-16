@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
-import bike_icon from '../Assets/bike.png';
 import logo from '../Assets/logo.jpg';
 import std from '../Assets/student.png';
 import bulb from '../Assets/bulb.png';
