@@ -47,9 +47,10 @@ const Dashboard = () => {
   return (
     <div className="container-home">
       <div className="topbar-home">
+        <div className="topbar-left-home">
         <img src={logo} alt="" className="logo-home" />
         <ul>
-          <li>
+          <li >
           <button className="nav-home-selected">
             <FontAwesomeIcon icon={faHome} className="icon-home" />
             <span>Home</span>
@@ -69,12 +70,28 @@ const Dashboard = () => {
             <FontAwesomeIcon icon={faMessage} className="icon-home" />
             <span>Messages</span>
           </button>
+
           <button className="nav-home">
             <FontAwesomeIcon icon={faChartBar} className="icon-home" />
             <span>Grades</span>
           </button>
+          
           </li>
         </ul>
+        </div>
+
+        <div className="topbar-right-home">
+          <ul>
+            <li>
+              <button className="nav-home">
+              <FontAwesomeIcon icon={faCog} className="icon-home" />
+              </button>
+              <span className="date-home">{formattedDate}</span>
+              <span className="date-home">Shahir Awlad</span>
+            </li>
+          </ul>
+        </div>
+        
       </div>
     </div>
   )

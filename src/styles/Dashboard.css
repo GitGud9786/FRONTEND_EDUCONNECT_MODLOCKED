@@ -45,12 +45,32 @@
     border-bottom: 1px solid #a8a4a4;
 }
 
+.topbar-home
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
  
+.topbar-left-home
+{
+  display: flex;
+  align-items: left;
+  justify-content: left;
+}
 
+.topbar-right-home
+{
+  display: flex;
+  align-self: right;
+  justify-self: right;
+}
   .topbar-home ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    
   }
   
   .topbar-home ul li {
@@ -58,34 +78,34 @@
     align-items: center;
     font-size: 16px;
     color: #333;
-    cursor: pointer;
     transition: background-color 0.3s ease;
     border-radius: 5px;
   }
 
-  .topbar-home ul li .nav-home
+  .nav-home
   {
     font-size: 17px;           
     display: flex;
     align-items: center;       
     justify-content: center;   
-    background-color: #14445a;
+    background-color: hsl(199, 64%, 22%);
     padding: 13.5px 20px;    
     border: none;  
     color: white;
     text-decoration: none;
+    transition: background-color 0.3s ease;
   }
 
-  .topbar-home ul li .icon-home {
+  .icon-home {
     margin-right: 10px;
     font-size: 20px;
   }
-  .topbar-home ul li .nav-home:hover {
+  .nav-home:hover {
     background-color:  #0a242e;
     cursor: pointer;
   }
 
-  .topbar-home ul li .nav-home-selected
+  .nav-home-selected
   {
     font-size: 17px;           
     display: flex;
@@ -96,37 +116,21 @@
     border: none;  
     color: #f5bc16;
     text-decoration: none;
+    transition: background-color 0.3s ease;
   }
 
-  .topbar-home ul li .nav-home-selected:hover {
+  .nav-home-selected:hover {
     background-color:  #0a242e;
     cursor: pointer;
   }
-  
-  .sidebar-shahir ul li.messages {
-    position: relative;
-  }
-  
-  .sidebar-shahir ul li .badge {
-    background-color: red;
-    color: white;
-    font-size: 11px;
-    border-radius: 50%;
-    padding: 1px 6px;
-    position: absolute;
-    right: 0;
-    top: 5px;
-  }
 
-  .messages-shahir .badge-shahir {
-    background-color: red; /* Notification badge color */
+  .date-home
+  {
     color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 12px;
-    margin-left: 10px;
+    font-size: 17px;
+    padding: 13.5px 20px;  
   }
-
+  
 .main-shahir
 {
     width: 82%;
