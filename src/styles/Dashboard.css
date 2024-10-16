@@ -65,7 +65,7 @@
 
   .topbar-home ul li .nav-home
   {
-    font-size: 20px;           
+    font-size: 17px;           
     display: flex;
     align-items: center;       
     justify-content: center;   
@@ -73,6 +73,7 @@
     padding: 13.5px 20px;    
     border: none;  
     color: white;
+    text-decoration: none;
   }
 
   .topbar-home ul li .icon-home {
@@ -81,11 +82,12 @@
   }
   .topbar-home ul li .nav-home:hover {
     background-color:  #0a242e;
+    cursor: pointer;
   }
 
   .topbar-home ul li .nav-home-selected
   {
-    font-size: 20px;           
+    font-size: 17px;           
     display: flex;
     align-items: center;       
     justify-content: center;   
@@ -93,10 +95,12 @@
     padding: 13.5px 20px;    
     border: none;  
     color: #f5bc16;
+    text-decoration: none;
   }
 
   .topbar-home ul li .nav-home-selected:hover {
     background-color:  #0a242e;
+    cursor: pointer;
   }
   
   .sidebar-shahir ul li.messages {

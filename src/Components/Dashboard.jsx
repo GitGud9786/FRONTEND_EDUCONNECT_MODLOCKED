@@ -3,7 +3,7 @@ import '../styles/Dashboard.css'
 import CourseCard from './CourseCard';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faCalendar, faCheckSquare, faUsers, faEnvelope, faChartBar, faCog, faAddressBook, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCalendar, faBook, faUsers, faEnvelope, faChartBar, faCog, faAddressBook, faSearch, faMessage } from '@fortawesome/free-solid-svg-icons';
 import logo from '../Assets/logo.jpg';
 
 const Dashboard = () => {
@@ -53,6 +53,25 @@ const Dashboard = () => {
           <button className="nav-home-selected">
             <FontAwesomeIcon icon={faHome} className="icon-home" />
             <span>Home</span>
+          </button>
+
+          <Link to = "/course" className="nav-home">
+            <FontAwesomeIcon icon={faBook} className="icon-home" />
+            <span>Courses</span>
+          </Link>
+          
+          <button className="nav-home">
+            <FontAwesomeIcon icon={faCalendar} className="icon-home" />
+            <span>Schedule</span>
+          </button>
+
+          <button className="nav-home">
+            <FontAwesomeIcon icon={faMessage} className="icon-home" />
+            <span>Messages</span>
+          </button>
+          <button className="nav-home">
+            <FontAwesomeIcon icon={faChartBar} className="icon-home" />
+            <span>Grades</span>
           </button>
           </li>
         </ul>
