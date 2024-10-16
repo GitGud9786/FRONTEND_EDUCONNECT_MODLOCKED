@@ -1,0 +1,208 @@
+
+
+.topbar-home
+{
+  background-color: #14445a;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.logo-home
+{
+  width: 70px;
+}
+
+.header
+{
+    text-align: center;
+    width: 100%;
+    font-size: 40px;
+    font-weight: 660;
+    color: #1a1382;
+    border-bottom: 1px solid #a8a4a4;
+    padding-top: 2%;
+    padding-bottom: 10px;
+}
+
+.menu
+{
+    text-align: left;
+    font-size: 13px;
+    color: #757272;
+    padding-left: 20px;
+    padding-top: 30px;
+}
+
+.border
+{
+    border-bottom: 1px solid #a8a4a4;
+}
+
+.topbar-home
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ 
+.topbar-left-home
+{
+  display: flex;
+  align-items: left;
+  justify-content: left;
+}
+
+.topbar-right-home
+{
+  display: flex;
+  align-self: right;
+  justify-self: right;
+}
+  .topbar-home ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    
+  }
+  
+  .topbar-home ul li {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #333;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+  }
+
+  .nav-home
+  {
+    font-size: 17px;           
+    display: flex;
+    align-items: center;       
+    justify-content: center;   
+    background-color: hsl(199, 64%, 22%);
+    padding: 13.5px 20px;    
+    border: none;  
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .icon-home {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  .nav-home:hover {
+    background-color:  #0a242e;
+    cursor: pointer;
+  }
+
+  .nav-home-selected
+  {
+    font-size: 17px;           
+    display: flex;
+    align-items: center;       
+    justify-content: center;   
+    background-color: #14445a;
+    padding: 13.5px 20px;    
+    border: none;  
+    color: #f5bc16;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .nav-home-selected:hover {
+    background-color:  #0a242e;
+    cursor: pointer;
+  }
+
+  .date-home
+  {
+    color: white;
+    font-size: 17px;
+    padding: 13.5px 20px;  
+  }
+  
+.main-shahir
+{
+    width: 82%;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-shahir
+{
+    width: 100%;
+    height: 69px;
+    border-bottom: 1px solid #a8a4a4;
+    display: flex;
+}
+
+.search-shahir
+{
+    align-self: left;
+    padding: 20px 30px 20px 50px;
+    display: flex;
+    align-items: center;
+    margin-right: 100px;
+}
+
+.search-shahir input
+{
+    width: 600px;
+    height: 30px;
+}
+
+.seicon-shahir
+{
+    border: 1px solid #a8a4a4;
+    font-size: 27px;
+}
+
+.seicon-shahir:hover
+{
+    background-color: #726c6c;
+}
+
+.detes-shahir
+{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.dates-shahir
+{
+    margin-top: 19px;
+}
+
+.date-shahir
+{
+    font-weight: 500;
+    font-size: 20px;
+    border: 1px solid #c2b8b8;
+    padding-right: 30px;
+}
+
+.header2-shahir
+{
+    text-align: left;
+    width: 100%;
+    font-size: 35px;
+    font-weight: 660;
+    color: #1a1382;
+    border-bottom: 1px solid #a8a4a4;
+    padding-bottom: 10px;
+}
+
+.course-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-around;
+  margin-top: 20px;
+}

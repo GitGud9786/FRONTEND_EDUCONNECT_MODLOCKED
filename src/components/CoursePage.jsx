@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './CoursePage.css';
+import Dashboard from "./Dashboard";
+import '../styles/CoursePage.css';
 
 const Courseinfo = () => {
     const [courseData, setCourseData] = useState(null);
@@ -107,7 +108,8 @@ const PageHeader = () => {
 
 const CombinedComponent = () => {
     return (
-        <div className="App">
+        <div className="App-tausif">
+            <Dashboard />
             <PageHeader />
             <div className="horizontalcontainer">
                 <Sidebar />
