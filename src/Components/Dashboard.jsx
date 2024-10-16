@@ -116,6 +116,23 @@ const Dashboard = () => {
             ))}
           </div>
         </div>
+
+        <div className="main-right-home">
+          <div className="maintop-home">
+            <h1>To Do</h1>
+          </div>
+          <div className="view-home">
+              <button className="nav-home-selected">
+                <span>All</span>
+              </button>
+              <button className="nav-home">
+                <span>Assignments</span>
+              </button>
+              <button className="nav-home">
+                <span>Others</span>
+              </button>
+            </div>
+        </div>
       </div>
     </div>
   )
