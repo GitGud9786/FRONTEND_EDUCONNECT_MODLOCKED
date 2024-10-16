@@ -4,6 +4,8 @@ import '../styles/Login.css';
 
 import bike_icon from '../Assets/bike.png';
 import logo from '../Assets/logo.jpg';
+import std from '../Assets/student.png';
+import bulb from '../Assets/bulb.png';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,6 +20,14 @@ const Login = () => {
 
     // After logging in, you can navigate to the dashboard
     navigate('/dash');
+  };
+
+  const AnimatedImage = () => {
+    return (
+      <div>
+        <img src={std} alt="Expanding Image" className='bulb-login'/>
+      </div>
+    );
   };
 
   return (
@@ -58,8 +68,9 @@ const Login = () => {
         </div>
       </div>
 
-      <div className="right">
-        <img src={bike_icon} alt="" />
+      <div className="right" style={{position: 'relative'}}>
+        <img src={std} alt="" className="student-login"/>
+        <img src={bulb} alt="" className="bulb-login" />
       </div>
     </div>
   );
