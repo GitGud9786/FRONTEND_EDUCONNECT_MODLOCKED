@@ -13,27 +13,6 @@
   width: 70px;
 }
 
-.header
-{
-    text-align: center;
-    width: 100%;
-    font-size: 40px;
-    font-weight: 660;
-    color: #1a1382;
-    border-bottom: 1px solid #a8a4a4;
-    padding-top: 2%;
-    padding-bottom: 10px;
-}
-
-.menu
-{
-    text-align: left;
-    font-size: 13px;
-    color: #757272;
-    padding-left: 20px;
-    padding-top: 30px;
-}
-
 .border
 {
     border-bottom: 1px solid #a8a4a4;
@@ -122,84 +101,39 @@
   {
     color: white;
     font-size: 17px;
-    padding: 13.5px 20px;  
+    padding: 10px 20px;  
   }
   
-.main-shahir
+.main-home
 {
-    width: 82%;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  height: 100%;
 }
 
-.top-shahir
+.main-left-home
 {
-    width: 100%;
-    height: 69px;
-    border-bottom: 1px solid #a8a4a4;
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #16414d;
+  width: 85%;
 }
 
-.search-shahir
+.maintop-home
 {
-    align-self: left;
-    padding: 20px 30px 20px 50px;
-    display: flex;
-    align-items: center;
-    margin-right: 100px;
+  display: flex;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 0 35px;
 }
 
-.search-shahir input
+.view-home
 {
-    width: 600px;
-    height: 30px;
+  display: flex;
+
 }
 
-.seicon-shahir
-{
-    border: 1px solid #a8a4a4;
-    font-size: 27px;
-}
-
-.seicon-shahir:hover
-{
-    background-color: #726c6c;
-}
-
-.detes-shahir
-{
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-right: 30px;
-}
-
-.dates-shahir
-{
-    margin-top: 19px;
-}
-
-.date-shahir
-{
-    font-weight: 500;
-    font-size: 20px;
-    border: 1px solid #c2b8b8;
-    padding-right: 30px;
-}
-
-.header2-shahir
-{
-    text-align: left;
-    width: 100%;
-    font-size: 35px;
-    font-weight: 660;
-    color: #1a1382;
-    border-bottom: 1px solid #a8a4a4;
-    padding-bottom: 10px;
-}
-
-.course-grid {
+.cards-home {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
