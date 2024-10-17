@@ -36,6 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
 body {
   background-color: #18323b; /* Dark green background */
   color: white; /* Make text color white for contrast */
