@@ -1,0 +1,99 @@
+.container-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 40px;
+    color: white;
+    background-color: #0a242e;
+    height: 100vh;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 90px;
+    border-bottom: 4px solid #14445a;
+    padding-bottom: 80px;
+    width: 100%;
+}
+
+.profile-pic-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 190px;
+
+    height: 190px;
+
+    border-radius: 60%;
+    border: 3px solid #f5bc16;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    /* Improved shadow */
+}
+
+.profile-header-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.profile-header-details h1 {
+    font-size: 35px;
+    color: #f5bc16;
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+
+.profile-header-details p {
+    font-size: 18px;
+    color: #a8a4a4;
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.profile-details {
+
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+.card-profile {
+    background-color: #14445a;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.card-profile h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #f5bc16;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-profile p {
+    font-size: 16px;
+    color: #e0e0e0;
+    margin: 8px 0;
+}
+
+.card-profile p strong {
+    color: #f5bc16;
+}
+
+.card-profile p svg {
+    margin-right: 10px;
+}

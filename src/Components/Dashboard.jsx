@@ -11,7 +11,7 @@ const Dashboard = () => {
 
     const currentDate = new Date();
     const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
-
+    const navigate = useNavigate();
     
 
     const courses = [
@@ -83,16 +83,19 @@ const Dashboard = () => {
         </div>
 
         <div className="topbar-right-home">
-          <ul>
-            <li>
-              <button className="nav-home">
-              <FontAwesomeIcon icon={faCog} className="icon-home" />
-              </button>
-              <span className="date-home">{formattedDate}</span>
-              <span className="date-home">Profile</span>
-            </li>
-          </ul>
-        </div>        
+                    <ul>
+                        <li>
+                            <button className="nav-home">
+                                <FontAwesomeIcon icon={faCog} className="icon-home" />
+                            </button>
+                            <span className="date-home">{formattedDate}</span>
+                            {/* Link to the profile page */}
+                            <span className="date-home">
+                                <Link to="/profile" className="nav-home">Profile</Link>
+                            </span>
+                        </li>
+                    </ul>
+           </div>      
       </div>
 
       <div className="main-home">
