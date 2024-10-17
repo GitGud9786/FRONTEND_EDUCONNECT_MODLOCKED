@@ -3,14 +3,13 @@ import '../styles/Dashboard.css'
 import CourseCard from './CourseCard';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faCalendar, faBook, faChartBar, faCog, faMessage, faTh, faList } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCalendar, faBook, faUsers, faEnvelope, faChartBar, faCog, faAddressBook, faSearch, faMessage } from '@fortawesome/free-solid-svg-icons';
 import logo from '../Assets/logo.jpg';
 
 const Dashboard = () => {
 
     const currentDate = new Date();
-    const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
-
+    const formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
     
 
     const courses = [
@@ -91,49 +90,8 @@ const Dashboard = () => {
               <span className="date-home">Shahir Awlad</span>
             </li>
           </ul>
-        </div>        
-      </div>
-
-      <div className="main-home">
-        <div className="main-left-home">
-          <div className="maintop-home">
-            <h1>Home</h1>
-
-            <div className="view-home">
-              <button className="nav-home-selected">
-                <FontAwesomeIcon icon={faTh} className="icon-home" />
-                <span>GridView</span>
-              </button>
-              <button className="nav-home">
-                <FontAwesomeIcon icon={faList} className="icon-home" />
-                <span>ListView</span>
-              </button>
-            </div> 
-          </div>
-
-          <div className="cards-home">
-            {courses.map((course, index) => (
-              <CourseCard key={index} {...course}/>
-            ))}
-          </div>
         </div>
-
-        <div className="main-right-home">
-          <div className="maintop-home">
-            <h1>To Do</h1>
-          </div>
-          <div className="view-home">
-              <button className="nav-home-selected">
-                <span>All</span>
-              </button>
-              <button className="nav-home">
-                <span>Assignments</span>
-              </button>
-              <button className="nav-home">
-                <span>Others</span>
-              </button>
-            </div>
-        </div>
+        
       </div>
     </div>
   )

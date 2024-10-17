@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
+import bike_icon from '../Assets/bike.png';
 import logo from '../Assets/logo.jpg';
-import std from '../Assets/student.png';
-import bulb from '../Assets/bulb.png';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -35,7 +34,7 @@ const Login = () => {
           <div className="input">
             <input 
               type="email" 
-              placeholder="   Enter Your Email" 
+              placeholder="Enter Your Email" 
               value={email}
               onChange={(e) => setEmail(e.target.value)} 
             />
@@ -44,7 +43,7 @@ const Login = () => {
           <div className="input">
             <input 
               type="password" 
-              placeholder="   Enter Your Password" 
+              placeholder="Enter Your Password" 
               value={password}
               onChange={(e) => setPassword(e.target.value)} 
             />
@@ -59,9 +58,8 @@ const Login = () => {
         </div>
       </div>
 
-      <div className="right" style={{position: 'relative'}}>
-        <img src={std} alt="" className="student-login"/>
-        <img src={bulb} alt="" className="bulb-login" />
+      <div className="right">
+        <img src={bike_icon} alt="" />
       </div>
     </div>
   );
