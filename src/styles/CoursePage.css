@@ -1,0 +1,175 @@
+.sidebar {
+  width: 200px;
+  height: 400px;
+  background-color: #0a242e;
+  margin-left: 40px;
+  margin-right: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+  padding: 0; /* Remove padding to help with alignment */
+  display: flex; /* Use flexbox to center the content */
+  flex-direction: column; /* Stack the items vertically */
+  align-items: center; /* Center horizontally */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+
+}
+
+.sidebar ul li {
+  padding: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 10px;
+  background-color: #0a242e;
+  border-bottom: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-radius: 5px;
+  text-align: left; /* Center the text in the list items */
+  transition: background-color 0.5s ease;
+  width: 80%; /* Adjust width for better centering */
+}
+  
+  /* Hover effect */
+  .sidebar ul li:hover {
+    color: #ffffff;
+    background-color: #f9f9f9; /* Change color on hover */
+    color:black;
+  }
+  
+  .pageheader {
+    max-width: 1450px;
+    padding-top: 10px;
+    width: 100%;
+    height: 45px;
+    font-size: 24px;
+    border-bottom: 4px solid #f9f9f9;
+    box-sizing: border-box;
+    margin: 0 auto 20px auto; /* Center the header and add spacing below */
+    text-align: left; /* Center the text inside the header */
+    font-family: Arial, sans-serif;
+}
+
+.courseinfo {
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #0a242e;
+  width: 800px;
+  text-align: left;
+  display: block;
+
+  /* Shadow properties */
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5); /* Add shadow */
+  border-radius: 10px; /* Optional: rounded corners */
+  align-items: left;
+}
+
+  
+  .coursetitle h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+  }
+  
+  .courseinfo h3 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 24px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    border-radius: 5px;
+    background-color: #14445a;
+    text-align: left;
+  }
+
+  .coursedetails-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .coursedetails-container {
+    flex: 1;
+    line-height: 1.6;
+  }
+  
+  .coursedetails p {
+    margin: 10px 0;
+  }
+  
+  .coursedetails a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  .coursedetails a:hover {
+    text-decoration: underline;
+  }
+  
+  .courseinstructions {
+    height: 20px;
+    padding: 10px;
+    background-color: #18465c;
+    border-left: 5px solid #01141d;
+    margin-top: 20px;
+
+    /* Flexbox properties */
+    display: flex;                 /* Enable flexbox */
+    align-items: center;          /* Vertically center the content */
+    justify-content: flex-start;  /* Align to the left (default behavior) */
+}
+
+  
+  .courseinstructions p {
+    font-size: 14px;
+  }
+
+  .todolist{
+    width: 290px;
+    margin-left: auto;
+    margin-right: 40px;
+    padding-right: 40px;
+    padding-left: 40px;
+    font-family: Arial, sans-serif;
+    background-color: #0a242e;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5); /* Add shadow */
+  border-radius: 10px; /* Optional: rounded corners */
+    
+  }
+  .todolist ul {
+    padding: 0; /* Remove default padding for the list */
+}
+.todoheader{
+    font-size: 20px;
+}
+
+.todolist ul li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 2px solid #f9f9f9;
+    background-color: #0a242e;
+    transition: background-color 0.5s ease;
+}
+ .todolist ul li:hover {
+    background-color: #f9f9f9; /* Change color on hover */
+    color:black;
+  }
+
+  .App-tausif
+  {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .horizontalcontainer
+  {
+    display: flex;
+    flex-direction: row;
+  }
