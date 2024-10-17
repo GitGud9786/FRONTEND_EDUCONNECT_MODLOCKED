@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
-import bike_icon from '../Assets/bike.png';
+import bike_icon from '../Assets/study.png';
 import logo from '../Assets/logo.jpg';
 
 const Login = () => {
@@ -21,6 +21,7 @@ const Login = () => {
   };
 
   return (
+    <div className="login-page">
     <div className="container">
       <div className="left">
         <img src={logo} alt="" />
@@ -61,6 +62,8 @@ const Login = () => {
       <div className="right">
         <img src={bike_icon} alt="" />
       </div>
+    </div>
+    <div className="bottom-login">Created by MODLOCKED©</div>
     </div>
   );
 };
