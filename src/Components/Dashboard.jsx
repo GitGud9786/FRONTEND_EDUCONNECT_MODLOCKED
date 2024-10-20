@@ -63,20 +63,17 @@ const Dashboard = () => {
             <span>Courses</span>
           </Link>
           
-          <button className="nav-home">
-            <FontAwesomeIcon icon={faCalendar} className="icon-home" />
+          <Link to="/schedule" className="nav-home">
+            <FontAwesomeIcon icon={faCalendar}  className="icon-home" />
             <span>Schedule</span>
-          </button>
+          </Link>
 
-          <button className="nav-home">
+
+          <Link to="/messages" className="nav-home">
             <FontAwesomeIcon icon={faMessage} className="icon-home" />
             <span>Messages</span>
-          </button>
+          </Link>
 
-          <button className="nav-home">
-            <FontAwesomeIcon icon={faChartBar} className="icon-home" />
-            <span>Grades</span>
-          </button>
           
           </li>
         </ul>
@@ -126,7 +123,7 @@ const Dashboard = () => {
 
         <div className="main-right-home">
           <div className="maintop-home">
-            <h1>To Do</h1>
+            <h1>📝To Do</h1>
           </div>
           <div className="view-home">
               <button className="nav-home-selected">
