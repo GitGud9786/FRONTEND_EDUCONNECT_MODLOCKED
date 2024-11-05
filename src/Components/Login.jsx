@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
-import bike_icon from '../Assets/bike.png';
+import bike_icon from '../Assets/study.png';
 import logo from '../Assets/logo.jpg';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("Select a Role");
   
   const navigate = useNavigate(); // for programmatic navigation
 
@@ -20,7 +21,13 @@ const Login = () => {
     navigate('/dash');
   };
 
+  
+  const handleRoleChange = (event) => {
+    setRole(event.target.value);
+  }
+
   return (
+    <div className="login-page">
     <div className="container">
       <div className="left">
         <img src={logo} alt="" />
@@ -31,6 +38,17 @@ const Login = () => {
         </div>
 
         <div className="inputs">
+        <div className="input">
+          <label htmlFor="role-select">Select Role:</label>
+          <select id="role-select" value={role} onChange={handleRoleChange}>
+            <option value="">-- Choose an option --</option>
+            <option value="teacher">Teacher</option>
+            <option value="student">Student</option>
+            <option value="admin">Admin</option>
+          </select>
+          <p>Selected Role: {role}</p>
+        </div>
+
           <div className="input">
             <input 
               type="email" 
@@ -61,6 +79,8 @@ const Login = () => {
       <div className="right">
         <img src={bike_icon} alt="" />
       </div>
+    </div>
+    <div className="bottom-login">Created by MODLOCKED©</div>
     </div>
   );
 };

@@ -1,99 +1,169 @@
-.container
-{
-    display: flex;
-    flex-direction: row;
+/* General page setup */
+.login-page {
+    width: 100vw;
     height: 100vh;
+    background-color: #0a242e;
+    /* Dark green background */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
 }
 
-.left
-{
+.container {
+    display: flex;
+    width: 800px;
+    max-width: 90%;
+    /* For responsiveness */
+    background-color: #ffffff;
+    /* White background for the login box */
+    border-radius: 8px;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 5);
+    overflow: hidden;
+}
+
+.left {
     flex: 1;
+    padding: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin-bottom: 70px;
+    justify-content: center;
 }
 
-.left img
-{
-    width: 400px;
-    height: 300px;
+.left img {
+    width: 200px;
+    margin-bottom: 20px;
 }
 
-.heading
-{
-    font-size: 35px;
-    font-weight: 700;
-    color: #344cff;
+.header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.subheading
-{
-    color: #757575;
-    padding-top: 10px;
+.heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0f516a;
 }
 
-.inputs
-{
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
+.subheading {
+    font-size: 14px;
+    color: #000;
 }
 
-.input
-{
-    padding: 5px;
-    
+.inputs {
+    width: 100%;
+    margin-top: 20px;
 }
 
-.input input{
-    height:50px;
-    width: 480px;
-    border-radius: 10px;
-    border-color: #757575;
+.input {
+    margin-bottom: 15px;
+    width: 100%;
 }
 
-.submit-container
-{
-    display: flex;
-    flex-direction: row;
-    gap: 40px;
-    margin-top: 30px;
+.input input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border: none;
+    border-bottom: 1px solid #0a242e;
+    outline: none;
+    box-sizing: border-box;
 }
 
-.submit
-{
+.input input,
+.input select {
+    /* Apply similar styles to both input and select elements */
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-bottom: 1px solid #0a242e;
+    /* Same border as input fields */
+    outline: none;
+    background-color: transparent;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+    appearance: none;
+    /* Remove default dropdown styling */
+}
+
+.input input:focus,
+.input select:focus {
+    border-bottom: 1px solid #14445a;
+    /* Change border color on focus */
+}
+
+.input select {
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%230a242e" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    /* Custom dropdown arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    padding-right: 30px;
+    /* Add padding for the arrow */
+}
+
+.input select option {
+    color: #0a242e;
+    background-color: #ffffff;
+}
+
+.submit-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    background: #3751fe;
-    color: #f4f4f4;
-    width: 95px;
-    height: 40px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+}
+
+.submit {
+    background-color: #14445a;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
 }
 
-.gray
-{
-    background: #f4f4f4;
-    color: #4a61be;
-    border: 1px solid;
-    box-shadow: none;
+.submit:hover {
+    background-color: #0a242e;
 }
 
-.right
-{
+.right {
     flex: 1;
-    background: #f4f4f4;
+    background-color: #0f516a;
+    /* Light gray background */
     display: flex;
-    justify-content: center;
     align-items: center;
-} 
+    justify-content: center;
+}
 
-.link
-{
-    color: inherit;
-    text-decoration: none;
+.right img {
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+    animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.bottom-login {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #136380;
+    font-family: sans-serif;
+    font-weight: bold;
 }
