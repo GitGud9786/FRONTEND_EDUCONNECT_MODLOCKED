@@ -17,10 +17,10 @@ const TopBar = () => {
         <img src={logo} alt="" className="logo-home" />
         <ul>
           <li >
-          <button className="nav-home-selected">
+          <Link to = "/dash" className="nav-home-selected">
             <FontAwesomeIcon icon={faHome} className="icon-home" />
             <span>Home</span>
-          </button>
+          </Link>
 
           <Link to = "/course" className="nav-home">
             <FontAwesomeIcon icon={faBook} className="icon-home" />
