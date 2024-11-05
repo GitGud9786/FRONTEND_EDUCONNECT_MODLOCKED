@@ -9,6 +9,7 @@ import Course from "./Components/CoursePage";
 import Profile from './Components/Profile';
 import Schedule from './Components/Schedule';
 import Messages from './Components/Messages';
+import StudentsAdmin from './Components/StudentsAdmin';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/stdadmin" element={<StudentsAdmin />} />
         </Routes>
       </BrowserRouter>
     </div>
