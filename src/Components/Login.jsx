@@ -17,7 +17,7 @@ const Login = () => {
     console.log("Password:", password);
 
     // After logging in, you can navigate to the dashboard
-    navigate('/admin');
+    navigate('/courselist');
   };
 
   return (

@@ -1,0 +1,115 @@
+
+.courselistcontainer {
+    display: flex;
+    width: 90%;
+    font-family: Arial, sans-serif;
+}
+
+.courselistsidebar {
+    margin-left: 20px;
+    margin-top: 20px;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    width: 250px;
+    background-color: #102a3b;
+    position: sticky;
+    top: 20px;
+    max-height: 500px;
+}
+
+.courselistsidebar h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.courselistfiltersection {
+    margin-bottom: 50px;
+}
+
+.courselistfiltersection h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.courselistfiltersection label {
+    padding-left: 50px;
+    text-align: left;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+/* Main content styles */
+.courselistmain {
+    flex: 1;
+    padding-top: 20px;
+}
+
+.courselistfiltersection .courselistdropdown {
+    width: 80%;
+    padding: 8px;
+    font-size: 14px;
+    margin-top: 5px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.courselistfiltersection .courselistdropdown:hover{
+    transform: scale(1.02);
+}
+
+
+/* Course card styles */
+.courselistcoursecard {
+    display: flex;
+    border: 2px solid #ddd;
+    background-color: #0a242e;
+    border-radius: 8px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+    width: 1000px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.courselistcoursecard:hover {
+    transform: scale(1.02);
+}
+
+.courselistcourseinfo {
+    width: 100%;
+}
+
+.courselisttitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+
+.courselistdetails {
+    font-size: 14px;
+    margin: 0 0 10px;
+}
+
+/* Tags styles */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.courselisttag {
+    background-color: #eee;
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    transition: background-color 0.5s;
+}
+
+.courselisttag:hover {
+    background-color: #d3d3d3;
+}
