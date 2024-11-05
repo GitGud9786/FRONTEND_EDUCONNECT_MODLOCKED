@@ -27,15 +27,15 @@ const TopBar = () => {
             <span>Courses</span>
           </Link>
           
-          <button className="nav-home">
+          <Link to = "/schedule" className="nav-home">
             <FontAwesomeIcon icon={faCalendar} className="icon-home" />
             <span>Schedule</span>
-          </button>
+          </Link>
 
-          <button className="nav-home">
+          <Link to = "/messages" className="nav-home">
             <FontAwesomeIcon icon={faMessage} className="icon-home" />
             <span>Messages</span>
-          </button>
+          </Link>
 
           <button className="nav-home">
             <FontAwesomeIcon icon={faChartBar} className="icon-home" />
