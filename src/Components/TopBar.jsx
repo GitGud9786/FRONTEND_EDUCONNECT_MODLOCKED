@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink ,Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faCalendar, faBook, faChartBar, faCog, faMessage } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCalendar, faBook, faChartBar, faCog, faMessage, faUser } from '@fortawesome/free-solid-svg-icons';
 import logo from '../Assets/logo.jpg';
 import '../styles/Dashboard.css';
 
@@ -71,7 +71,15 @@ const TopBar = () => {
                 <FontAwesomeIcon icon={faCog} className="icon-home" />
               </button>
               <span className="date-home">{formattedDate}</span>
-              <span className="date-home">Shahir Awlad</span>
+              <NavLink
+                to="/profile"
+                className={({ isActive }) =>
+                  isActive ? "nav-home-selected" : "nav-home"
+                }
+              >
+                <FontAwesomeIcon icon={faUser} className="icon-home" />
+                <span>Siyam Bhuiyan</span>
+              </NavLink>
             </li>
           </ul>
         </div>
