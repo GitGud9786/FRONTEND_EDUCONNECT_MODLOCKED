@@ -36,7 +36,6 @@
     transform: rotate(360deg);
   }
 }
-
 body {
   background-color: #18323b; /* Dark green background */
   color: white; /* Make text color white for contrast */
@@ -44,4 +43,5 @@ body {
   padding: 0; /* Remove default padding */
   font-family: Arial, sans-serif; /* Optional: Set a global font */
 }
+
 
