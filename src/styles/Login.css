@@ -71,6 +71,38 @@
     box-sizing: border-box;
 }
 
+.input input,
+.input select { /* Apply similar styles to both input and select elements */
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-bottom: 1px solid #0a242e; /* Same border as input fields */
+    outline: none;
+    background-color: transparent;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+    appearance: none; /* Remove default dropdown styling */
+}
+
+.input input:focus,
+.input select:focus {
+    border-bottom: 1px solid #14445a; /* Change border color on focus */
+}
+
+.input select {
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%230a242e" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'); /* Custom dropdown arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    padding-right: 30px; /* Add padding for the arrow */
+}
+
+.input select option {
+    color: #0a242e;
+    background-color: #ffffff;
+}
+
 .submit-container {
     display: flex;
     justify-content: center;
