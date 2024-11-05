@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import chatbox from '../Assets/chatbox.png';
 import '../styles/Messages.css'; // Assuming the styles will be in this file
+import TopBar from './TopBar';
 
 const MessagesWithChat = () => {
   const [selectedCourse, setSelectedCourse] = useState('');
@@ -24,7 +25,11 @@ const MessagesWithChat = () => {
   };
 
   return (
-    <div className="messages-layout">
+    <div className="container-messages">
+      <div>
+        <TopBar/>
+      </div>
+      <div className="messages-layout">
       {/* Left Panel: Course Selection and Options */}
       <div className="left-panel">
         {/* Chatbox logo at the top */}
@@ -95,6 +100,7 @@ const MessagesWithChat = () => {
   )}
 </div>
 
+    </div>
     </div>
   );
 };
