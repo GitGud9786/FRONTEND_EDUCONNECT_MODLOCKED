@@ -7,6 +7,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import '../styles/Schedule.css'; // Import the styles for Schedule
 import AddEventForm from './AddEventForm';
 import logo from '../Assets/schedule.png'; // Assuming your logo is in the 'assets' folder
+import TopBar from './TopBar'
 
 const localizer = momentLocalizer(moment);
 
@@ -64,10 +65,7 @@ const Schedule = () => {
   return (
     <div style={{ height: "750px" }}>
       {/* Logo and Title Section */}
-      <div className="header-container">
-        <img src={logo} alt="Logo" className="logo" />
-        <h1 className="schedule-title">Schedule</h1>
-      </div>
+      <TopBar></TopBar>
 
       {/* Calendar Component */}
       <Calendar
