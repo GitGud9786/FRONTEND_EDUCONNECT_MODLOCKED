@@ -1,0 +1,214 @@
+/* Schedule.css */
+.rbc-calendar {
+    background-color: #f0f0f5;
+    /* Light background for better readability */
+    color: #333;
+    /* Dark text for contrast */
+    border: none;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Calendar Header (Weekdays and Date navigation) */
+.rbc-toolbar {
+    background-color: #025975;
+    /* Blue toolbar */
+    color: white;
+    padding: 10px;
+    border-radius: 0px;
+}
+
+.rbc-btn-group button {
+    background-color: #0fadb3;
+    /* Darker blue buttons */
+    color: white;
+    border: none;
+    margin-right: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.rbc-btn-group button:hover {
+    background-color: #0fadb3;
+}
+
+.rbc-toolbar-label {
+    font-weight: bold;
+    font-size: 22px;
+}
+
+/* Weekday Titles */
+.rbc-header {
+    background-color: #0d7769;
+    /* Darker blue for weekdays */
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Day Cells */
+.rbc-day-bg {
+    background-color: #f0f0f5;
+    border: 1px solid #d3d3d3;
+    /* Subtle borders between cells */
+}
+
+/* Current Day Highlight */
+.rbc-today {
+    background-color: #9accce;
+    /* Light blue for today's date */
+}
+
+/* Event Styling */
+.rbc-event {
+    background-color: #ff6f61;
+    /* Bright coral for events */
+    color: white;
+    border-radius: 4px;
+    padding: 3px 7px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.rbc-event:hover {
+    background-color: #ff3d30;
+    /* Darker on hover */
+}
+
+/* Month Navigation */
+.rbc-month-view .rbc-row {
+    border-top: 1px solid #d3d3d3;
+}
+
+/* Event Tooltip */
+.rbc-event-content {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Buttons (e.g., Today, Month, Week) */
+.rbc-toolbar button {
+    background-color: #085844;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.rbc-toolbar button:hover {
+    background-color: #038338;
+}
+
+.rbc-show-more {
+    color: #007BFF;
+    /* Blue "show more" text */
+    cursor: pointer;
+}
+
+
+
+.modal-overlay {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
+
+.modal-dialog {
+    position: relative;
+    margin: 50px auto;
+    width: 500px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.modal-content {
+    padding: 20px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.btn-close {
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.modal-body {
+    margin-top: 10px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 8px 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Schedule.css */
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    margin-bottom: 0px;
+    background-color: #025975;
+    border-bottom: 1px solid #033536;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    margin-right: 15px;
+}
+
+.schedule-title {
+    font-size: 30px;
+    font-weight: 600;
+    color: #fcfafa;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

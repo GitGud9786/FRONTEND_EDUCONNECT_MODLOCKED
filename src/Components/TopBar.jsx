@@ -17,25 +17,25 @@ const TopBar = () => {
         <img src={logo} alt="" className="logo-home" />
         <ul>
           <li >
-          <button className="nav-home-selected">
+          <Link to = "/dash" className="nav-home-selected">
             <FontAwesomeIcon icon={faHome} className="icon-home" />
             <span>Home</span>
-          </button>
+          </Link>
 
           <Link to = "/course" className="nav-home">
             <FontAwesomeIcon icon={faBook} className="icon-home" />
             <span>Courses</span>
           </Link>
           
-          <button className="nav-home">
+          <Link to = "/schedule" className="nav-home">
             <FontAwesomeIcon icon={faCalendar} className="icon-home" />
             <span>Schedule</span>
-          </button>
+          </Link>
 
-          <button className="nav-home">
+          <Link to = "/messages" className="nav-home">
             <FontAwesomeIcon icon={faMessage} className="icon-home" />
             <span>Messages</span>
-          </button>
+          </Link>
 
           <button className="nav-home">
             <FontAwesomeIcon icon={faChartBar} className="icon-home" />
