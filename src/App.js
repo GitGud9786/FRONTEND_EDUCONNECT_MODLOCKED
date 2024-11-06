@@ -10,6 +10,8 @@ import Profile from './Components/Profile';
 import Schedule from './Components/Schedule';
 import Messages from './Components/Messages';
 import AdminPanel from "./Components/AdminDashboard";
+import AdminStudentRegister from "./Components/AdminStudentRegister";
+import AdminFacultyRegister from "./Components/AdminFacultyRegister";
 import CombinedCourseList from "./Components/CourseList";
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -29,6 +31,8 @@ function App() {
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/courselist" element={<CombinedCourseList />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/adminstudentregister" element={<AdminStudentRegister />} />
+          <Route path="/adminfacultyregister" element={<AdminFacultyRegister />} />
         </Routes>
       </BrowserRouter>
     </div>
