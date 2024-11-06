@@ -1,0 +1,82 @@
+.grades-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    background-color: #18323b;
+    color: white;
+    min-height: 100vh;
+}
+
+.logo {
+    width: 120px;
+}
+
+h2 {
+    font-size: 1.6em;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.course-selection {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.select-input {
+    width: 20%;
+    padding: 15px;
+    font-size: 1.25rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background-color: #14445a;
+    color: #fff;
+}
+
+.select-input.selected {
+    background-color: #14445a;
+    color: #fff;
+}
+
+.grades-display {
+    margin-top: 30px;
+}
+
+.grades-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.grade-card {
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    height: auto;
+    min-height: 200px;
+}
+
+.quizzes {
+    background-color: #005f73;
+}
+
+.assignments {
+    background-color: #005f73;
+}
+
+.mid-exam {
+    background-color: #005f73;
+}
+
+.projects {
+    background-color: #005f73;
+}
+
+.grade-card h4 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: #ecbf37;
+    position: relative;
+    padding-bottom: 5px;
+}
