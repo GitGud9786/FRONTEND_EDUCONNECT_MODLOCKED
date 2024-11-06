@@ -1,3 +1,7 @@
+.courselistsuper{
+    display: flex;
+    flex-direction: column;
+}
 
 .courselistcontainer {
     display: flex;

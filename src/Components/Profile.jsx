@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faUniversity, faAddressCard, faMapMarkerAlt, faTint } from '@fortawesome/free-solid-svg-icons';
 import profilePic from '../Assets/profilePic.jpg'; 
 import '../styles/Profile.css';
+import TopBar from './TopBar'
 
 const Profile = () => {
     const student = {
@@ -35,6 +36,8 @@ const Profile = () => {
 
     return (
         <div className="container-profile">
+
+            <TopBar></TopBar>
             <div className="profile-header">
                 <div className="profile-pic-container">
                     <img src={profilePic} alt="Profile" className="profile-pic" />
