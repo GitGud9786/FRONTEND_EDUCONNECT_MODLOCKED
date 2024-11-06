@@ -37,12 +37,12 @@ function App() {
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/courselist" element={<CombinedCourseList />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/adminstudentregister" element={<AdminStudentRegister />} />
-          <Route path="/adminfacultyregister" element={<AdminFacultyRegister />} />
-          <Route path="/admincourseregister" element={<AdminCourseRegister />} />
-          <Route path="/admindepartmentregister" element={<AdminDepartmentRegister />} />
-          <Route path="/stdadmin" element={<StudentsAdmin />} />
-          <Route path="/facadmin" element={<FacultiesAdmin />} />
+          <Route path="/admin/student/register" element={<AdminStudentRegister />} />
+          <Route path="/admin/faculty/register" element={<AdminFacultyRegister />} />
+          <Route path="/admin/course/register" element={<AdminCourseRegister />} />
+          <Route path="/admin/department/register" element={<AdminDepartmentRegister />} />
+          <Route path="/admin/student" element={<StudentsAdmin />} />
+          <Route path="/admin/faculty" element={<FacultiesAdmin />} />
         </Routes>
       </BrowserRouter>
     </div>

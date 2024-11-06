@@ -20,14 +20,14 @@ const AdminPanel = () => {
             <hr className="admindivider" />
 
             <div className="adminpanelgrid">
-                <Link to = "/stdadmin" className = "adminpanelitem">
+                <Link to = "/admin/student" className = "adminpanelitem">
                     <img src={adminstudent} alt="Students" className="panel-icon" />
                     <p>Students</p>
                 </Link>
-                <div className="adminpanelitem">
+                <Link to = "/admin/faculty" className = "adminpanelitem">
                     <img src={adminfaculty} alt="Faculties" className="panel-icon" />
-                    <p>Faculties</p>
-                </div>
+                    <p>Faculty</p>
+                </Link>
                 <div className="adminpanelitem">
                     <img src={admincourse} alt="Courses" className="panel-icon" />
                     <p>Courses</p>
