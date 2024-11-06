@@ -1,0 +1,127 @@
+.adminpanel {
+    background-color: #102a3b;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.admintopbar {
+    background-color: #14445a;
+    display: flex;
+    height: 80px;
+}
+
+.admintopbar img {
+    margin-right: auto;
+    height: 100%;
+    width:auto;
+}
+
+.adminlogout {
+    color: #ffffff;
+    width:100px;
+    display: flex;
+    font-size: 20px;
+    background-color: #102a3b;
+    border-radius: 10px; 
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.adminlogout:hover{
+    color: #FFFF00;
+    background-color: #0a242e;
+}
+
+.adminitle {
+    padding-top: 10px;
+    font-size: 32px;
+    text-align: left;
+    padding-left: 110px;
+}
+
+.admindivider {
+    border: 2px solid #ffffff;
+    width: 85%;
+}
+
+.adminpanelgrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 100px;
+    row-gap: 100px;
+    justify-content: center;
+    margin-top: 30px;
+    width: 1000px;
+    margin: 30px auto;
+}
+
+.adminpanelitem {
+    background-color: #01141D;
+    border-radius: 20px;
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.adminpanelitem:hover {
+    transform: scale(1.1);
+}
+
+.panel-icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 50px;
+}
+
+.adminpanelitem p {
+    margin: 0;
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+}
+
+.adminevaluation
+{
+    align-self: center;
+    background-color: #01141D;
+    border-radius: 20px;
+    width: 500px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.adminevaluation:hover {
+    transform: scale(1.1);
+}
+
+.adminevaluation .panel-icon {
+    margin-bottom:10px;
+    width: 100px;
+    height: 100px; 
+}
+
+.adminevaluation p
+{
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}

@@ -3,6 +3,7 @@ import '../styles/Dashboard.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCalendar, faBook, faChartBar, faCog, faTh, faList, faMessage } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCalendar, faBook, faChartBar, faCog, faUser, faMessage } from '@fortawesome/free-solid-svg-icons';
 import logo from '../Assets/logo.jpg';
 
 
