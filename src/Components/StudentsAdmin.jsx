@@ -1,7 +1,7 @@
 import React, { useState }from 'react'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faEdit, faDumpster } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEdit, faDumpster, faSearch } from '@fortawesome/free-solid-svg-icons';
 import TopBarAdmin from './TopBarAdmin'
 import '../styles/StudentsAdmin.css';
 
@@ -27,6 +27,14 @@ const StudentsAdmin = () => {
     return departmentMatches && yearMatches;
   });
 
+  
+    const [searchText, setSearchText] = useState('');
+  
+    const handleSearch = () => {
+      console.log("Searching for:", searchText);
+      // Implement your search logic here
+    };
+
   return (
     <div className="studentsadmincontainer">
       <TopBarAdmin></TopBarAdmin>
@@ -43,6 +51,7 @@ const StudentsAdmin = () => {
                 <option value="CEE">CEE</option>
               </select>
             </label>
+
             <label>
               Year Group:
               <select value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
@@ -53,9 +62,14 @@ const StudentsAdmin = () => {
                 <option value="Year 4">Year 4</option>
               </select>
             </label>
-            <input type="search">
-              
-            </input>
+            
+            <div className="stdadmin-searchbar">
+              <input type="search" placeholder='Search by ID'/>
+              <button>
+                <FontAwesomeIcon icon = {faSearch}/>
+              </button>
+            </div>
+
           </div>
           <table className="student-table">
             <thead>
