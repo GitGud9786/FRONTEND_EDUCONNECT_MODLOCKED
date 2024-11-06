@@ -23,7 +23,7 @@ const StudentsAdmin = () => {
 
   const filteredStudents = students.filter((student) => {
     const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
-    const yearMatches = selectedYear === 'All' || student.grade === selectedYear;
+    const yearMatches = selectedYear === 'All' || student.year === selectedYear;
     return departmentMatches && yearMatches;
   });
 
