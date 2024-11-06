@@ -2,7 +2,8 @@
 .login-page {
     width: 100vw;
     height: 100vh;
-    background-color: #0a242e; /* Dark green background */
+    background-color: #0a242e;
+    /* Dark green background */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,8 +14,10 @@
 .container {
     display: flex;
     width: 800px;
-    max-width: 90%; /* For responsiveness */
-    background-color: #ffffff; /* White background for the login box */
+    max-width: 90%;
+    /* For responsiveness */
+    background-color: #ffffff;
+    /* White background for the login box */
     border-radius: 8px;
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 5);
     overflow: hidden;
@@ -72,30 +75,36 @@
 }
 
 .input input,
-.input select { /* Apply similar styles to both input and select elements */
+.input select {
+    /* Apply similar styles to both input and select elements */
     width: 100%;
     padding: 10px;
     font-size: 14px;
     border: none;
-    border-bottom: 1px solid #0a242e; /* Same border as input fields */
+    border-bottom: 1px solid #0a242e;
+    /* Same border as input fields */
     outline: none;
     background-color: transparent;
     box-sizing: border-box;
     transition: border-color 0.3s;
-    appearance: none; /* Remove default dropdown styling */
+    appearance: none;
+    /* Remove default dropdown styling */
 }
 
 .input input:focus,
 .input select:focus {
-    border-bottom: 1px solid #14445a; /* Change border color on focus */
+    border-bottom: 1px solid #14445a;
+    /* Change border color on focus */
 }
 
 .input select {
-    background-image: url('data:image/svg+xml;utf8,<svg fill="%230a242e" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'); /* Custom dropdown arrow */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%230a242e" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    /* Custom dropdown arrow */
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 12px;
-    padding-right: 30px; /* Add padding for the arrow */
+    padding-right: 30px;
+    /* Add padding for the arrow */
 }
 
 .input select option {
@@ -125,7 +134,8 @@
 
 .right {
     flex: 1;
-    background-color: #0f516a; /* Light gray background */
+    background-color: #0f516a;
+    /* Light gray background */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -135,22 +145,25 @@
     width: 200px;
     max-width: 100%;
     height: auto;
-    animation: pulse 3s infinite ease-in-out; 
+    animation: pulse 3s infinite ease-in-out;
 }
 
 @keyframes pulse {
-    0%, 100% {
-      transform: scale(1);
+
+    0%,
+    100% {
+        transform: scale(1);
     }
+
     50% {
-      transform: scale(1.05); 
+        transform: scale(1.05);
     }
 }
 
 .bottom-login {
     margin-top: 20px;
     font-size: 20px;
-    color:#136380;
+    color: #136380;
     font-family: sans-serif;
     font-weight: bold;
 }

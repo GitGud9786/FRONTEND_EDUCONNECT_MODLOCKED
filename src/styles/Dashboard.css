@@ -1,122 +1,112 @@
-.container-home
-{
+.container-home {
   height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-.topbar-home
-{
+.topbar-home {
   background-color: #14445a;
   height: 50px;
   display: flex;
   flex-direction: row;
 }
 
-.logo-home
-{
+.logo-home {
   width: 70px;
 }
 
-.border
-{
-    border-bottom: 1px solid #a8a4a4;
+.border {
+  border-bottom: 1px solid #a8a4a4;
 }
 
-.topbar-home
-{
+.topbar-home {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
- 
-.topbar-left-home
-{
+
+.topbar-left-home {
   display: flex;
   align-items: left;
   justify-content: left;
 }
 
-.topbar-right-home
-{
+.topbar-right-home {
   display: flex;
   align-self: right;
   justify-self: right;
 }
-  .topbar-home ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    
-  }
-  
-  .topbar-home ul li {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: #333;
-    transition: background-color 0.3s ease;
-    border-radius: 5px;
-  }
 
-  .nav-home
-  {
-    font-size: 17px;           
-    display: flex;
-    align-items: center;       
-    justify-content: center;   
-    background-color: hsl(199, 64%, 22%);
-    padding: 13.5px 20px;    
-    border: none;  
-    color: white;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
+.topbar-home ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
 
-  .icon-home {
-    margin-right: 10px;
-    font-size: 20px;
-  }
-  .nav-home:hover {
-    background-color:  #0a242e;
-    cursor: pointer;
-  }
+}
 
-  .nav-home-selected
-  {
-    font-size: 17px;           
-    display: flex;
-    align-items: center;       
-    justify-content: center;   
-    background-color: #14445a;
-    padding: 13.5px 20px;    
-    border: none;  
-    color: #f5bc16;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
+.topbar-home ul li {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #333;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
 
-  .nav-home-selected:hover {
-    background-color:  #0a242e;
-    cursor: pointer;
-  }
+.nav-home {
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(199, 64%, 22%);
+  padding: 13.5px 20px;
+  border: none;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
 
-  .date-home
-  {
-    color: white;
-    font-size: 17px;
-    padding: 10px 20px;  
-  }
-  
-.main-home
-{
+.icon-home {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.nav-home:hover {
+  background-color: #0a242e;
+  cursor: pointer;
+}
+
+.nav-home-selected {
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #14445a;
+  padding: 13.5px 20px;
+  border: none;
+  color: #f5bc16;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.nav-home-selected:hover {
+  background-color: #0a242e;
+  cursor: pointer;
+}
+
+.date-home {
+  color: white;
+  font-size: 17px;
+  padding: 10px 20px;
+}
+
+.main-home {
   display: flex;
   height: 100%;
 }
 
-.main-left-home
-{
+.main-left-home {
   display: flex;
   flex-direction: column;
   border-right: 1px solid #16414d;
@@ -124,8 +114,7 @@
   height: 100%;
 }
 
-.maintop-home
-{
+.maintop-home {
   display: flex;
   color: white;
   justify-content: space-between;
@@ -133,8 +122,7 @@
   padding: 0 20px 0 35px;
 }
 
-.view-home
-{
+.view-home {
   display: flex;
 
 }
@@ -148,8 +136,7 @@
   color: black;
 }
 
-.main-right-home
-{
+.main-right-home {
   display: flex;
   flex-direction: column;
 }

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
+import { NavLink ,Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faCalendar, faBook, faChartBar, faCog, faMessage,faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUserGraduate, faChalkboardTeacher, faBook, faBuilding, faStar, faUser, faCog } from '@fortawesome/free-solid-svg-icons';
 import logo from '../Assets/logo.jpg';
 import '../styles/Dashboard.css';
 
@@ -17,17 +17,27 @@ const TopBar = () => {
           <ul>
             <li>
               <NavLink
-                to="/dash"
+                to="/stdadmin"
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
               >
-                <FontAwesomeIcon icon={faHome} className="icon-home" />
-                <span>Home</span>
+                <FontAwesomeIcon icon={faUserGraduate} className="icon-home" />
+                <span>Students</span>
               </NavLink>
 
               <NavLink
-                to="/courselist"
+                to="/faculties"
+                className={({ isActive }) =>
+                  isActive ? "nav-home-selected" : "nav-home"
+                }
+              >
+                <FontAwesomeIcon icon={faChalkboardTeacher} className="icon-home" />
+                <span>Faculties</span>
+              </NavLink>
+
+              <NavLink
+                to="/course-admin"
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
@@ -37,35 +47,19 @@ const TopBar = () => {
               </NavLink>
 
               <NavLink
-                to="/schedule"
+                to="/departments"
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
               >
-                <FontAwesomeIcon icon={faCalendar} className="icon-home" />
-                <span>Schedule</span>
+                <FontAwesomeIcon icon={faBuilding} className="icon-home" />
+                <span>Departments</span>
               </NavLink>
 
-              <NavLink
-                to="/messages"
-                className={({ isActive }) =>
-                  isActive ? "nav-home-selected" : "nav-home"
-                }
-              >
-                <FontAwesomeIcon icon={faMessage} className="icon-home" />
-                <span>Messages</span>
-              </NavLink>
-
-              <NavLink
-                to="/grades"
-                className={({ isActive }) =>
-                  isActive ? "nav-home-selected" : "nav-home"
-                 }
-                >
-                  <FontAwesomeIcon icon={faChartBar} className="icon-home" />
-                  <span>Grades</span>
-              </NavLink>
-
+              <button className="nav-home">
+                <FontAwesomeIcon icon={faStar} className="icon-home" />
+                <span>Review</span>
+              </button>
             </li>
           </ul>
         </div>
