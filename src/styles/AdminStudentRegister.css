@@ -32,6 +32,8 @@
   }
   
   .studentregisterbutton {
+    width: 200px;
+    margin-left:200px;
     background-color: #ffa600; /* Green background */
     color: black; /* White text color */
     font-size: 16px; /* Font size */

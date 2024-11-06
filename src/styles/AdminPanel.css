@@ -73,6 +73,8 @@
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
     cursor: pointer;
+    text-decoration: none;
+    color: white;
 }
 
 .adminpanelitem:hover {

@@ -33,6 +33,8 @@
   
   .facultyregisterbutton {
     background-color: #ffa600; /* Green background */
+    margin-left:200px;
+    width:200px;
     color: black; /* White text color */
     font-size: 16px; /* Font size */
     padding: 10px 20px; /* Padding for height and width */
