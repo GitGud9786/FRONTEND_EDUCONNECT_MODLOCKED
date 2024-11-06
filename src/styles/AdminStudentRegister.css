@@ -1,59 +1,82 @@
 .adminstudentform {
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
-    margin-left: 440px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #0a242e;
-    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
-    font-family: Arial, sans-serif;
-  }
-  
-  .adminstudentform h2 {
-    margin-top: 20px;
-    font-size: 1.5em;
-  }
-  
-  .adminstudentformsection {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-  
-  .adminstudentformsection input {
-    flex: 1;
-    min-width: 150px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .studentregisterbutton {
-    width: 200px;
-    margin-left:200px;
-    background-color: #ffa600; /* Green background */
-    color: black; /* White text color */
-    font-size: 16px; /* Font size */
-    padding: 10px 20px; /* Padding for height and width */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow */
-    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 60px;
+  padding: 35px;
+  border-radius: 10px;
+  background-color: #0a242e;
+  box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.6), 12px 12px 30px rgba(0, 0, 0, 0.3);
+  font-family: Arial, sans-serif;
+}
+
+.adminstudentform h2 {
+  margin-top: 10px;
+  font-size: 1.6em;
+  color: #ffffff;
+}
+
+.adminstudentformsection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.adminstudentformsection input {
+  flex: 1 1 calc(33.33% - 10px); /* Each input takes about a third of the fieldset width */
+  min-width: 150px;
+  padding: 10px;
+  border: 1px solid #a1a1a1;
+  border-radius: 4px;
+  background-color: #14445a;
+  color: #ffffff;
+  font-size: 1em;
+}
+
+.adminstudentformsection input::placeholder {
+  color: #d3d3d3;
+}
+
+.adminstudentformsection fieldset {
+  flex: 1 1 100%;
+  border: 1px solid #3197a5;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.adminstudentformsection legend {
+  padding: 0 10px;
+  color: #ffffff;
+  font-size: 1.2em;
+}
+
+.studentregisterbutton {
+  background-color: #defdff;
+  margin: auto;
+  width: 200px;
+  color: black;
+  font-size: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7), 6px 6px 15px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .studentregisterbutton:hover {
-    background-color: #ffa600; /* Darker green on hover */
-    transform: scale(1.05); /* Slightly larger on hover */
+  background-color: #ffa600;
+  transform: scale(1.05);
 }
 
 .studentregisterbutton:active {
-    background-color: #1e7e34; /* Even darker green on active */
-    color: white;
-    transform: scale(1); /* Reset scale on click */
+  background-color: #1e7e34;
+  color: rgb(255, 255, 255);
+  transform: scale(1);
 }
-
-  
