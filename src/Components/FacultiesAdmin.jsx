@@ -1,8 +1,8 @@
-import React, { useState }from 'react'
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faEdit, faDumpster } from '@fortawesome/free-solid-svg-icons';
-import TopBarAdmin from './TopBarAdmin'
+import { faPlus, faEdit, faDumpster, faSearch } from '@fortawesome/free-solid-svg-icons';
+import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
 const StudentsAdmin = () => {
@@ -19,15 +19,36 @@ const StudentsAdmin = () => {
   ];
 
   const [selectedDepartment, setSelectedDepartment] = useState('All');
+  const [searchText, setSearchText] = useState('');
+  const [filteredStudents, setFilteredStudents] = useState(students);
+  const [error, setError] = useState('');
 
-  const filteredStudents = students.filter((student) => {
-    const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
-    return departmentMatches
-  });
+  // Function to filter students by department, year, and ID
+  const filterStudents = () => {
+    const searchResult = students.filter(student => {
+      const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
+      const idMatches = !searchText || student.id.toString().includes(searchText);
+
+      return departmentMatches && idMatches;
+    });
+
+    if (searchResult.length > 0) {
+      setFilteredStudents(searchResult);
+      setError(''); // Clear error if students are found
+    } else {
+      setFilteredStudents([]); // No results
+      setError(`No Teachers found with the specified criteria.`); // Set error message
+    }
+  };
+
+  // Call filterStudents whenever department, year, or searchText changes
+  useEffect(() => {
+    filterStudents();
+  }, [selectedDepartment, searchText]);
 
   return (
     <div className="studentsadmincontainer">
-      <TopBarAdmin></TopBarAdmin>
+      <TopBarAdmin />
       <div className="studentsadmin-subcontainer">
         <div className="table-container">
           <div className="filter-controls">
@@ -41,10 +62,22 @@ const StudentsAdmin = () => {
                 <option value="CEE">CEE</option>
               </select>
             </label>
-            <input type="search">
-              
-            </input>
+
+            <div className="stdadmin-searchbar">
+              <input
+                type="search"
+                placeholder="Search by ID"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+              <button onClick={filterStudents}>
+                <FontAwesomeIcon icon={faSearch} />
+              </button>
+            </div>
           </div>
+
+          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+
           <table className="student-table">
             <thead>
               <tr>
@@ -59,7 +92,7 @@ const StudentsAdmin = () => {
               </tr>
             </thead>
             <tbody>
-            {filteredStudents.length > 0 ? (
+              {filteredStudents.length > 0 ? (
                 filteredStudents.map((student) => (
                   <tr key={student.id}>
                     <td><input type="checkbox" /></td>
@@ -82,22 +115,22 @@ const StudentsAdmin = () => {
         </div>
 
         <div className="stdadmin-controls">
-          <Link to = "/adminfacultyregister" className = "stdadmin-controls-button">
-            <FontAwesomeIcon icon={faPlus}/>
+          <Link to="/adminstudentregister" className="stdadmin-controls-button">
+            <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
           </Link>
           <button>
-            <FontAwesomeIcon icon = {faEdit} />
+            <FontAwesomeIcon icon={faEdit} />
             <span>Edit</span>
           </button>
           <button>
-            <FontAwesomeIcon icon = {faDumpster} />
+            <FontAwesomeIcon icon={faDumpster} />
             <span>Delete</span>
           </button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default StudentsAdmin
+export default StudentsAdmin;
