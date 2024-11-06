@@ -106,7 +106,7 @@ const StudentsAdmin = () => {
         </div>
 
         <div className="stdadmin-controls">
-          <Link to="/admin/student/register" className="stdadmin-controls-button">
+          <Link to="/admin/course/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
           </Link>
