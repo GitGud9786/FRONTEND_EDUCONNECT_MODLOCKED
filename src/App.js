@@ -28,6 +28,7 @@ function App() {
           <Route path="/messages" element={<Messages />} />
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/courselist" element={<CombinedCourseList />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </div>
