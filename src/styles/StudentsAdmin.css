@@ -1,6 +1,7 @@
 .studentsadmincontainer{
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .studentsadmin-subcontainer
@@ -57,7 +58,7 @@
   margin-bottom: 15px ;
   display: flex;
   gap: 20px;
-  align-items: center;
+  justify-content: flex-end;
 }
 
 .filter-controls label {
@@ -67,6 +68,12 @@
 .filter-controls select {
   margin-left: 5px;
   padding: 5px;
+  border-radius: 10px;
+}
+
+.filter-controls input {
+  width: 300px;
+  border-radius: 10px;
 }
 
 .stdadmin-controls{

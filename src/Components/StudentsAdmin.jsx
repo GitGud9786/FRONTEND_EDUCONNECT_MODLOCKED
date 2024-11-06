@@ -23,7 +23,7 @@ const StudentsAdmin = () => {
 
   const filteredStudents = students.filter((student) => {
     const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
-    const yearMatches = selectedYear === 'All' || student.grade === selectedYear;
+    const yearMatches = selectedYear === 'All' || student.year === selectedYear;
     return departmentMatches && yearMatches;
   });
 
@@ -53,7 +53,9 @@ const StudentsAdmin = () => {
                 <option value="Year 4">Year 4</option>
               </select>
             </label>
-            <input type="search" />
+            <input type="search">
+              
+            </input>
           </div>
           <table className="student-table">
             <thead>
