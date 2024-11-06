@@ -1,4 +1,6 @@
 import React, { useState }from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faEdit, faMinus } from '@fortawesome/free-solid-svg-icons';
 import TopBarAdmin from './TopBarAdmin'
 import '../styles/StudentsAdmin.css';
 
@@ -91,9 +93,18 @@ const StudentsAdmin = () => {
         </div>
 
         <div className="stdadmin-controls">
-          <button>Add</button>
-          <button>Edit</button>
-          <button>Delete</button>
+          <button>
+            <FontAwesomeIcon icon = {faPlus} />
+            <span>Add</span>
+          </button>
+          <button>
+            <FontAwesomeIcon icon = {faEdit} />
+            <span>Edit</span>
+          </button>
+          <button>
+            <FontAwesomeIcon icon = {faPlus} />
+            <span>Delete</span>
+          </button>
         </div>
       </div>
     </div>
