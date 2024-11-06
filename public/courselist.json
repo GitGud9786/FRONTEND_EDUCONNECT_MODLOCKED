@@ -1,0 +1,39 @@
+[
+    {
+        "id": 1,
+        "title": "Software and Development",
+        "instructors": ["Shohel Ahmed", "Dr. Hasan Mahmud"],
+        "tags": ["Engineering", "Computer Science", "Systems Engineering", "+ 3 more"]
+    },
+    {
+        "id": 2,
+        "title": "Computer graphics and multimedia systems",
+        "instructors": ["Mohammad Ishrak Abedin"],
+        "tags": ["Engineering", "Mathematics", "Graphics"]
+    },
+    {
+        "id": 3,
+        "title": "Microprocessor and assembly language",
+        "instructors": ["Obayedur Rahman"],
+        "tags": ["Engineering", "Computers", "Processors", "+ 2 more"]
+    },
+    {
+        "id": 4,
+        "title": "Relational database and management systems",
+        "instructors": ["Farhan Ishmaam","Tariquzzaman Faisal"],
+        "tags": ["Engineering", "Database", "+ 2 more"]
+    },
+    {
+        "id": 5,
+        "title": "Data structures",
+        "instructors": ["Shabbir Ahmed"],
+        "tags": ["Engineering", "Computers", "Algorithms", "Graphs"]
+    },
+    {
+        "id": 6,
+        "title": "Algorithms",
+        "instructors": ["Dr. Moniruzzaman"],
+        "tags": ["Engineering", "Computers", "Algorithms", "Programming"]
+    }
+  ]
+  

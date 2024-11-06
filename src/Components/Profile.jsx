@@ -36,6 +36,7 @@ const Profile = () => {
 
     return (
         <div className="container-profile">
+
             <TopBar></TopBar>
             <div className="profile-header">
                 <div className="profile-pic-container">
