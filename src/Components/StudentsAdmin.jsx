@@ -1,7 +1,7 @@
 import React, { useState }from 'react'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faEdit, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEdit, faDumpster } from '@fortawesome/free-solid-svg-icons';
 import TopBarAdmin from './TopBarAdmin'
 import '../styles/StudentsAdmin.css';
 
@@ -96,14 +96,14 @@ const StudentsAdmin = () => {
         <div className="stdadmin-controls">
           <Link to = "/adminstudentregister" className = "stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus}/>
-            <span>Courses</span>
+            <span>Add</span>
           </Link>
           <button>
             <FontAwesomeIcon icon = {faEdit} />
             <span>Edit</span>
           </button>
           <button>
-            <FontAwesomeIcon icon = {faPlus} />
+            <FontAwesomeIcon icon = {faDumpster} />
             <span>Delete</span>
           </button>
         </div>

@@ -78,7 +78,7 @@
   align-items: center;
 }
 
-.stdadmin-controls-button{
+.stdadmin-controls button{
   width: 150px;
   height: 80px;
   border-radius: 10px;
@@ -86,5 +86,31 @@
   font-size: 30px;
   justify-content: center;
   align-items: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.stdadmin-controls button:hover{
+  cursor: pointer;
+  background-color: #4fa8d8; /* Slightly darker shade on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+.stdadmin-controls-button{
+  width: 150px;
+  height: 80px;
+  border-radius: 10px;
+  background-color: #65bee7;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.stdadmin-controls-button:hover {
+  background-color: #4fa8d8; /* Slightly darker shade on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
 }
 
