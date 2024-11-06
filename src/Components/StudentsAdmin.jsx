@@ -1,8 +1,8 @@
-import React, { useState }from 'react'
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEdit, faDumpster, faSearch } from '@fortawesome/free-solid-svg-icons';
-import TopBarAdmin from './TopBarAdmin'
+import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
 const StudentsAdmin = () => {
@@ -20,24 +20,37 @@ const StudentsAdmin = () => {
 
   const [selectedDepartment, setSelectedDepartment] = useState('All');
   const [selectedYear, setSelectedYear] = useState('All');
+  const [searchText, setSearchText] = useState('');
+  const [filteredStudents, setFilteredStudents] = useState(students); // Keep track of filtered students
+  const [error, setError] = useState(''); // Error state
 
-  const filteredStudents = students.filter((student) => {
-    const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
-    const yearMatches = selectedYear === 'All' || student.year === selectedYear;
-    return departmentMatches && yearMatches;
-  });
+  // Filtering by department and year
+  const filterByDepartmentAndYear = () => {
+    return students.filter((student) => {
+      const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
+      const yearMatches = selectedYear === 'All' || student.year === selectedYear;
+      return departmentMatches && yearMatches;
+    });
+  };
 
-  
-    const [searchText, setSearchText] = useState('');
-  
-    const handleSearch = () => {
-      console.log("Searching for:", searchText);
-      // Implement your search logic here
-    };
+  // Handle search by ID
+  const handleSearch = () => {
+    const searchResult = filterByDepartmentAndYear().filter(student =>
+      student.id.toString().includes(searchText)
+    );
+    
+    if (searchResult.length > 0) {
+      setFilteredStudents(searchResult);
+      setError(''); // Clear error if students are found
+    } else {
+      setFilteredStudents([]); // No results
+      setError(`No student found with ID "${searchText}"`); // Set error message
+    }
+  };
 
   return (
     <div className="studentsadmincontainer">
-      <TopBarAdmin></TopBarAdmin>
+      <TopBarAdmin />
       <div className="studentsadmin-subcontainer">
         <div className="table-container">
           <div className="filter-controls">
@@ -62,15 +75,22 @@ const StudentsAdmin = () => {
                 <option value="Year 4">Year 4</option>
               </select>
             </label>
-            
+
             <div className="stdadmin-searchbar">
-              <input type="search" placeholder='Search by ID'/>
-              <button>
-                <FontAwesomeIcon icon = {faSearch}/>
+              <input
+                type="search"
+                placeholder="Search by ID"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+              <button onClick={handleSearch}>
+                <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
-
           </div>
+
+          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+
           <table className="student-table">
             <thead>
               <tr>
@@ -86,7 +106,7 @@ const StudentsAdmin = () => {
               </tr>
             </thead>
             <tbody>
-            {filteredStudents.length > 0 ? (
+              {filteredStudents.length > 0 ? (
                 filteredStudents.map((student) => (
                   <tr key={student.id}>
                     <td><input type="checkbox" /></td>
@@ -110,22 +130,22 @@ const StudentsAdmin = () => {
         </div>
 
         <div className="stdadmin-controls">
-          <Link to = "/adminstudentregister" className = "stdadmin-controls-button">
-            <FontAwesomeIcon icon={faPlus}/>
+          <Link to="/adminstudentregister" className="stdadmin-controls-button">
+            <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
           </Link>
           <button>
-            <FontAwesomeIcon icon = {faEdit} />
+            <FontAwesomeIcon icon={faEdit} />
             <span>Edit</span>
           </button>
           <button>
-            <FontAwesomeIcon icon = {faDumpster} />
+            <FontAwesomeIcon icon={faDumpster} />
             <span>Delete</span>
           </button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default StudentsAdmin
+export default StudentsAdmin;
