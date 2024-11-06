@@ -9,6 +9,7 @@ const AdminCourseRegister = () => {
         courseDuration: '',
         courseInformation: '',
         courseDepartment: ''
+        
     });
 
     const handleChange = (e) => {
@@ -49,13 +50,20 @@ const AdminCourseRegister = () => {
                 value={formData.courseDuration}
                 onChange={handleChange}
             />
-            <input
+            <select className='admincourseselect'>
                 type="text"
                 name="courseDepartment"
-                placeholder="Dedicated department"
-                value={formData.courseDepartment}
-                onChange={handleChange}
-            />
+                placeholder="Department of the Course"
+                 value={formData.courseDepartment}
+                 onChange={handleChange}
+                 <option value="null">Location</option>
+                <option value="AB1">Computer Science and Engineering</option>
+                <option value="AB2">Electrical and Electronics Engineering</option>
+                <option value="AB2">Mechanical and Production Engineering</option>
+                <option value="AB2">Civil and Environmental Engineering</option>
+                <option value="AB2">Industrial and Production Engineering</option>
+                <option value="AB2">Business Technology and Management</option>
+            </select>
 
             <div className='admincourseinforegister'>
                 <h2>Course Description Block</h2>
