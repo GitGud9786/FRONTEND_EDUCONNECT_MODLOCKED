@@ -39,18 +39,18 @@ const AdminFacultyRegister = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: `${formData.studentfirstName} ${formData.studentmiddleName} ${formData.studentlastName}`,
-          email: formData.studentemail,
+          name: `${formData.facultyfirstName} ${formData.facultymiddleName} ${formData.facultylastName}`,
+          email: formData.facultyemail,
           password: 'defaultPassword', // replace this as needed
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Student Registered Successfully:", data);
+        console.log("Faculty Registered Successfully:", data);
       } else {
         const error = await response.json();
-        console.error("Failed to Register Student:", error);
+        console.error("Failed to Register Faculty:", error);
       }
     } catch (error) {
       console.error("Error submitting form:", error);
