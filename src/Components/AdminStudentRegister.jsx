@@ -28,9 +28,33 @@ const AdminStudentRegister = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
+
+    // Send data to backend
+    try {
+      const response = await fetch('http://localhost:8000/students/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: `${formData.studentfirstName} ${formData.studentmiddleName} ${formData.studentlastName}`,
+          email: formData.studentemail,
+          password: 'defaultPassword', // replace this as needed
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Student Registered Successfully:", data);
+      } else {
+        const error = await response.json();
+        console.error("Failed to Register Student:", error);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
@@ -41,91 +65,92 @@ const AdminStudentRegister = () => {
           type="text"
           name="studentfirstName"
           placeholder="First Name"
-          value={formData.firstName}
+          value={formData.studentfirstName}
           onChange={handleChange}
         />
         <input
           type="text"
           name="studentmiddleName"
           placeholder="Middle Name"
-          value={formData.middleName}
+          value={formData.studentmiddleName}
           onChange={handleChange}
         />
         <input
           type="text"
           name="studentlastName"
           placeholder="Last Name"
-          value={formData.lastName}
+          value={formData.studentlastName}
           onChange={handleChange}
         />
         <input
-          type="studentdate"
+          type="date"
           name="studentdateOfBirth"
           placeholder="Date of Birth"
-          value={formData.dateOfBirth}
+          value={formData.studentdateOfBirth}
           onChange={handleChange}
         />
         <input
           type="text"
-          name="studentguardianphone"
+          name="studentguardianPhone"
           placeholder="Guardian number"
-          value={formData.guardianPhone}
+          value={formData.studentguardianPhone}
           onChange={handleChange}
         />
         <input
           type="text"
-          name="studentbloodgroup"
+          name="studentbloodGroup"
           placeholder="Blood Group"
-          value={formData.bloodGroup}
+          value={formData.studentbloodGroup}
           onChange={handleChange}
         />
       </div>
 
       <h2>Department</h2>
-      <div className='adminstudentformsection'>
-      <input
+      <div className="adminstudentformsection">
+        <input
           type="text"
-          name="studentdepartment"
-          placeholder="Designation of department"
+          name="studentDepartment"
+          placeholder="Department"
           value={formData.studentDepartment}
           onChange={handleChange}
         />
       </div>
+      
       <h2>Address</h2>
       <div className="adminstudentformsection">
         <input
           type="text"
           name="studentstreetAddress"
           placeholder="Street Address"
-          value={formData.streetAddress}
+          value={formData.studentstreetAddress}
           onChange={handleChange}
         />
         <input
           type="text"
           name="studentcity"
           placeholder="City"
-          value={formData.city}
+          value={formData.studentcity}
           onChange={handleChange}
         />
         <input
           type="text"
           name="studentstate"
           placeholder="State / Province"
-          value={formData.state}
+          value={formData.studentstate}
           onChange={handleChange}
         />
         <input
           type="text"
           name="studentcountry"
           placeholder="Country"
-          value={formData.country}
+          value={formData.studentcountry}
           onChange={handleChange}
         />
         <input
           type="text"
           name="studentzipCode"
           placeholder="ZIP Code"
-          value={formData.zipCode}
+          value={formData.studentzipCode}
           onChange={handleChange}
         />
       </div>
@@ -136,19 +161,21 @@ const AdminStudentRegister = () => {
           type="email"
           name="studentemail"
           placeholder="E-mail"
-          value={formData.email}
+          value={formData.studentemail}
           onChange={handleChange}
         />
         <input
           type="text"
           name="studentphone"
           placeholder="Phone"
-          value={formData.phone}
+          value={formData.studentphone}
           onChange={handleChange}
         />
       </div>
 
-      <button className='studentregisterbutton' type="submit">Register this student</button>
+      <button className="studentregisterbutton" type="submit">
+        Register this student
+      </button>
     </form>
   );
 };
