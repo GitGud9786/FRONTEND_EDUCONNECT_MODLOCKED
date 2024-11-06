@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/AdminPanel.css';
 import logo from '../Assets/logo.jpg';
 import admincourse from '../Assets/admincourse.png';
@@ -19,10 +20,10 @@ const AdminPanel = () => {
             <hr className="admindivider" />
 
             <div className="adminpanelgrid">
-                <div className="adminpanelitem">
+                <Link to = "/stdadmin" className = "adminpanelitem">
                     <img src={adminstudent} alt="Students" className="panel-icon" />
                     <p>Students</p>
-                </div>
+                </Link>
                 <div className="adminpanelitem">
                     <img src={adminfaculty} alt="Faculties" className="panel-icon" />
                     <p>Faculties</p>

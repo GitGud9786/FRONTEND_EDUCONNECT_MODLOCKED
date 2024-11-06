@@ -53,7 +53,9 @@ const StudentsAdmin = () => {
                 <option value="Year 4">Year 4</option>
               </select>
             </label>
-            <input type="search" />
+            <input type="search">
+              
+            </input>
           </div>
           <table className="student-table">
             <thead>
