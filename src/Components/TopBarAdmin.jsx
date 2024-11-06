@@ -47,7 +47,7 @@ const TopBar = () => {
               </NavLink>
 
               <NavLink
-                to="/departments"
+                to="/admin/department"
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
