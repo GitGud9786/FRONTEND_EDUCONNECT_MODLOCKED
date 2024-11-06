@@ -140,3 +140,59 @@
   display: flex;
   flex-direction: column;
 }
+
+.profile-dropdown {
+  position: relative;
+  margin-right: 10px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px; 
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 150px;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  border-bottom: 1px solid #f2f2f2;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+.dropdown-menu a:hover {
+  background: linear-gradient(135deg, #f5bc16, #ff9a00);
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.dropdown-menu a:last-child {
+  border-bottom: none;
+}
+
+
+.dps {
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 10px; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.dps:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+}
