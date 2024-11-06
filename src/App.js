@@ -9,6 +9,8 @@ import Course from "./Components/CoursePage";
 import Profile from './Components/Profile';
 import Schedule from './Components/Schedule';
 import Messages from './Components/Messages';
+import AdminPanel from "./Components/AdminDashboard";
+import CombinedCourseList from "./Components/CourseList";
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -24,6 +26,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<Messages />} />
+          <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/courselist" element={<CombinedCourseList />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
