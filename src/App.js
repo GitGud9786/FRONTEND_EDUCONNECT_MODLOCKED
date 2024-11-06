@@ -13,6 +13,7 @@ import AdminPanel from "./Components/AdminDashboard";
 import AdminStudentRegister from "./Components/AdminStudentRegister";
 import AdminFacultyRegister from "./Components/AdminFacultyRegister";
 import CombinedCourseList from "./Components/CourseList";
+import AdminCourseRegister from "./Components/AdminCourseRegister";
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -33,6 +34,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/adminstudentregister" element={<AdminStudentRegister />} />
           <Route path="/adminfacultyregister" element={<AdminFacultyRegister />} />
+          <Route path="/admincourseregister" element={<AdminCourseRegister />} />
         </Routes>
       </BrowserRouter>
     </div>

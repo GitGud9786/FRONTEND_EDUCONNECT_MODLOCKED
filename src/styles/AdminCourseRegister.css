@@ -1,4 +1,4 @@
-.adminfacultyform {
+.admincourseform {
     max-width: 600px;
     display: flex;
     flex-direction: column;
@@ -11,19 +11,20 @@
     font-family: Arial, sans-serif;
   }
   
-  .adminfacultyform h2 {
+  .admincourseform h2 {
     margin-top: 20px;
     font-size: 1.5em;
   }
   
-  .adminfacultyformsection {
+  .admincourseformsection {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 15px;
     margin-bottom: 20px;
   }
   
-  .adminfacultyformsection input {
+  .admincourseformsection input {
     flex: 1;
     min-width: 150px;
     padding: 8px;
@@ -31,7 +32,7 @@
     border-radius: 4px;
   }
   
-  .facultyregisterbutton {
+  .courseregisterbutton {
     background-color: #ffa600; /* Green background */
     margin-left:200px;
     width:200px;
@@ -45,15 +46,28 @@
     transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
 }
 
-.facultyregisterbutton:hover {
+.courseregisterbutton:hover {
     background-color: #ffa600; /* Darker green on hover */
     transform: scale(1.05); /* Slightly larger on hover */
 }
 
-.facultyregisterbutton:active {
+.courseregisterbutton:active {
     background-color: #1e7e34; /* Even darker green on active */
     color: white;
     transform: scale(1); /* Reset scale on click */
 }
 
+.admincourseinforegister {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   
+  .admincourseinforegister textarea {
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    resize: vertical; 
+    font-family: Arial, sans-serif; 
+    font-size: 16px;
+  }
