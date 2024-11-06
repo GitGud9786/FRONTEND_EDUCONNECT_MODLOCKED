@@ -22,7 +22,8 @@ const Login = () => {
     } else if(role === "student") {
       navigate('/dash');   // Navigate to the general dashboard
     }
-    else navigate('/admincourseregister');
+    else if(role === "teacher")
+      navigate('/teacherdashboard');
   };
 
   
