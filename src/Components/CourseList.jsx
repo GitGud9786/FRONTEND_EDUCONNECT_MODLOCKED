@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/CourseList.css';
-
+import TopBar from "./TopBar";
 const CourseListSideBar = () => {
     return (
         <aside className="courselistsidebar">
@@ -65,13 +65,16 @@ const CombinedCourseList = () => {
     }, []);
 
     return (
-        <div className="courselistcontainer">
+        <div className="courselistsuper">
+            <TopBar></TopBar>
+            <div className="courselistcontainer">
             <CourseListSideBar />
             <div className="courselistmain">
                 {courses.map((course) => (
                     <CourseListCourseCard key={course.id} course={course} />
                 ))}
             </div>
+        </div>
         </div>
     );
 };

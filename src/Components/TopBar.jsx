@@ -27,7 +27,7 @@ const TopBar = () => {
               </NavLink>
 
               <NavLink
-                to="/course"
+                to="/courselist"
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }

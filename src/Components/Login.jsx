@@ -17,8 +17,11 @@ const Login = () => {
     console.log("Email:", email);
     console.log("Password:", password);
 
-    // After logging in, you can navigate to the dashboard
-    navigate('/courselist');
+    if (role === "admin") {
+      navigate('/admin');  // Navigate to the admin panel
+    } else if(role === "student") {
+      navigate('/dash');   // Navigate to the general dashboard
+    }
   };
 
   
