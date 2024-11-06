@@ -78,11 +78,13 @@
   align-items: center;
 }
 
-.stdadmin-controls button{
+.stdadmin-controls-button{
   width: 150px;
   height: 80px;
   border-radius: 10px;
   background-color: #65bee7;
   font-size: 30px;
+  justify-content: center;
+  align-items: center;
 }
 
