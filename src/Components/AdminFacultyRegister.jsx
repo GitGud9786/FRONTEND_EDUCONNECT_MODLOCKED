@@ -28,9 +28,33 @@ const AdminFacultyRegister = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
+
+    // Send data to backend
+    try {
+      const response = await fetch('http://localhost:8000/students/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: `${formData.facultyfirstName} ${formData.facultymiddleName} ${formData.facultylastName}`,
+          email: formData.facultyemail,
+          password: 'defaultPassword', // replace this as needed
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Faculty Registered Successfully:", data);
+      } else {
+        const error = await response.json();
+        console.error("Failed to Register Faculty:", error);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
