@@ -17,7 +17,7 @@ const TopBar = () => {
           <ul>
             <li>
               <NavLink
-                to="/stdadmin"
+                to="/admin/student"
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
@@ -27,7 +27,7 @@ const TopBar = () => {
               </NavLink>
 
               <NavLink
-                to="/facadmin"
+                to="/admin/faculty"
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
@@ -37,7 +37,7 @@ const TopBar = () => {
               </NavLink>
 
               <NavLink
-                to="/course-admin"
+                to="/admin/course"
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
@@ -47,7 +47,7 @@ const TopBar = () => {
               </NavLink>
 
               <NavLink
-                to="/departments"
+                to="/admin/department"
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
