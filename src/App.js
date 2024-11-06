@@ -17,6 +17,7 @@ import CombinedCourseList from "./Components/CourseList";
 import AdminCourseRegister from "./Components/AdminCourseRegister";
 import AdminDepartmentRegister from "./Components/AdminDepartmentRegister"
 import StudentsAdmin from './Components/StudentsAdmin';
+import FacultiesAdmin from './Components/FacultiesAdmin';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/admincourseregister" element={<AdminCourseRegister />} />
           <Route path="/admindepartmentregister" element={<AdminDepartmentRegister />} />
           <Route path="/stdadmin" element={<StudentsAdmin />} />
+          <Route path="/facadmin" element={<FacultiesAdmin />} />
         </Routes>
       </BrowserRouter>
     </div>

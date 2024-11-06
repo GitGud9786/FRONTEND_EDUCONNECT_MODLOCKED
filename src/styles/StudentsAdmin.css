@@ -96,6 +96,7 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+
 .stdadmin-controls button:hover{
   cursor: pointer;
   background-color: #4fa8d8; /* Slightly darker shade on hover */
@@ -121,3 +122,17 @@
   transform: scale(1.05); /* Slightly enlarge the button */
 }
 
+.stdadmin-searchbar {
+  display: flex;
+  flex-direction: row;
+}
+
+.stdadmin-searchbar button {
+  border-radius: 10px;
+  background-color: #65bee7;
+}
+
+.stdadmin-searchbar button:hover {
+  background-color: #4fa8d8; /* Slightly darker shade on hover */
+  transform: scale(1.05);
+}
