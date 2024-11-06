@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEdit, faDumpster, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -20,31 +20,31 @@ const StudentsAdmin = () => {
 
   const [selectedDepartment, setSelectedDepartment] = useState('All');
   const [searchText, setSearchText] = useState('');
-  const [filteredStudents, setFilteredStudents] = useState(students); // Keep track of filtered students
-  const [error, setError] = useState(''); // Error state
+  const [filteredStudents, setFilteredStudents] = useState(students);
+  const [error, setError] = useState('');
 
-  // Filtering by department and year
-  const filterByDepartmentAndYear = () => {
-    return students.filter((student) => {
+  // Function to filter students by department, year, and ID
+  const filterStudents = () => {
+    const searchResult = students.filter(student => {
       const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
-      return departmentMatches;
-    });
-  };
+      const idMatches = !searchText || student.id.toString().includes(searchText);
 
-  // Handle search by ID
-  const handleSearch = () => {
-    const searchResult = filterByDepartmentAndYear().filter(student =>
-      student.id.toString().includes(searchText)
-    );
-    
+      return departmentMatches && idMatches;
+    });
+
     if (searchResult.length > 0) {
       setFilteredStudents(searchResult);
       setError(''); // Clear error if students are found
     } else {
       setFilteredStudents([]); // No results
-      setError(`No teacher found with ID "${searchText}"`); // Set error message
+      setError(`No Teachers found with the specified criteria.`); // Set error message
     }
   };
+
+  // Call filterStudents whenever department, year, or searchText changes
+  useEffect(() => {
+    filterStudents();
+  }, [selectedDepartment, searchText]);
 
   return (
     <div className="studentsadmincontainer">
@@ -70,7 +70,7 @@ const StudentsAdmin = () => {
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
-              <button onClick={handleSearch}>
+              <button onClick={filterStudents}>
                 <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
