@@ -8,9 +8,9 @@ import '../styles/StudentsAdmin.css';
 const StudentsAdmin = () => {
   const students = [
     { id: 1, firstName: 'CSE', Building: "AB1", Head: "Sohel Ahmed"},
-    { id: 1, firstName: 'EEE', Building: "AB2", Head: "Yead"},
-    { id: 1, firstName: 'MPE', Building: "AB1", Head: "Oshayer"},
-    { id: 1, firstName: 'CEE', Building: "AB2", Head: "Tausif"}
+    { id: 2, firstName: 'EEE', Building: "AB2", Head: "Yead"},
+    { id: 3, firstName: 'MPE', Building: "AB1", Head: "Oshayer"},
+    { id: 4, firstName: 'CEE', Building: "AB2", Head: "Tausif"}
   ];
 
   const [selectedBuilding, setSelectedBuilding] = useState('All');

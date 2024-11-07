@@ -68,11 +68,6 @@ const TopBar = () => {
                 <FontAwesomeIcon icon={faBuilding} className="icon-home" />
                 <span>Departments</span>
               </NavLink>
-
-              <button className="nav-home">
-                <FontAwesomeIcon icon={faStar} className="icon-home" />
-                <span>Review</span>
-              </button>
             </li>
           </ul>
         </div>

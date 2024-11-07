@@ -4,9 +4,7 @@ import '../styles/AdminCourseRegister.css';
 const AdminCourseRegister = () => {
     const [formData, setFormData] = useState({
         courseName: '',
-        courseCode: '',
         courseID: '',
-        courseDuration: '',
         courseInformation: '',
         courseDepartment: ''
         

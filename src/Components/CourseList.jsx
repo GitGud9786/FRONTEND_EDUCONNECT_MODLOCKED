@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/CourseList.css';
 import TopBar from "./TopBar";
 const CourseListSideBar = () => {
@@ -33,7 +34,7 @@ const CourseListSideBar = () => {
 
 const CourseListCourseCard = ({ course }) => {
     return (
-        <div className="courselistcoursecard">
+        <Link to = '/courselist/course' className="courselistcoursecard">
             <div className="courselistcourseinfo">
                 <p className="courselisttitle">{course.title}</p>
                 <p className="courselistdetails">{course.instructors.join(", ")}</p>
@@ -43,7 +44,7 @@ const CourseListCourseCard = ({ course }) => {
                     ))}
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
