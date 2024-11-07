@@ -7,10 +7,10 @@ import '../styles/StudentsAdmin.css';
 
 const StudentsAdmin = () => {
   const students = [
-    { firstName: 'CSE', Building: "AB1", Head: "Sohel Ahmed"},
-    { firstName: 'EEE', Building: "AB2", Head: "Yead"},
-    { firstName: 'MPE', Building: "AB1", Head: "Oshayer"},
-    { firstName: 'CEE', Building: "AB2", Head: "Tausif"}
+    { id: 1, firstName: 'CSE', Building: "AB1", Head: "Sohel Ahmed"},
+    { id: 1, firstName: 'EEE', Building: "AB2", Head: "Yead"},
+    { id: 1, firstName: 'MPE', Building: "AB1", Head: "Oshayer"},
+    { id: 1, firstName: 'CEE', Building: "AB2", Head: "Tausif"}
   ];
 
   const [selectedBuilding, setSelectedBuilding] = useState('All');
@@ -32,7 +32,7 @@ const StudentsAdmin = () => {
       setError(''); // Clear error if students are found
     } else {
       setFilteredStudents([]); // No results
-      setError(`No courses found with the specified criteria.`); // Set error message
+      setError(`No Department found with the specified criteria.`); // Set error message
     }
   };
 
@@ -51,10 +51,8 @@ const StudentsAdmin = () => {
               Building:
               <select value={selectedBuilding} onChange={(e) => setSelectedBuilding(e.target.value)}>
                 <option value="All">All</option>
-                <option value="CSE">CSE</option>
-                <option value="EEE">EEE</option>
-                <option value="MPE">MPE</option>
-                <option value="CEE">CEE</option>
+                <option value="AB1">AB1</option>
+                <option value="AB2">AB2</option>
               </select>
             </label>
 
@@ -78,7 +76,7 @@ const StudentsAdmin = () => {
               <tr>
                 <th><input type="checkbox" /></th>
                 <th>ID</th>
-                <th>Course Name</th>
+                <th>Department</th>
                 <th>Building</th>
               </tr>
             </thead>
