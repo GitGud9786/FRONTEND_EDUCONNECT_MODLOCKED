@@ -33,15 +33,17 @@ const AdminStudentRegister = () => {
 
     // Send data to backend
     try {
-      const response = await fetch("http://localhost:8000/students/create", {
-        method: "POST",
+
+      const response = await fetch('http://localhost:8000/students/create', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
+
         },
         body: JSON.stringify({
           name: `${formData.studentfirstName} ${formData.studentmiddleName} ${formData.studentlastName}`,
           email: formData.studentemail,
-          password: "defaultPassword", // replace this as needed
+          password: 'defaultPassword', // replace this as needed
         }),
       });
 
@@ -59,6 +61,7 @@ const AdminStudentRegister = () => {
 
   return (
     <form className="adminstudentform" onSubmit={handleSubmit}>
+
       <h2>Student Registration Form</h2>
 
       <section className="adminstudentformsection">
