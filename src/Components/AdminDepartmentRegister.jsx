@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import '../styles/AdminDepartmentRegister.css';
+import React, { useState } from "react";
+import "../styles/AdminDepartmentRegister.css";
 
 const AdminDepartmentRegister = () => {
   const [formData, setFormData] = useState({
-    departmentId: '',
-    departmentName: '',
-    departmentEmail: '',
-    departmentHead: '',
-    departmentShortHand: '',
-    departmentLocation: '',
+    departmentId: "",
+    departmentName: "",
+    departmentEmail: "",
+    departmentHead: "",
+    departmentShortHand: "",
+    departmentLocation: "",
   });
 
   const handleChange = (e) => {
@@ -52,26 +52,26 @@ const AdminDepartmentRegister = () => {
       </div>
 
       <h2>Department Contact and Location</h2>
-      <div className='admindepartmentformsection'>
-      <input
+      <div className="admindepartmentformsection">
+        <input
           type="text"
           name="departmentEmail"
           placeholder="Department Email"
           value={formData.departmentEmail}
           onChange={handleChange}
         />
-        <select className='admindepartmentselect'>
-          type="text"
-          name="departmentLocation"
-          placeholder="Establishment of the Department"
-          value={formData.departmentLocation}
+        <select className="admindepartmentselect">
+          type="text" name="departmentLocation" placeholder="Establishment of
+          the Department" value={formData.departmentLocation}
           onChange={handleChange}
           <option value="null">Location</option>
-            <option value="AB1">Academic Building 01</option>
-            <option value="AB2">Academic Building 02</option>
+          <option value="AB1">Academic Building 01</option>
+          <option value="AB2">Academic Building 02</option>
         </select>
       </div>
-      <button className='studentregisterbutton' type="submit">Establish department</button>
+      <button className="studentregisterbutton" type="submit">
+        Establish department
+      </button>
     </form>
   );
 };
