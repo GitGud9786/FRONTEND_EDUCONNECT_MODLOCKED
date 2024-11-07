@@ -37,16 +37,9 @@ const AdminDepartmentRegister = () => {
         />
         <input
           type="text"
-          name="departmentShortHand"
-          placeholder="Designated Acroynym"
-          value={formData.departmentShortHand}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="departmentHead"
-          placeholder="Designated Head of the Department"
-          value={formData.departmentHead}
+          name="departmentID"
+          placeholder="Department ID"
+          value={formData.departmentID}
           onChange={handleChange}
         />
       </div>

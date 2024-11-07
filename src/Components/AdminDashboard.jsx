@@ -33,8 +33,8 @@ const AdminPanel = () => {
                     <p>Course</p>
                 </Link>
                 <Link to = "/admin/department" className = "adminpanelitem">
-                    <img src={adminfaculty} alt="Faculties" className="panel-icon" />
-                    <p>Faculty</p>
+                    <img src={admindepartment} alt="Faculties" className="panel-icon" />
+                    <p>Department</p>
                 </Link>
                 
             </div>
