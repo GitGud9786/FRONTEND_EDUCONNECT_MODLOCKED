@@ -71,10 +71,15 @@ const TopBar = () => {
                 <span>Messages</span>
               </NavLink>
 
-              <button className="nav-home">
+              <NavLink
+                to="/grades"
+                className={({ isActive }) =>
+                  isActive ? "nav-home-selected" : "nav-home"
+                }
+              >
                 <FontAwesomeIcon icon={faChartBar} className="icon-home" />
                 <span>Grades</span>
-              </button>
+              </NavLink>
             </li>
           </ul>
         </div>
