@@ -18,6 +18,8 @@ const AdminStudentRegister = () => {
     studentphone: "",
     studentguardianPhone: "",
     studentbloodGroup: "",
+    studentID: "",
+    studentPass: ""
   });
 
   const handleChange = (e) => {
@@ -183,6 +185,21 @@ const AdminStudentRegister = () => {
             value={formData.studentphone}
             onChange={handleChange}
           />
+          <input
+            type="text"
+            name="studentPass"
+            placeholder="Default password"
+            value={formData.studentPass}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="studentID"
+            placeholder="Student ID"
+            value={formData.studentID}
+            onChange={handleChange}
+          />
+
         </fieldset>
       </section>
 
