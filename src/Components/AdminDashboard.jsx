@@ -36,12 +36,11 @@ const AdminPanel = () => {
                     <img src={admindepartment} alt="Faculties" className="panel-icon" />
                     <p>Department</p>
                 </Link>
-                
+                <Link to = "/admin/teachercourseenroll" className = "adminpanelitem">
+                    <img src={admindepartment} alt="Faculties" className="panel-icon" />
+                    <p>Teacher Assignment</p>
+                </Link>
             </div>
-            <div className="adminevaluation">
-                    <img src={adminreview} alt="Review students' evaluation" className="panel-icon" />
-                    <p>Review student's evaluation</p>
-                </div>
         </div>
     );
 };
