@@ -6,44 +6,53 @@ import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
 const StudentsAdmin = () => {
-  const students = [
-    { id: 4301, firstName: 'Coding 1',department: 'CSE' },
-    { id: 4779, firstName: 'Mecha 1', department: 'MPE' },
-    { id: 4321, firstName: 'Electric 1', department: 'EEE' },
-    { id: 4103, firstName: 'Coding 2', department: 'CSE' },
-    { id: 4389, firstName: 'Coding 3', department: 'CSE' },
-    { id: 4551, firstName: 'Mecha 2', department: 'MPE' },
-    { id: 4801, firstName: 'Electric 3', department: 'EEE' },
-    { id: 4310, firstName: 'Civil 1', department: 'CEE' },
-  ];
-
+  const [courses, setCourses] = useState([]); // State to hold courses
   const [selectedDepartment, setSelectedDepartment] = useState('All');
   const [searchText, setSearchText] = useState('');
-  const [filteredStudents, setFilteredStudents] = useState(students);
+  const [filteredCourses, setFilteredCourses] = useState(courses);
   const [error, setError] = useState('');
 
-  // Function to filter students by department, year, and ID
-  const filterStudents = () => {
-    const searchResult = students.filter(student => {
-      const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
-      const idMatches = !searchText || student.id.toString().includes(searchText);
+  // Fetch courses data from the backend on component mount
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/courses');
+        const data = await response.json();
+        if (response.ok) {
+          setCourses(data); // Set courses state with the fetched data
+        } else {
+          setError('Failed to fetch courses');
+        }
+      } catch (error) {
+        setError('Error fetching courses from the backend');
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  // Function to filter courses by department and search text
+  const filterCourses = () => {
+    const searchResult = courses.filter(course => {
+      const departmentMatches = selectedDepartment === 'All' || course.course_department === selectedDepartment;
+      const idMatches = !searchText || course.course_id.toString().includes(searchText);
 
       return departmentMatches && idMatches;
     });
 
     if (searchResult.length > 0) {
-      setFilteredStudents(searchResult);
-      setError(''); // Clear error if students are found
+      setFilteredCourses(searchResult);
+      setError(''); // Clear error if courses are found
     } else {
-      setFilteredStudents([]); // No results
-      setError(`No courses found with the specified criteria.`); // Set error message
+      setFilteredCourses([]); // No results
+      setError('No courses found with the specified criteria.'); // Set error message
     }
   };
 
-  // Call filterStudents whenever department, year, or searchText changes
+  // Call filterCourses whenever department, year, or searchText changes
   useEffect(() => {
-    filterStudents();
-  }, [selectedDepartment, searchText]);
+    filterCourses();
+  }, [selectedDepartment, searchText, courses]);
 
   return (
     <div className="studentsadmincontainer">
@@ -55,21 +64,21 @@ const StudentsAdmin = () => {
               Department:
               <select value={selectedDepartment} onChange={(e) => setSelectedDepartment(e.target.value)}>
                 <option value="All">All</option>
-                <option value="CSE">CSE</option>
-                <option value="EEE">EEE</option>
-                <option value="MPE">MPE</option>
-                <option value="CEE">CEE</option>
+                <option value="Computer Science and Engineering">CSE</option>
+                <option value="Electrical and Electronics Engineering">EEE</option>
+                <option value="Mechanical and Production Engineering">MPE</option>
+                <option value="Civil and Environmental Engineering">CEE</option>
               </select>
             </label>
 
             <div className="stdadmin-searchbar">
               <input
                 type="search"
-                placeholder="Search by ID"
+                placeholder="Search by Course ID"
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
-              <button onClick={filterStudents}>
+              <button onClick={filterCourses}>
                 <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
@@ -81,24 +90,24 @@ const StudentsAdmin = () => {
             <thead>
               <tr>
                 <th><input type="checkbox" /></th>
-                <th>ID</th>
+                <th>Course ID</th>
                 <th>Course Name</th>
                 <th>Department</th>
               </tr>
             </thead>
             <tbody>
-              {filteredStudents.length > 0 ? (
-                filteredStudents.map((student) => (
-                  <tr key={student.id}>
+              {filteredCourses.length > 0 ? (
+                filteredCourses.map((course) => (
+                  <tr key={course.course_id}>
                     <td><input type="checkbox" /></td>
-                    <td>{student.id}</td>
-                    <td>{student.firstName}</td>
-                    <td>{student.department}</td>
+                    <td>{course.course_id}</td>
+                    <td>{course.title}</td>
+                    <td>{course.course_department}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="9" style={{ textAlign: 'center' }}>No students found for the selected filters.</td>
+                  <td colSpan="9" style={{ textAlign: 'center' }}>No courses found for the selected filters.</td>
                 </tr>
               )}
             </tbody>

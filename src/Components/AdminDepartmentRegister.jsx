@@ -8,6 +8,7 @@ const AdminDepartmentRegister = () => {
     departmentEmail: '',
     departmentLocation: '',
   });
+  const [responseMessage, setResponseMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,9 +18,33 @@ const AdminDepartmentRegister = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
+
+    try {
+      const response = await fetch('http://localhost:8000/departments/create', {  // Adjust this URL based on your backend configuration
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          department_id: formData.departmentId,
+          name: formData.departmentName,
+          dept_email: formData.departmentEmail,
+          location: formData.departmentLocation,
+        }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setResponseMessage('Department created successfully!');
+      } else {
+        setResponseMessage(result.message || 'Error creating department.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setResponseMessage('Failed to create department.');
+    }
   };
 
   return (
@@ -29,40 +54,44 @@ const AdminDepartmentRegister = () => {
         <input
           type="text"
           name="departmentName"
-          placeholder="First Name"
+          placeholder="Department Name"
           value={formData.departmentName}
           onChange={handleChange}
+          required
         />
         <input
           type="text"
-          name="departmentID"
+          name="departmentId"
           placeholder="Department ID"
-          value={formData.departmentID}
+          value={formData.departmentId}
           onChange={handleChange}
+          required
         />
       </div>
 
       <h2>Department Contact and Location</h2>
       <div className='admindepartmentformsection'>
-      <input
-          type="text"
+        <input
+          type="email"
           name="departmentEmail"
           placeholder="Department Email"
           value={formData.departmentEmail}
           onChange={handleChange}
+          required
         />
-        <select className='admindepartmentselect'>
-          type="text"
+        <select
           name="departmentLocation"
-          placeholder="Establishment of the Department"
           value={formData.departmentLocation}
           onChange={handleChange}
-          <option value="null">Location</option>
-            <option value="AB1">Academic Building 01</option>
-            <option value="AB2">Academic Building 02</option>
+          required
+        >
+          <option value="">Select Location</option>
+          <option value="AB1">Academic Building 01</option>
+          <option value="AB2">Academic Building 02</option>
         </select>
       </div>
-      <button className='studentregisterbutton' type="submit">Establish department</button>
+      <button className='studentregisterbutton' type="submit">Establish Department</button>
+      {responseMessage && <p>{responseMessage}</p>}
     </form>
   );
 };

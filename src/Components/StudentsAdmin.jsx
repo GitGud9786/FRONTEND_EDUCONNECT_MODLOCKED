@@ -6,44 +6,45 @@ import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
 const StudentsAdmin = () => {
-  const students = [
-    { id: 210041201, firstName: 'Daisy', lastName: 'Scott', email: 'daisy22@gmail.com', phone: '+442046886341', year: 'Year 1', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041202, firstName: 'Isabel', lastName: 'Harris', email: 'isabel87@gmail.com', phone: '+442751886322', year: 'Year 3', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041203, firstName: 'Dan', lastName: 'Thomas', email: 'dan98765@gmail.com', phone: '+442842635535', year: 'Year 1', department: 'MPE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041204, firstName: 'Debra', lastName: 'Nelson', email: 'debra112@gmail.com', phone: '+442932223543', year: 'Year 2', department: 'EEE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041205, firstName: 'Vera', lastName: 'Cooper', email: 'vera8888@gmail.com', phone: '+442198254644', year: 'Year 3', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041206, firstName: 'Brian', lastName: 'Miller', email: 'brian5564@gmail.com', phone: '+442213233311', year: 'Year 3', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041207, firstName: 'Lauren', lastName: 'Martin', email: 'lauren7712@gmail.com', phone: '+442089235622', year: 'Year 3', department: 'MPE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041208, firstName: 'Milton', lastName: 'Smith', email: 'milton2244@gmail.com', phone: '+442044957517', year: 'Year 1', department: 'EEE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041209, firstName: 'Molly', lastName: 'White', email: 'molly747@gmail.com', phone: '+442041963198', year: 'Year 3', department: 'CEE' , photo: 'https://via.placeholder.com/40' },
-  ];
-
+  const [students, setStudents] = useState([]);  // Original student data from backend
+  const [filteredStudents, setFilteredStudents] = useState([]);  // Filtered data to display
   const [selectedDepartment, setSelectedDepartment] = useState('All');
   const [selectedYear, setSelectedYear] = useState('All');
   const [searchText, setSearchText] = useState('');
-  const [filteredStudents, setFilteredStudents] = useState(students);
   const [error, setError] = useState('');
 
-  // Function to filter students by department, year, and ID
+  // Fetch students from backend on component mount
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/students');
+        if (!response.ok) throw new Error('Failed to fetch students');
+        const data = await response.json();
+        setStudents(data);
+        setFilteredStudents(data);  // Initially, filtered list is the same as full list
+      } catch (error) {
+        console.error(error);
+        setError('Could not fetch students data');
+      }
+    };
+    fetchStudents();
+  }, []);
+
+  // Filter students based on search text, department, and year
   const filterStudents = () => {
     const searchResult = students.filter(student => {
       const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
       const yearMatches = selectedYear === 'All' || student.year === selectedYear;
-      const idMatches = !searchText || student.id.toString().includes(searchText);
+      const idMatches = !searchText || student.student_id.toString().includes(searchText);
 
       return departmentMatches && yearMatches && idMatches;
     });
 
-    if (searchResult.length > 0) {
-      setFilteredStudents(searchResult);
-      setError(''); // Clear error if students are found
-    } else {
-      setFilteredStudents([]); // No results
-      setError(`No students found with the specified criteria.`); // Set error message
-    }
+    setFilteredStudents(searchResult);
+    setError(searchResult.length > 0 ? '' : '');
   };
 
-  // Call filterStudents whenever department, year, or searchText changes
+  // Call filterStudents whenever department, year, or search text changes
   useEffect(() => {
     filterStudents();
   }, [selectedDepartment, selectedYear, searchText]);
@@ -95,34 +96,30 @@ const StudentsAdmin = () => {
             <thead>
               <tr>
                 <th><input type="checkbox" /></th>
-                <th>Photo</th>
                 <th>ID</th>
-                <th>First name</th>
-                <th>Last name</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Year</th>
                 <th>Department</th>
+                <th>Blood Group</th>
               </tr>
             </thead>
             <tbody>
               {filteredStudents.length > 0 ? (
                 filteredStudents.map((student) => (
-                  <tr key={student.id}>
+                  <tr key={student.student_id}>
                     <td><input type="checkbox" /></td>
-                    <td><img src={student.photo} alt={`${student.firstName} ${student.lastName}`} className="photo" /></td>
-                    <td>{student.id}</td>
-                    <td>{student.firstName}</td>
-                    <td>{student.lastName}</td>
+                    <td>{student.student_id}</td>
+                    <td>{student.name}</td>
                     <td>{student.email}</td>
-                    <td>{student.phone}</td>
-                    <td>{student.year}</td>
+                    <td>{student.phone_number}</td>
                     <td>{student.department}</td>
+                    <td>{student.blood_group}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="9" style={{ textAlign: 'center' }}>No students found for the selected filters.</td>
+                  <td colSpan="7" style={{ textAlign: 'center' }}>No students found for the selected filters.</td>
                 </tr>
               )}
             </tbody>
