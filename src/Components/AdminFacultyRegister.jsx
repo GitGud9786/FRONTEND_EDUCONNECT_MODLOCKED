@@ -10,6 +10,7 @@ const AdminFacultyRegister = () => {
     facultybloodGroup: "",
     facultyDesignation: "",
     facultyDepartment: "",
+    facultyDepartmentID: "",
     facultystreetAddress: "",
     facultycity: "",
     facultystate: "",
@@ -17,6 +18,7 @@ const AdminFacultyRegister = () => {
     facultyzipCode: "",
     facultyemail: "",
     facultyphone: "",
+    facultyPass: "",
   });
 
   const handleChange = (e) => {
@@ -112,8 +114,15 @@ const AdminFacultyRegister = () => {
           <input
             type="text"
             name="facultyDepartment"
-            placeholder="Department"
+            placeholder="Department name"
             value={formData.facultyDepartment}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="facultyDepartmentID"
+            placeholder="Department ID"
+            value={formData.facultyDepartmentID}
             onChange={handleChange}
           />
         </div>
@@ -161,7 +170,7 @@ const AdminFacultyRegister = () => {
       </fieldset>
 
       <fieldset>
-        <legend>Contact Information</legend>
+        <legend>Contact and Credentials Information</legend>
         <div className="adminfacultyformsection">
           <input
             type="email"
@@ -175,6 +184,13 @@ const AdminFacultyRegister = () => {
             name="facultyphone"
             placeholder="Phone"
             value={formData.facultyphone}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="facultyPass"
+            placeholder="Default password"
+            value={formData.facultyPass}
             onChange={handleChange}
           />
         </div>
