@@ -28,14 +28,14 @@ const AdminPanel = () => {
                     <img src={adminfaculty} alt="Faculties" className="panel-icon" />
                     <p>Faculty</p>
                 </Link>
-                <div className="adminpanelitem">
+                <Link to = "/admin/course" className = "adminpanelitem">
                     <img src={admincourse} alt="Courses" className="panel-icon" />
-                    <p>Courses</p>
-                </div>
-                <div className="adminpanelitem">
-                    <img src={admindepartment} alt="Departments" className="panel-icon" />
-                    <p>Departments</p>
-                </div>
+                    <p>Course</p>
+                </Link>
+                <Link to = "/admin/department" className = "adminpanelitem">
+                    <img src={adminfaculty} alt="Faculties" className="panel-icon" />
+                    <p>Faculty</p>
+                </Link>
                 
             </div>
             <div className="adminevaluation">
