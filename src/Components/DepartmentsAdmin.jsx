@@ -32,7 +32,7 @@ const StudentsAdmin = () => {
       setError(''); // Clear error if students are found
     } else {
       setFilteredStudents([]); // No results
-      setError(`No courses found with the specified criteria.`); // Set error message
+      setError(`No Department found with the specified criteria.`); // Set error message
     }
   };
 
@@ -76,7 +76,7 @@ const StudentsAdmin = () => {
               <tr>
                 <th><input type="checkbox" /></th>
                 <th>ID</th>
-                <th>Course Name</th>
+                <th>Department</th>
                 <th>Building</th>
               </tr>
             </thead>
