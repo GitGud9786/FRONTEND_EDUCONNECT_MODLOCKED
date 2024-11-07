@@ -8,9 +8,9 @@ import '../styles/StudentsAdmin.css';
 const StudentsAdmin = () => {
   const students = [
     { id: 1, firstName: 'CSE', Building: "AB1", Head: "Sohel Ahmed"},
-    { id: 1, firstName: 'EEE', Building: "AB2", Head: "Yead"},
-    { id: 1, firstName: 'MPE', Building: "AB1", Head: "Oshayer"},
-    { id: 1, firstName: 'CEE', Building: "AB2", Head: "Tausif"}
+    { id: 2, firstName: 'EEE', Building: "AB2", Head: "Yead"},
+    { id: 3, firstName: 'MPE', Building: "AB1", Head: "Oshayer"},
+    { id: 4, firstName: 'CEE', Building: "AB2", Head: "Tausif"}
   ];
 
   const [selectedBuilding, setSelectedBuilding] = useState('All');
@@ -32,7 +32,7 @@ const StudentsAdmin = () => {
       setError(''); // Clear error if students are found
     } else {
       setFilteredStudents([]); // No results
-      setError(`No Department found with the specified criteria.`); // Set error message
+      setError(`No courses found with the specified criteria.`); // Set error message
     }
   };
 
@@ -76,7 +76,7 @@ const StudentsAdmin = () => {
               <tr>
                 <th><input type="checkbox" /></th>
                 <th>ID</th>
-                <th>Department</th>
+                <th>Course Name</th>
                 <th>Building</th>
               </tr>
             </thead>

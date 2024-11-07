@@ -20,6 +20,7 @@ import StudentsAdmin from './Components/StudentsAdmin';
 import FacultiesAdmin from './Components/FacultiesAdmin';
 import CoursesAdmin from './Components/CoursesAdmin';
 import DepartmentsAdmin from './Components/DepartmentsAdmin';
+import CombinedTeacherComponents from "./Components/TeacherDashboard"
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -31,7 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/dash" element={<Dashboard />} />
-          <Route path="/course" element={<Course />} />
+          <Route path="/courselist/course" element={<Course />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/profile" element={<Profile />} />
@@ -47,6 +48,7 @@ function App() {
           <Route path="/admin/faculty" element={<FacultiesAdmin />} />
           <Route path="/admin/course" element={<CoursesAdmin />} />
           <Route path="/admin/department" element={<DepartmentsAdmin />} />
+          <Route path="/teacherdashboard" element={<CombinedTeacherComponents />} />
         </Routes>
       </BrowserRouter>
     </div>
