@@ -5,8 +5,8 @@ import { faPlus, faEdit, faDumpster, faSearch } from '@fortawesome/free-solid-sv
 import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
-const StudentsAdmin = () => {
-  const students = [
+const TeachersAdmin = () => {
+  const initialStudents = [
     { id: 210041201, firstName: 'Daisy', lastName: 'Scott', email: 'daisy22@gmail.com', phone: '+442046886341', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
     { id: 210041202, firstName: 'Isabel', lastName: 'Harris', email: 'isabel87@gmail.com', phone: '+442751886322', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
     { id: 210041203, firstName: 'Dan', lastName: 'Thomas', email: 'dan98765@gmail.com', phone: '+442842635535', department: 'MPE' , photo: 'https://via.placeholder.com/40' },
@@ -18,9 +18,11 @@ const StudentsAdmin = () => {
     { id: 210041209, firstName: 'Molly', lastName: 'White', email: 'molly747@gmail.com', phone: '+442041963198', department: 'CEE' , photo: 'https://via.placeholder.com/40' },
   ];
 
+  const [students, setStudents] = useState(initialStudents);
   const [selectedDepartment, setSelectedDepartment] = useState('All');
   const [searchText, setSearchText] = useState('');
-  const [filteredStudents, setFilteredStudents] = useState(students);
+  const [filteredStudents, setFilteredStudents] = useState(initialStudents);
+  const [selectedStudentId, setSelectedStudentId] = useState(null); // Tracks the ID of the selected student
   const [error, setError] = useState('');
 
   // Function to filter students by department, year, and ID
@@ -44,7 +46,31 @@ const StudentsAdmin = () => {
   // Call filterStudents whenever department, year, or searchText changes
   useEffect(() => {
     filterStudents();
-  }, [selectedDepartment, searchText]);
+  }, [selectedDepartment, searchText, students]);
+
+  // Handle checkbox selection
+  const handleCheckboxChange = (id) => {
+    if (selectedStudentId === id) {
+      setSelectedStudentId(null); // Unselect if already selected
+    } else {
+      setSelectedStudentId(id); // Select new ID
+    }
+  };
+
+  // Handle delete functionality
+  const handleDelete = () => {
+    if (selectedStudentId === null) {
+      setError('Please select one student to delete.');
+      return;
+    }
+
+    // Delete the selected student
+    const updatedStudents = students.filter(student => student.id !== selectedStudentId);
+    setStudents(updatedStudents);
+    setFilteredStudents(updatedStudents);
+    setSelectedStudentId(null); // Clear selection
+    setError(''); // Clear error
+  };
 
   return (
     <div className="studentsadmincontainer">
@@ -81,7 +107,7 @@ const StudentsAdmin = () => {
           <table className="student-table">
             <thead>
               <tr>
-                <th><input type="checkbox" /></th>
+                <th><input type="checkbox" disabled /></th>
                 <th>Photo</th>
                 <th>ID</th>
                 <th>First name</th>
@@ -95,7 +121,13 @@ const StudentsAdmin = () => {
               {filteredStudents.length > 0 ? (
                 filteredStudents.map((student) => (
                   <tr key={student.id}>
-                    <td><input type="checkbox" /></td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedStudentId === student.id}
+                        onChange={() => handleCheckboxChange(student.id)}
+                      />
+                    </td>
                     <td><img src={student.photo} alt={`${student.firstName} ${student.lastName}`} className="photo" /></td>
                     <td>{student.id}</td>
                     <td>{student.firstName}</td>
@@ -115,7 +147,7 @@ const StudentsAdmin = () => {
         </div>
 
         <div className="stdadmin-controls">
-          <Link to="/admin/faculty/register" className="stdadmin-controls-button">
+          <Link to="/admin/student/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
           </Link>
@@ -123,7 +155,7 @@ const StudentsAdmin = () => {
             <FontAwesomeIcon icon={faEdit} />
             <span>Edit</span>
           </button>
-          <button>
+          <button onClick={handleDelete}>
             <FontAwesomeIcon icon={faDumpster} />
             <span>Delete</span>
           </button>
@@ -133,4 +165,4 @@ const StudentsAdmin = () => {
   );
 };
 
-export default StudentsAdmin;
+export default TeachersAdmin;
