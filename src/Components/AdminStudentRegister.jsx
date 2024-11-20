@@ -7,7 +7,7 @@ const AdminStudentRegister = () => {
     studentmiddleName: "",
     studentlastName: "",
     studentdateOfBirth: "",
-    studentId: "",
+    studentID: "",  // Use studentID for consistency with form input
     studentDepartment: "",
     studentstreetAddress: "",
     studentcity: "",
@@ -18,7 +18,6 @@ const AdminStudentRegister = () => {
     studentphone: "",
     studentguardianPhone: "",
     studentbloodGroup: "",
-    studentID: "",
     studentPass: ""
   });
 
@@ -35,17 +34,21 @@ const AdminStudentRegister = () => {
 
     // Send data to backend
     try {
-
       const response = await fetch('http://localhost:8000/students/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-
         },
         body: JSON.stringify({
+          student_id: formData.studentID,
           name: `${formData.studentfirstName} ${formData.studentmiddleName} ${formData.studentlastName}`,
           email: formData.studentemail,
-          password: 'defaultPassword', // replace this as needed
+          password: formData.studentPass || 'defaultPassword',
+          address: `${formData.studentstreetAddress}, ${formData.studentcity}, ${formData.studentstate}, ${formData.studentcountry} - ${formData.studentzipCode}`,
+          date_of_birth: formData.studentdateOfBirth,
+          department: formData.studentDepartment,
+          phone_number: formData.studentphone,
+          blood_group: formData.studentbloodGroup,
         }),
       });
 
@@ -199,7 +202,6 @@ const AdminStudentRegister = () => {
             value={formData.studentID}
             onChange={handleChange}
           />
-
         </fieldset>
       </section>
 

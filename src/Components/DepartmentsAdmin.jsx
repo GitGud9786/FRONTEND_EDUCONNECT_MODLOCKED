@@ -6,39 +6,51 @@ import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
 const StudentsAdmin = () => {
-  const students = [
-    { id: 1, firstName: 'CSE', Building: "AB1", Head: "Sohel Ahmed"},
-    { id: 2, firstName: 'EEE', Building: "AB2", Head: "Yead"},
-    { id: 3, firstName: 'MPE', Building: "AB1", Head: "Oshayer"},
-    { id: 4, firstName: 'CEE', Building: "AB2", Head: "Tausif"}
-  ];
-
+  const [departments, setDepartments] = useState([]); // Store fetched departments
   const [selectedBuilding, setSelectedBuilding] = useState('All');
   const [searchText, setSearchText] = useState('');
-  const [filteredStudents, setFilteredStudents] = useState(students);
+  const [filteredDepartments, setFilteredDepartments] = useState([]);
   const [error, setError] = useState('');
 
-  // Function to filter students by Building, year, and ID
-  const filterStudents = () => {
-    const searchResult = students.filter(student => {
-      const BuildingMatches = selectedBuilding === 'All' || student.Building === selectedBuilding;
-      const idMatches = !searchText || student.id.toString().includes(searchText);
-
-      return BuildingMatches && idMatches;
-    });
-
-    if (searchResult.length > 0) {
-      setFilteredStudents(searchResult);
-      setError(''); // Clear error if students are found
-    } else {
-      setFilteredStudents([]); // No results
-      setError(`No Department found with the specified criteria.`); // Set error message
+  // Fetch departments from backend
+  const fetchDepartments = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/departments/'); // Adjust this URL to match your backend
+      const data = await response.json();
+      setDepartments(data);
+      setFilteredDepartments(data); // Initialize filtered list with all departments
+    } catch (err) {
+      console.error('Error fetching departments:', err);
+      setError('Failed to fetch departments');
     }
   };
 
-  // Call filterStudents whenever Building, year, or searchText changes
+  // Filter departments by building and ID
+  const filterDepartments = () => {
+    const searchResult = departments.filter(department => {
+      const buildingMatches = selectedBuilding === 'All' || department.location.includes(selectedBuilding);
+      const idMatches = !searchText || department.department_id.toString().includes(searchText);
+
+      return buildingMatches && idMatches;
+    });
+
+    if (searchResult.length > 0) {
+      setFilteredDepartments(searchResult);
+      setError(''); // Clear error if departments are found
+    } else {
+      setFilteredDepartments([]); // No results
+      setError(``); // Set error message
+    }
+  };
+
+  // Fetch departments when component mounts
   useEffect(() => {
-    filterStudents();
+    fetchDepartments();
+  }, []);
+
+  // Call filterDepartments whenever selectedBuilding or searchText changes
+  useEffect(() => {
+    filterDepartments();
   }, [selectedBuilding, searchText]);
 
   return (
@@ -63,7 +75,7 @@ const StudentsAdmin = () => {
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
-              <button onClick={filterStudents}>
+              <button onClick={filterDepartments}>
                 <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
@@ -75,24 +87,26 @@ const StudentsAdmin = () => {
             <thead>
               <tr>
                 <th><input type="checkbox" /></th>
-                <th>ID</th>
-                <th>Department</th>
-                <th>Building</th>
+                <th>Department ID</th>
+                <th>Department Name</th>
+                <th>Location</th>
+                <th>Email</th>
               </tr>
             </thead>
             <tbody>
-              {filteredStudents.length > 0 ? (
-                filteredStudents.map((student) => (
-                  <tr key={student.id}>
+              {filteredDepartments.length > 0 ? (
+                filteredDepartments.map((department) => (
+                  <tr key={department.department_id}>
                     <td><input type="checkbox" /></td>
-                    <td>{student.id}</td>
-                    <td>{student.firstName}</td>
-                    <td>{student.Building}</td>
+                    <td>{department.department_id}</td>
+                    <td>{department.name}</td>
+                    <td>{department.location}</td>
+                    <td>{department.dept_email}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="9" style={{ textAlign: 'center' }}>No students found for the selected filters.</td>
+                  <td colSpan="5" style={{ textAlign: 'center' }}>No departments found for the selected filters.</td>
                 </tr>
               )}
             </tbody>
