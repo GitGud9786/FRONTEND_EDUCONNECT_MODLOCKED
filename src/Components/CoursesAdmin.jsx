@@ -5,8 +5,8 @@ import { faPlus, faEdit, faDumpster, faSearch } from '@fortawesome/free-solid-sv
 import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
-const StudentsAdmin = () => {
-  const students = [
+const CoursesAdmin = () => {
+  const initialStudents = [
     { id: 4301, firstName: 'Coding 1',department: 'CSE' },
     { id: 4779, firstName: 'Mecha 1', department: 'MPE' },
     { id: 4321, firstName: 'Electric 1', department: 'EEE' },
@@ -17,9 +17,11 @@ const StudentsAdmin = () => {
     { id: 4310, firstName: 'Civil 1', department: 'CEE' },
   ];
 
+  const [students, setStudents] = useState(initialStudents);
   const [selectedDepartment, setSelectedDepartment] = useState('All');
   const [searchText, setSearchText] = useState('');
-  const [filteredStudents, setFilteredStudents] = useState(students);
+  const [filteredStudents, setFilteredStudents] = useState(initialStudents);
+  const [selectedStudentId, setSelectedStudentId] = useState(null); // Tracks the ID of the selected student
   const [error, setError] = useState('');
 
   // Function to filter students by department, year, and ID
@@ -43,7 +45,31 @@ const StudentsAdmin = () => {
   // Call filterStudents whenever department, year, or searchText changes
   useEffect(() => {
     filterStudents();
-  }, [selectedDepartment, searchText]);
+  }, [selectedDepartment, searchText, students]);
+
+  // Handle checkbox selection
+  const handleCheckboxChange = (id) => {
+    if (selectedStudentId === id) {
+      setSelectedStudentId(null); // Unselect if already selected
+    } else {
+      setSelectedStudentId(id); // Select new ID
+    }
+  };
+
+  // Handle delete functionality
+  const handleDelete = () => {
+    if (selectedStudentId === null) {
+      setError('Please select one student to delete.');
+      return;
+    }
+
+    // Delete the selected student
+    const updatedStudents = students.filter(student => student.id !== selectedStudentId);
+    setStudents(updatedStudents);
+    setFilteredStudents(updatedStudents);
+    setSelectedStudentId(null); // Clear selection
+    setError(''); // Clear error
+  };
 
   return (
     <div className="studentsadmincontainer">
@@ -80,9 +106,9 @@ const StudentsAdmin = () => {
           <table className="student-table">
             <thead>
               <tr>
-                <th><input type="checkbox" /></th>
+                <th><input type="checkbox" disabled /></th>
                 <th>ID</th>
-                <th>Course Name</th>
+                <th>First name</th>
                 <th>Department</th>
               </tr>
             </thead>
@@ -90,7 +116,13 @@ const StudentsAdmin = () => {
               {filteredStudents.length > 0 ? (
                 filteredStudents.map((student) => (
                   <tr key={student.id}>
-                    <td><input type="checkbox" /></td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedStudentId === student.id}
+                        onChange={() => handleCheckboxChange(student.id)}
+                      />
+                    </td>
                     <td>{student.id}</td>
                     <td>{student.firstName}</td>
                     <td>{student.department}</td>
@@ -106,7 +138,7 @@ const StudentsAdmin = () => {
         </div>
 
         <div className="stdadmin-controls">
-          <Link to="/admin/course/register" className="stdadmin-controls-button">
+          <Link to="/admin/student/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
           </Link>
@@ -114,7 +146,7 @@ const StudentsAdmin = () => {
             <FontAwesomeIcon icon={faEdit} />
             <span>Edit</span>
           </button>
-          <button>
+          <button onClick={handleDelete}>
             <FontAwesomeIcon icon={faDumpster} />
             <span>Delete</span>
           </button>
@@ -124,4 +156,4 @@ const StudentsAdmin = () => {
   );
 };
 
-export default StudentsAdmin;
+export default CoursesAdmin;
