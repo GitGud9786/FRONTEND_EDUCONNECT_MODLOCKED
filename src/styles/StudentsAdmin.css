@@ -1,0 +1,138 @@
+.studentsadmincontainer{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.studentsadmin-subcontainer
+{
+  display: flex;
+  flex-direction: row;
+}
+
+.table-container {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0px 30px 70px;
+}
+
+.student-table {
+  max-width: 1200px;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+  background-color: #f8f8f8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.student-table th, .student-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+.student-table th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+.student-table tbody tr:hover {
+  background-color: #e9f6fa;
+}
+
+.photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.student-table input[type="checkbox"]{
+  cursor: pointer;
+}
+
+.filter-controls {
+  margin-bottom: 15px ;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+.filter-controls label {
+  font-weight: bold;
+}
+
+.filter-controls select {
+  margin-left: 5px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.filter-controls input {
+  width: 300px;
+  border-radius: 10px;
+}
+
+.stdadmin-controls{
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  justify-content: center;
+  align-items: center;
+}
+
+.stdadmin-controls button{
+  width: 150px;
+  height: 80px;
+  border-radius: 10px;
+  background-color: #65bee7;
+  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+.stdadmin-controls button:hover{
+  cursor: pointer;
+  background-color: #4fa8d8; /* Slightly darker shade on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+.stdadmin-controls-button{
+  width: 150px;
+  height: 80px;
+  border-radius: 10px;
+  background-color: #65bee7;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.stdadmin-controls-button:hover {
+  background-color: #4fa8d8; /* Slightly darker shade on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+.stdadmin-searchbar {
+  display: flex;
+  flex-direction: row;
+}
+
+.stdadmin-searchbar button {
+  border-radius: 10px;
+  background-color: #65bee7;
+}
+
+.stdadmin-searchbar button:hover {
+  background-color: #4fa8d8; /* Slightly darker shade on hover */
+  transform: scale(1.05);
+}

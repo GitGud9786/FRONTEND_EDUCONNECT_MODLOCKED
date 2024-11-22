@@ -1,12 +1,12 @@
-import React, { useState }from 'react'
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEdit, faDumpster, faSearch } from '@fortawesome/free-solid-svg-icons';
-import TopBarAdmin from './TopBarAdmin'
+import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
 const StudentsAdmin = () => {
-  const students = [
+  const initialStudents = [
     { id: 210041201, firstName: 'Daisy', lastName: 'Scott', email: 'daisy22@gmail.com', phone: '+442046886341', year: 'Year 1', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
     { id: 210041202, firstName: 'Isabel', lastName: 'Harris', email: 'isabel87@gmail.com', phone: '+442751886322', year: 'Year 3', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
     { id: 210041203, firstName: 'Dan', lastName: 'Thomas', email: 'dan98765@gmail.com', phone: '+442842635535', year: 'Year 1', department: 'MPE' , photo: 'https://via.placeholder.com/40' },
@@ -18,26 +18,65 @@ const StudentsAdmin = () => {
     { id: 210041209, firstName: 'Molly', lastName: 'White', email: 'molly747@gmail.com', phone: '+442041963198', year: 'Year 3', department: 'CEE' , photo: 'https://via.placeholder.com/40' },
   ];
 
+  const [students, setStudents] = useState(initialStudents);
   const [selectedDepartment, setSelectedDepartment] = useState('All');
   const [selectedYear, setSelectedYear] = useState('All');
+  const [searchText, setSearchText] = useState('');
+  const [filteredStudents, setFilteredStudents] = useState(initialStudents);
+  const [selectedStudentId, setSelectedStudentId] = useState(null); // Tracks the ID of the selected student
+  const [error, setError] = useState('');
 
-  const filteredStudents = students.filter((student) => {
-    const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
-    const yearMatches = selectedYear === 'All' || student.year === selectedYear;
-    return departmentMatches && yearMatches;
-  });
+  // Function to filter students by department, year, and ID
+  const filterStudents = () => {
+    const searchResult = students.filter(student => {
+      const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
+      const yearMatches = selectedYear === 'All' || student.year === selectedYear;
+      const idMatches = !searchText || student.id.toString().includes(searchText);
 
-  
-    const [searchText, setSearchText] = useState('');
-  
-    const handleSearch = () => {
-      console.log("Searching for:", searchText);
-      // Implement your search logic here
-    };
+      return departmentMatches && yearMatches && idMatches;
+    });
+
+    if (searchResult.length > 0) {
+      setFilteredStudents(searchResult);
+      setError(''); // Clear error if students are found
+    } else {
+      setFilteredStudents([]); // No results
+      setError(`No students found with the specified criteria.`); // Set error message
+    }
+  };
+
+  // Call filterStudents whenever department, year, or searchText changes
+  useEffect(() => {
+    filterStudents();
+  }, [selectedDepartment, selectedYear, searchText, students]);
+
+  // Handle checkbox selection
+  const handleCheckboxChange = (id) => {
+    if (selectedStudentId === id) {
+      setSelectedStudentId(null); // Unselect if already selected
+    } else {
+      setSelectedStudentId(id); // Select new ID
+    }
+  };
+
+  // Handle delete functionality
+  const handleDelete = () => {
+    if (selectedStudentId === null) {
+      setError('Please select one student to delete.');
+      return;
+    }
+
+    // Delete the selected student
+    const updatedStudents = students.filter(student => student.id !== selectedStudentId);
+    setStudents(updatedStudents);
+    setFilteredStudents(updatedStudents);
+    setSelectedStudentId(null); // Clear selection
+    setError(''); // Clear error
+  };
 
   return (
     <div className="studentsadmincontainer">
-      <TopBarAdmin></TopBarAdmin>
+      <TopBarAdmin />
       <div className="studentsadmin-subcontainer">
         <div className="table-container">
           <div className="filter-controls">
@@ -62,19 +101,26 @@ const StudentsAdmin = () => {
                 <option value="Year 4">Year 4</option>
               </select>
             </label>
-            
+
             <div className="stdadmin-searchbar">
-              <input type="search" placeholder='Search by ID'/>
-              <button onClick={handleSearch}>
-                <FontAwesomeIcon icon = {faSearch}/>
+              <input
+                type="search"
+                placeholder="Search by ID"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+              <button onClick={filterStudents}>
+                <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
-
           </div>
+
+          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+
           <table className="student-table">
             <thead>
               <tr>
-                <th><input type="checkbox" /></th>
+                <th><input type="checkbox" disabled /></th>
                 <th>Photo</th>
                 <th>ID</th>
                 <th>First name</th>
@@ -86,10 +132,16 @@ const StudentsAdmin = () => {
               </tr>
             </thead>
             <tbody>
-            {filteredStudents.length > 0 ? (
+              {filteredStudents.length > 0 ? (
                 filteredStudents.map((student) => (
                   <tr key={student.id}>
-                    <td><input type="checkbox" /></td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedStudentId === student.id}
+                        onChange={() => handleCheckboxChange(student.id)}
+                      />
+                    </td>
                     <td><img src={student.photo} alt={`${student.firstName} ${student.lastName}`} className="photo" /></td>
                     <td>{student.id}</td>
                     <td>{student.firstName}</td>
@@ -110,22 +162,22 @@ const StudentsAdmin = () => {
         </div>
 
         <div className="stdadmin-controls">
-          <Link to = "/adminstudentregister" className = "stdadmin-controls-button">
-            <FontAwesomeIcon icon={faPlus}/>
+          <Link to="/admin/student/register" className="stdadmin-controls-button">
+            <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
           </Link>
           <button>
-            <FontAwesomeIcon icon = {faEdit} />
+            <FontAwesomeIcon icon={faEdit} />
             <span>Edit</span>
           </button>
-          <button>
-            <FontAwesomeIcon icon = {faDumpster} />
+          <button onClick={handleDelete}>
+            <FontAwesomeIcon icon={faDumpster} />
             <span>Delete</span>
           </button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default StudentsAdmin
+export default StudentsAdmin;

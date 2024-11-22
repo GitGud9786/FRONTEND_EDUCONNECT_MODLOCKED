@@ -1,32 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import TeacherTopBar from "./TeacherTopBar";
+import TeacherSideBar from './TeacherCourseSideBar';
 import '../styles/TeacherDashboard.css';
-
-
-import profileImage from '../Assets/logo.jpg';
-
-const TeacherTopBar = () => {
-    return(
-        <header className='teachertopbar'>
-            <img src={profileImage} alt="Profile" className="teacherlogo" />
-            <button className='teacherusername'>Ridwan Kabir, Lecturer, CSE</button>
-            <button className='teacherlogout'>Log out</button>
-        </header>
-    );
-};
-
-
-const TeacherSideBar = () =>
-{
-    return(
-        <aside className='teachersidebar'>
-            <button className='teachersidebarbutton'>Classrooms</button>
-            <button className='teachersidebarbutton'>Schedule</button>
-            <button className='teachersidebarbutton'>Messages</button>
-            <button className='teachersidebarbutton'>Assignments</button>
-        </aside>
-    );
-};
 
 const TeacherClass = () => {
     const [courses, setCourses] = useState([]);

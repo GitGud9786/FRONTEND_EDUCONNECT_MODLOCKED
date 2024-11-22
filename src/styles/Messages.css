@@ -1,9 +1,9 @@
 /* MessagesWithChat.css */
-.container-messages
-{
+.container-messages {
     display: flex;
     flex-direction: column;
 }
+
 .messages-layout {
     display: grid;
     grid-template-columns: 1fr 4fr;

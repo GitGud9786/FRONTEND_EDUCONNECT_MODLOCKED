@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/AdminPanel.css';
 import logo from '../Assets/logo.jpg';
 import admincourse from '../Assets/admincourse.png';
@@ -19,22 +20,22 @@ const AdminPanel = () => {
             <hr className="admindivider" />
 
             <div className="adminpanelgrid">
-                <div className="adminpanelitem">
+                <Link to = "/admin/student" className = "adminpanelitem">
                     <img src={adminstudent} alt="Students" className="panel-icon" />
                     <p>Students</p>
-                </div>
-                <div className="adminpanelitem">
+                </Link>
+                <Link to = "/admin/faculty" className = "adminpanelitem">
                     <img src={adminfaculty} alt="Faculties" className="panel-icon" />
-                    <p>Faculties</p>
-                </div>
-                <div className="adminpanelitem">
+                    <p>Faculty</p>
+                </Link>
+                <Link to = "/admin/course" className = "adminpanelitem">
                     <img src={admincourse} alt="Courses" className="panel-icon" />
-                    <p>Courses</p>
-                </div>
-                <div className="adminpanelitem">
-                    <img src={admindepartment} alt="Departments" className="panel-icon" />
-                    <p>Departments</p>
-                </div>
+                    <p>Course</p>
+                </Link>
+                <Link to = "/admin/department" className = "adminpanelitem">
+                    <img src={admindepartment} alt="Faculties" className="panel-icon" />
+                    <p>Department</p>
+                </Link>
                 
             </div>
             <div className="adminevaluation">
