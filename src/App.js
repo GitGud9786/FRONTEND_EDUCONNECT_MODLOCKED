@@ -12,6 +12,7 @@ import Messages from './Components/Messages';
 import Grades from './Components/Grades';
 import AdminPanel from "./Components/AdminDashboard";
 import AdminStudentRegister from "./Components/AdminStudentRegister";
+import AdminStudentEdit from "./Components/AdminStudentEdit";
 import AdminFacultyRegister from "./Components/AdminFacultyRegister";
 import CombinedCourseList from "./Components/CourseList";
 import AdminCourseRegister from "./Components/AdminCourseRegister";
@@ -41,6 +42,7 @@ function App() {
           <Route path="/courselist" element={<CombinedCourseList />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin/student/register" element={<AdminStudentRegister />} />
+          <Route path="/admin/student/edit" element={<AdminStudentEdit/>} />
           <Route path="/admin/faculty/register" element={<AdminFacultyRegister />} />
           <Route path="/admin/course/register" element={<AdminCourseRegister />} />
           <Route path="/admin/department/register" element={<AdminDepartmentRegister />} />

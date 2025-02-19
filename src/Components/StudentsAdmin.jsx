@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faEdit, faDumpster, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEdit, faDumpster, faSearch, faEye } from '@fortawesome/free-solid-svg-icons';
 import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
 const StudentsAdmin = () => {
-  const [students, setStudents] = useState([]);  // Original student data from backend
-  const [filteredStudents, setFilteredStudents] = useState([]);  // Filtered data to display
+  const [students, setStudents] = useState([]);
+  const [filteredStudents, setFilteredStudents] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState('All');
   const [selectedYear, setSelectedYear] = useState('All');
   const [searchText, setSearchText] = useState('');
   const [error, setError] = useState('');
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // Fetch students from backend on component mount
   useEffect(() => {
     const fetchStudents = async () => {
       try {
@@ -21,7 +22,7 @@ const StudentsAdmin = () => {
         if (!response.ok) throw new Error('Failed to fetch students');
         const data = await response.json();
         setStudents(data);
-        setFilteredStudents(data);  // Initially, filtered list is the same as full list
+        setFilteredStudents(data);
       } catch (error) {
         console.error(error);
         setError('Could not fetch students data');
@@ -30,24 +31,38 @@ const StudentsAdmin = () => {
     fetchStudents();
   }, []);
 
-  // Filter students based on search text, department, and year
   const filterStudents = () => {
     const searchResult = students.filter(student => {
       const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
       const yearMatches = selectedYear === 'All' || student.year === selectedYear;
       const idMatches = !searchText || student.student_id.toString().includes(searchText);
-
       return departmentMatches && yearMatches && idMatches;
     });
 
     setFilteredStudents(searchResult);
-    setError(searchResult.length > 0 ? '' : '');
+    setError(searchResult.length > 0 ? '' : 'No students found.');
   };
 
-  // Call filterStudents whenever department, year, or search text changes
   useEffect(() => {
     filterStudents();
   }, [selectedDepartment, selectedYear, searchText]);
+
+  const fetchStudentDetails = async (studentId) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:8000/students/read/${studentId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setSelectedStudent(data.length > 0 ? data[0] : null);
+      } else {
+        setSelectedStudent(null);
+        alert("Student not found!");
+      }
+    } catch (error) {
+      console.error("Error fetching student details:", error);
+    }
+    setLoading(false);
+  };
 
   return (
     <div className="studentsadmincontainer">
@@ -95,26 +110,34 @@ const StudentsAdmin = () => {
           <table className="student-table">
             <thead>
               <tr>
-                <th><input type="checkbox" /></th>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Department</th>
                 <th>Blood Group</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredStudents.length > 0 ? (
                 filteredStudents.map((student) => (
                   <tr key={student.student_id}>
-                    <td><input type="checkbox" /></td>
                     <td>{student.student_id}</td>
                     <td>{student.name}</td>
                     <td>{student.email}</td>
                     <td>{student.phone_number}</td>
                     <td>{student.department}</td>
                     <td>{student.blood_group}</td>
+                    <td>
+                      <button
+                        className="stdadmin-controls-button"
+                        onClick={() => fetchStudentDetails(student.student_id)}
+                      >
+                        <FontAwesomeIcon icon={faEye} />
+                        <span>View</span>
+                      </button>
+                    </td>
                   </tr>
                 ))
               ) : (
@@ -130,16 +153,58 @@ const StudentsAdmin = () => {
           <Link to="/admin/student/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
-          </Link>
+          </Link >
           <button>
-            <FontAwesomeIcon icon={faEdit} />
-            <span>Edit</span>
+            <Link to="/admin/student/edit" className="stdadmin-controls-button">
+              <FontAwesomeIcon icon={faEdit} />
+              <span>Edit</span>
+            </Link >
           </button>
-          <button>
+          <button
+            className="stdadmin-controls-button"
+            onClick={async () => {
+              const studentId = prompt("Enter Student ID to delete:");
+              if (studentId) {
+                try {
+                  const response = await fetch(`http://localhost:8000/students/delete/${studentId}`, {
+                    method: "DELETE",
+                  });
+
+                  if (response.ok) {
+                    alert("Student deleted successfully");
+                  } else {
+                    alert("Failed to delete student");
+                  }
+                } catch (error) {
+                  console.error("Error deleting student:", error);
+                }
+              }
+            }}
+          >
             <FontAwesomeIcon icon={faDumpster} />
             <span>Delete</span>
           </button>
         </div>
+
+        {selectedStudent && (
+          <div className="student-info">
+            <h3>Student Information</h3>
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <p><strong>ID:</strong> {selectedStudent.student_id}</p>
+                <p><strong>Name:</strong> {selectedStudent.name}</p>
+                <p><strong>Email:</strong> {selectedStudent.email}</p>
+                <p><strong>Date of Birth:</strong> {selectedStudent.date_of_birth}</p>
+                <p><strong>Department:</strong> {selectedStudent.department}</p>
+                <p><strong>Address:</strong> {selectedStudent.address}</p>
+                <p><strong>Phone:</strong> {selectedStudent.phone_number}</p>
+                <p><strong>Blood Group:</strong> {selectedStudent.blood_group}</p>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
