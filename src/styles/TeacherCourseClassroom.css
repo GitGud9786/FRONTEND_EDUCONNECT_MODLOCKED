@@ -12,7 +12,7 @@
     border-width: 5px;
     border-color: #f6ff00;
     background-color: #0A242E;
-    width: 1000px;
+    max-width: 1000px;
     height: 250px;
 }
 
