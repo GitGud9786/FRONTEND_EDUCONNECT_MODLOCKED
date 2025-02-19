@@ -72,6 +72,9 @@ const CourseCardAssignment = () => {
   
           {/* Action Buttons */}
           <div className="assignment-action-buttons">
+            <div className="submission-text">
+                <h2>Submission</h2>
+            </div>
             <button className="upload-btn">Upload File</button>
             <button 
               className={`mark-done-btn ${isMarkedDone ? 'done' : ''}`} 
