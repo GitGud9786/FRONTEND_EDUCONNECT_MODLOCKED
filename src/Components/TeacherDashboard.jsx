@@ -1,12 +1,15 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import TeacherTopBar from "./TeacherTopBar";
 import TeacherSideBar from './TeacherCourseSideBar';
+import TeacherCourseClassroom from './TeacherCourseClassroom';
 import '../styles/TeacherDashboard.css';
 
 const TeacherClass = () => {
     const [courses, setCourses] = useState([]);
-  
+    const navigate = useNavigate();
+    
     useEffect(() => {
       // Fetch the courses from the JSON file
       fetch('teacher_courses.json')
@@ -16,7 +19,7 @@ const TeacherClass = () => {
     }, []); // Empty dependency array ensures it runs only once when the component mounts
   
     const handleCourseClick = (course) => {
-      console.log('Course clicked:', course);
+      navigate('/teacherclassroom')
     };
   
     return (
