@@ -24,9 +24,9 @@ import CombinedTeacherComponents from "./Components/TeacherDashboard"
 import CombinedTeacherClassroom from "./Components/TeacherCourseClassroom"
 import TeacherSideBar from "./Components/TeacherCourseSideBar";
 import CourseCardAssignment from "./Components/CourseCardAssignment";
+import FileUploader from "./Components/FileUploader";
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 
 function App() {
   return (
@@ -54,6 +54,7 @@ function App() {
           <Route path="/teacherdashboard" element={<CombinedTeacherComponents />} />
           <Route path="/teacherclassroom" element={<CombinedTeacherClassroom />} />
           <Route path="/dash/assignment" element={<CourseCardAssignment />} />
+          <Route path="/dash/assignment/upload" element={<FileUploader />} />
         </Routes>
       </BrowserRouter>
     </div>
