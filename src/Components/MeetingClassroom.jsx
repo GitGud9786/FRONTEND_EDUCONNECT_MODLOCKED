@@ -62,26 +62,29 @@ const MeetingPage = () => {
     };
   }, []);
 
-  // Toggle Video
   const toggleVideo = async () => {
-    if (!isScreenSharing) { // Only toggle video if screen sharing is not active
+    if (isScreenSharing) return; // Prevent toggling video while screen sharing
+  
+    if (videoEnabled) {
+      // Stop and close the video track
       if (localTrackRef.current) {
-        if (videoEnabled) {
-          // Stop the video track
-          localTrackRef.current.stop();
-          localTrackRef.current.close(); // Close the track to release resources
-        } else {
-          // Resume the video track
-          const videoTrack = await AgoraRTC.createCameraVideoTrack();
-          localTrackRef.current = videoTrack;
-          videoTrack.play("local-player");
-          await clientRef.current.publish(videoTrack); // Republish the video track
-        }
-
-        setVideoEnabled(!videoEnabled);
+        await clientRef.current.unpublish(localTrackRef.current);
+        localTrackRef.current.stop();
+        localTrackRef.current.close();
+        localTrackRef.current = null; // Clear the reference
       }
+    } else {
+      // Recreate and publish the video track
+      const videoTrack = await AgoraRTC.createCameraVideoTrack();
+      localTrackRef.current = videoTrack;
+      await clientRef.current.publish(videoTrack);
+      videoTrack.play("local-player");
     }
+  
+    setVideoEnabled(!videoEnabled);
   };
+  
+  
 
   // Toggle Audio
   const toggleAudio = async () => {
@@ -94,60 +97,47 @@ const MeetingPage = () => {
   const toggleScreenShare = async () => {
     if (!isScreenSharing) {
       try {
-        // Create screen video track
         const screenTrack = await AgoraRTC.createScreenVideoTrack({
           encoderConfig: "1080p",
           optimizationMode: "detail",
         });
         screenTrackRef.current = screenTrack;
-
-        // Unpublish the local camera video track
+  
         await clientRef.current.unpublish(localTrackRef.current);
-
-        // Publish the screen track
         await clientRef.current.publish(screenTrack);
-
-        // Play the screen track in the "local-player" div
         screenTrack.play("local-player");
-
-        // Stop the local video feed (hide local video)
+  
         if (localTrackRef.current) {
           localTrackRef.current.stop();
-          localTrackRef.current.close(); // Ensure the track is closed properly
+          localTrackRef.current.close();
         }
-
+  
         setIsScreenSharing(true);
-        setVideoEnabled(false); // Disable video when screen sharing starts
-        setIsVideoButtonDisabled(true); // Disable the video toggle button during screen sharing
-        console.log("Screen sharing started!");
+        setVideoEnabled(false);
+        setIsVideoButtonDisabled(true); // Ensure button is disabled
       } catch (error) {
         console.error("Error sharing screen:", error);
       }
     } else {
       try {
-        // Unpublish the screen track
         await clientRef.current.unpublish(screenTrackRef.current);
-
-        // Stop the screen track to release resources
         screenTrackRef.current.stop();
         screenTrackRef.current.close();
-
-        // Publish the local video track again
-        await clientRef.current.publish(localTrackRef.current);
-
-        // Play the local video track again
-        localTrackRef.current.play("local-player");
-
-        // Ensure that the button text reflects the video state properly
+  
+        const videoTrack = await AgoraRTC.createCameraVideoTrack();
+        localTrackRef.current = videoTrack;
+        await clientRef.current.publish(videoTrack);
+        videoTrack.play("local-player");
+  
         setIsScreenSharing(false);
-        setVideoEnabled(true); // Set video state to "enabled" after stopping screen share
-        setIsVideoButtonDisabled(false); // Re-enable the video button after screen sharing stops
-        console.log("Screen sharing stopped!");
+        setVideoEnabled(true);
+        setIsVideoButtonDisabled(false); // Re-enable button when screen sharing stops
       } catch (error) {
         console.error("Error stopping screen sharing:", error);
       }
     }
   };
+  
 
   // Leave Meeting
   const leaveMeeting = () => {
