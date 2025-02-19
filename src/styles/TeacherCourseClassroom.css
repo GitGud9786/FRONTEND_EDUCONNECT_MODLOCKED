@@ -43,7 +43,27 @@
   width: 1000px;
   font-family: Arial, sans-serif;
   background-color: #0A242E;
+  cursor: pointer;
   transition: max-height 0.3s ease-out; /* Transition effect for expanding/collapsing */
+}
+
+.meeting-button {
+  height: 100px;
+  margin-top: 20px;
+  margin-left: 100px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  width: 1000px;
+  background-color: #0A242E;
+  color: #ffffff;
+  height: 75px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.meeting-button:hover {
+  background-color: #ffa600;
 }
 
 /* For when the content is expanded */
@@ -151,6 +171,8 @@
   .teachercoursecontents{
     display:flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
 

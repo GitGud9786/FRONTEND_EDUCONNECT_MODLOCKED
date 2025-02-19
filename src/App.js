@@ -12,10 +12,12 @@ import Messages from './Components/Messages';
 import Grades from './Components/Grades';
 import AdminPanel from "./Components/AdminDashboard";
 import AdminStudentRegister from "./Components/AdminStudentRegister";
+import AdminStudentEdit from "./Components/AdminStudentEdit";
 import AdminFacultyRegister from "./Components/AdminFacultyRegister";
 import CombinedCourseList from "./Components/CourseList";
 import AdminCourseRegister from "./Components/AdminCourseRegister";
 import AdminDepartmentRegister from "./Components/AdminDepartmentRegister"
+import AdminDepartmentEdit from "./Components/AdminDepartmentEdit"
 import StudentsAdmin from './Components/StudentsAdmin';
 import TeachersAdmin from './Components/TeachersAdmin';
 import CoursesAdmin from './Components/CoursesAdmin';
@@ -25,6 +27,7 @@ import CombinedTeacherClassroom from "./Components/TeacherCourseClassroom"
 import TeacherSideBar from "./Components/TeacherCourseSideBar";
 import CourseCardAssignment from "./Components/CourseCardAssignment";
 import FileUploader from "./Components/FileUploader";
+import MeetingPage from './Components/MeetingClassroom';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -44,9 +47,11 @@ function App() {
           <Route path="/courselist" element={<CombinedCourseList />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin/student/register" element={<AdminStudentRegister />} />
+          <Route path="/admin/student/edit" element={<AdminStudentEdit/>} />
           <Route path="/admin/faculty/register" element={<AdminFacultyRegister />} />
           <Route path="/admin/course/register" element={<AdminCourseRegister />} />
           <Route path="/admin/department/register" element={<AdminDepartmentRegister />} />
+          <Route path="/admin/department/edit" element={<AdminDepartmentEdit />} />
           <Route path="/admin/student" element={<StudentsAdmin />} />
           <Route path="/admin/faculty" element={<TeachersAdmin />} />
           <Route path="/admin/course" element={<CoursesAdmin />} />
@@ -55,6 +60,7 @@ function App() {
           <Route path="/teacherclassroom" element={<CombinedTeacherClassroom />} />
           <Route path="/dash/assignment" element={<CourseCardAssignment />} />
           <Route path="/dash/assignment/upload" element={<FileUploader />} />
+          <Route path="/meetingpage" element={<MeetingPage />} />
         </Routes>
       </BrowserRouter>
     </div>

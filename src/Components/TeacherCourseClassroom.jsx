@@ -1,8 +1,13 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import AgoraRTC from 'agora-rtc-sdk-ng';
+import { useState, useEffect, useRef } from 'react';
 import TeacherTopBar from './TeacherTopBar';
 import "../styles/TeacherCourseClassroom.css";
 import TeacherSideBar from './TeacherCourseSideBar';
+
+const APP_ID = '5a3ef53cf05c49d5a7e6ad24ba307cdb';
+const TOKEN = null; // use a token if needed for production
+const CHANNEL = 'test-channel';
 
 const TitleBlock = () => {
     return(
@@ -61,6 +66,32 @@ const Announcement = () => {
   );
 };
 
+const MeetingClassroom = () => {
+  const [joined, setJoined] = useState(false);
+  const clientRef = useRef(null);
+  const localTrackRef = useRef(null);
+
+  useEffect(() => {
+    clientRef.current = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
+  }, []);
+
+  const joinCall = () => {
+    // Open the meeting page in a new tab and pass the params via the URL
+    const meetingUrl = `/meetingpage?appId=${APP_ID}&channel=${CHANNEL}&token=${TOKEN}`;
+    window.open(meetingUrl, '_blank');
+  };
+
+  return (
+    <div>
+      {!joined && (
+        <button className="meeting-button" onClick={joinCall}>
+          Join in a call
+        </button>
+      )}
+    </div>
+  );
+};
+
 
 const TeacherPostCard = ({ user, date, message }) => {
   return (
@@ -101,6 +132,7 @@ const CombinedTeacherClassroom = () =>
                 <TeacherSideBar / >
                 <div className='teachercoursecontents'>
                     <TitleBlock />
+                    <MeetingClassroom />
                     <Announcement />
                     <TeacherPostCard />
                 </div>
