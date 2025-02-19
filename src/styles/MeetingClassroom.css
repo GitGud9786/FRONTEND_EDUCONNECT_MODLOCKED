@@ -1,0 +1,65 @@
+/* MeetingClassroom.css */
+
+.meeting-text {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .meeting-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+  }
+  
+  #local-player {
+    width: 640px;
+    height: 480px;
+    background-color: black;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  /* Control buttons */
+  .meeting-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 10px;
+  }
+  
+  .control-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+  
+  .control-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Screen share button */
+  .screen-share {
+    background-color: #28a745;
+  }
+  
+  .screen-share:hover {
+    background-color: #1e7e34;
+  }
+  
+  /* Leave button styling */
+  .leave-button {
+    background-color: red;
+  }
+  
+  .leave-button:hover {
+    background-color: darkred;
+  }
+  

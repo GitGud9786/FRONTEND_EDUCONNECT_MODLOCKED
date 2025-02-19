@@ -23,6 +23,7 @@ import DepartmentsAdmin from './Components/DepartmentsAdmin';
 import CombinedTeacherComponents from "./Components/TeacherDashboard"
 import CombinedTeacherClassroom from "./Components/TeacherCourseClassroom"
 import TeacherSideBar from "./Components/TeacherCourseSideBar";
+import MeetingPage from './Components/MeetingClassroom';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -52,6 +53,7 @@ function App() {
           <Route path="/admin/department" element={<DepartmentsAdmin />} />
           <Route path="/teacherdashboard" element={<CombinedTeacherComponents />} />
           <Route path="/teacherclassroom" element={<CombinedTeacherClassroom />} />
+          <Route path="/meetingpage" element={<MeetingPage />} />
         </Routes>
       </BrowserRouter>
     </div>
