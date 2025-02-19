@@ -5,16 +5,17 @@ import { faPlus, faEdit, faDumpster, faSearch } from '@fortawesome/free-solid-sv
 import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
-const CoursesAdmin = () => {
+const TeachersAdmin = () => {
   const initialStudents = [
-    { id: 4301, firstName: 'Coding 1',department: 'CSE' },
-    { id: 4779, firstName: 'Mecha 1', department: 'MPE' },
-    { id: 4321, firstName: 'Electric 1', department: 'EEE' },
-    { id: 4103, firstName: 'Coding 2', department: 'CSE' },
-    { id: 4389, firstName: 'Coding 3', department: 'CSE' },
-    { id: 4551, firstName: 'Mecha 2', department: 'MPE' },
-    { id: 4801, firstName: 'Electric 3', department: 'EEE' },
-    { id: 4310, firstName: 'Civil 1', department: 'CEE' },
+    { id: 210041201, firstName: 'Daisy', lastName: 'Scott', email: 'daisy22@gmail.com', phone: '+442046886341', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
+    { id: 210041202, firstName: 'Isabel', lastName: 'Harris', email: 'isabel87@gmail.com', phone: '+442751886322', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
+    { id: 210041203, firstName: 'Dan', lastName: 'Thomas', email: 'dan98765@gmail.com', phone: '+442842635535', department: 'MPE' , photo: 'https://via.placeholder.com/40' },
+    { id: 210041204, firstName: 'Debra', lastName: 'Nelson', email: 'debra112@gmail.com', phone: '+442932223543', department: 'EEE' , photo: 'https://via.placeholder.com/40' },
+    { id: 210041205, firstName: 'Vera', lastName: 'Cooper', email: 'vera8888@gmail.com', phone: '+442198254644', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
+    { id: 210041206, firstName: 'Brian', lastName: 'Miller', email: 'brian5564@gmail.com', phone: '+442213233311', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
+    { id: 210041207, firstName: 'Lauren', lastName: 'Martin', email: 'lauren7712@gmail.com', phone: '+442089235622', department: 'MPE' , photo: 'https://via.placeholder.com/40' },
+    { id: 210041208, firstName: 'Milton', lastName: 'Smith', email: 'milton2244@gmail.com', phone: '+442044957517', department: 'EEE' , photo: 'https://via.placeholder.com/40' },
+    { id: 210041209, firstName: 'Molly', lastName: 'White', email: 'molly747@gmail.com', phone: '+442041963198', department: 'CEE' , photo: 'https://via.placeholder.com/40' },
   ];
 
   const [students, setStudents] = useState(initialStudents);
@@ -38,7 +39,7 @@ const CoursesAdmin = () => {
       setError(''); // Clear error if students are found
     } else {
       setFilteredStudents([]); // No results
-      setError(`No courses found with the specified criteria.`); // Set error message
+      setError(`No Teachers found with the specified criteria.`); // Set error message
     }
   };
 
@@ -107,8 +108,12 @@ const CoursesAdmin = () => {
             <thead>
               <tr>
                 <th><input type="checkbox" disabled /></th>
+                <th>Photo</th>
                 <th>ID</th>
                 <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Phone</th>
                 <th>Department</th>
               </tr>
             </thead>
@@ -123,8 +128,12 @@ const CoursesAdmin = () => {
                         onChange={() => handleCheckboxChange(student.id)}
                       />
                     </td>
+                    <td><img src={student.photo} alt={`${student.firstName} ${student.lastName}`} className="photo" /></td>
                     <td>{student.id}</td>
                     <td>{student.firstName}</td>
+                    <td>{student.lastName}</td>
+                    <td>{student.email}</td>
+                    <td>{student.phone}</td>
                     <td>{student.department}</td>
                   </tr>
                 ))
@@ -156,4 +165,4 @@ const CoursesAdmin = () => {
   );
 };
 
-export default CoursesAdmin;
+export default TeachersAdmin;

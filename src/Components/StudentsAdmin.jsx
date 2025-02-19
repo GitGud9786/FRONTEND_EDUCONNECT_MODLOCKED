@@ -111,9 +111,11 @@ const StudentsAdmin = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>First name</th>
+                <th>Last name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Year</th>
                 <th>Department</th>
                 <th>Blood Group</th>
                 <th>Actions</th>
@@ -126,7 +128,8 @@ const StudentsAdmin = () => {
                     <td>{student.student_id}</td>
                     <td>{student.name}</td>
                     <td>{student.email}</td>
-                    <td>{student.phone_number}</td>
+                    <td>{student.phone}</td>
+                    <td>{student.year}</td>
                     <td>{student.department}</td>
                     <td>{student.blood_group}</td>
                     <td>
@@ -142,7 +145,7 @@ const StudentsAdmin = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="7" style={{ textAlign: 'center' }}>No students found for the selected filters.</td>
+                  <td colSpan="9" style={{ textAlign: 'center' }}>No students found for the selected filters.</td>
                 </tr>
               )}
             </tbody>

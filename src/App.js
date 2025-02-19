@@ -18,10 +18,12 @@ import CombinedCourseList from "./Components/CourseList";
 import AdminCourseRegister from "./Components/AdminCourseRegister";
 import AdminDepartmentRegister from "./Components/AdminDepartmentRegister"
 import StudentsAdmin from './Components/StudentsAdmin';
-import FacultiesAdmin from './Components/FacultiesAdmin';
+import TeachersAdmin from './Components/TeachersAdmin';
 import CoursesAdmin from './Components/CoursesAdmin';
 import DepartmentsAdmin from './Components/DepartmentsAdmin';
 import CombinedTeacherComponents from "./Components/TeacherDashboard"
+import CombinedTeacherClassroom from "./Components/TeacherCourseClassroom"
+import TeacherSideBar from "./Components/TeacherCourseSideBar";
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -47,10 +49,11 @@ function App() {
           <Route path="/admin/course/register" element={<AdminCourseRegister />} />
           <Route path="/admin/department/register" element={<AdminDepartmentRegister />} />
           <Route path="/admin/student" element={<StudentsAdmin />} />
-          <Route path="/admin/faculty" element={<FacultiesAdmin />} />
+          <Route path="/admin/faculty" element={<TeachersAdmin />} />
           <Route path="/admin/course" element={<CoursesAdmin />} />
           <Route path="/admin/department" element={<DepartmentsAdmin />} />
           <Route path="/teacherdashboard" element={<CombinedTeacherComponents />} />
+          <Route path="/teacherclassroom" element={<CombinedTeacherClassroom />} />
         </Routes>
       </BrowserRouter>
     </div>
