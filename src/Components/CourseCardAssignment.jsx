@@ -2,7 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import TopBar from './TopBar';
 import "../styles/CourseCardAssignment.css";
-import TeacherSideBar from './TeacherCourseSideBar';
+import DropboxChooser from 'react-dropbox-chooser';
+
+const APP_KEY = "2kkwrv0a58nf77q"
 
 const TitleBlock = () => {
     return(
@@ -50,44 +52,85 @@ The first part of the recruitment process will be held online. The tasks will be
 
 
 const CourseCardAssignment = () => {
-    const [isMarkedDone, setIsMarkedDone] = useState(false);
-  
-    const handleMarkDone = () => {
-        if(isMarkedDone)
-            setIsMarkedDone(false);
-        else
-            setIsMarkedDone(true)
-    };
-  
-    return (
-      <div className="container-assignment">
-        <TopBar />
-        <div className='courseassignmentmain'>
-          
-          {/* Main Course Content */}
-          <div className='teachercoursecontents'>
-            <TitleBlock /> 
-            <TeacherPostCard />
-          </div>
-  
-          {/* Action Buttons */}
-          <div className="assignment-action-buttons">
-            <div className="submission-text">
-                <h2>Submission</h2>
-            </div>
-            <button className="upload-btn">Upload File</button>
-            <button 
-              className={`mark-done-btn ${isMarkedDone ? 'done' : ''}`} 
-              onClick={handleMarkDone}
-            >
-              {isMarkedDone ? "Unsubmit" : "Mark as Done"}
-            </button>
-          </div>
-          
-        </div>
-      </div>
-    );
+  const [isMarkedDone, setIsMarkedDone] = useState(false);
+  const [url, setUrl] = useState("");
+
+  // Toggle "Mark as Done" & Reset URL on Unsubmit
+  const handleMarkDone = () => {
+      /*if (isMarkedDone) {
+          setUrl(""); // ✅ Clear URL when "Unsubmit" is clicked
+      }*/
+      setIsMarkedDone((prev) => !prev);
   };
-  
+
+  // Handle Dropbox file upload
+  function handleSuccess(files) {
+      console.log(files[0].link);
+      setUrl(files[0].link);
+  }
+
+  // ✅ New function to clear uploaded file manually
+  const handleRemoveFile = () => {
+      setUrl(""); // Clear URL
+  };
+
+  return (
+      <div className="container-assignment">
+          <TopBar />
+          <div className="courseassignmentmain">
+
+              {/* Main Course Content */}
+              <div className="teachercoursecontents">
+                  <TitleBlock />
+                  <TeacherPostCard />
+              </div>
+
+              {/* Action Buttons */}
+              <div className="assignment-action-buttons">
+                  <div className="submission-text">
+                      <h2>Submission</h2>
+                  </div>
+
+                  {/* Hide Upload & URL Input When Marked as Done */}
+                  {!isMarkedDone && (
+                      <>
+                          <div className="file-uploader">
+                              <DropboxChooser
+                                  appKey={APP_KEY}
+                                  success={handleSuccess}
+                                  cancel={() => console.log("closed")}
+                                  multiselect={true}
+                              >
+                                  <button className="upload-btn">Upload to Dropbox</button>
+                              </DropboxChooser>
+                          </div>
+
+                          {/* ✅ Show Uploaded File Link & Remove Button */}
+                          {url && (
+                              <div className="uploaded-link">
+                                  <p>Uploaded File:</p>
+                                  <a href={url} target="_blank" rel="noopener noreferrer">
+                                    {url.length > 30 ? `${url.substring(0, 15)}...${url.slice(-10)}` : url}
+                                  </a>
+                                  <button className="upload-btn" onClick={handleRemoveFile}>
+                                      Remove File ❌
+                                  </button>
+                              </div>
+                          )}
+                      </>
+                  )}
+
+                  {/* Mark as Done Button */}
+                  <button 
+                      className={`mark-done-btn ${isMarkedDone ? "done" : ""}`}
+                      onClick={handleMarkDone}
+                  >
+                      {isMarkedDone ? "Unsubmit" : "Mark as Done"}
+                  </button>
+              </div>
+          </div>
+      </div>
+  );
+};
 
 export default CourseCardAssignment;

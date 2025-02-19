@@ -25,7 +25,7 @@ const Dashboard = () => {
         task: 'Project Proposal Submission',
       },
       {
-        courseTitle: 'EEE 2411: Digital Electronics',
+        courseTitle: 'CSE 4501: Operating Systems',
         instructorName: 'Ridwan Kabir',
         section: '2B',
         imageUrl: 'https://cse.iutoic-dhaka.edu/uploads/img/1601107075_1082.jpg',
@@ -61,7 +61,9 @@ const Dashboard = () => {
 
           <div className="cards-home">
           {courses.map((course, index) => (
-                        <CourseCard key={index} {...course} />
+                        <Link to="/dash/assignment">
+                          <CourseCard key={index} {...course} />
+                          </Link>
                     ))}
           </div>
         </div>
