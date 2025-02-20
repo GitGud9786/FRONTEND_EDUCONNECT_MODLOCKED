@@ -42,7 +42,7 @@ function App() {
           <Route path="/courselist/course" element={<Course />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/messages" element={<Messages />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/student-profile/:id" element={<Profile />} />
           <Route path="/grades" element={<Grades />} />
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/courselist" element={<CombinedCourseList />} />
