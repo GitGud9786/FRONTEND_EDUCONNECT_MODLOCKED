@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/AdminCourseRegister.css';
 
 const AdminCourseRegister = () => {
     const [formData, setFormData] = useState({
-        courseName: '',
-        courseID: '',
-        courseInformation: '',
+        courseId: '',
+        courseTitle: '',
+        courseDescription: '',
+        departmentId: '',
         courseDepartment: '',
     });
 
-    const [message, setMessage] = useState(''); // To show success/error message
+    const [departments, setDepartments] = useState([]);
+    const [responseMessage, setResponseMessage] = useState('');
+
+    // Fetch departments from the backend
+    useEffect(() => {
+        const fetchDepartments = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/departments/');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch departments');
+                }
+                const data = await response.json();
+                setDepartments(data); // Store department data in state
+            } catch (error) {
+                console.error('Error fetching departments:', error);
+            }
+        };
+
+        fetchDepartments();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -21,80 +41,99 @@ const AdminCourseRegister = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+    
         try {
-            const response = await fetch('http://localhost:8000/courses/create', { // Adjust this URL if needed
+            const response = await fetch('http://localhost:8000/courses/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    course_id: formData.courseID,
-                    department_id: 1, // Set this based on your form or default
+                    course_id: formData.courseId,
+                    title: formData.courseTitle,
+                    description: formData.courseDescription,
+                    department_id: formData.departmentId,
                     course_department: formData.courseDepartment,
-                    title: formData.courseName,
-                    description: formData.courseInformation,
                 }),
             });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                setMessage(`Error: ${errorData.message}`);
+    
+            const result = await response.json();
+            if (response.ok) {
+                setResponseMessage('Course created successfully!');
             } else {
-                const result = await response.json();
-                setMessage('Course successfully created!');
-                console.log('Course created:', result);
+                setResponseMessage(result.message || 'Error creating course.');
             }
         } catch (error) {
-            console.error('Error creating course:', error);
-            setMessage('An error occurred. Please try again.');
+            console.error('Error:', error);
+            setResponseMessage('Failed to create course.');
         }
     };
 
     return (
-        <form className='admincourseform' onSubmit={handleSubmit}>
-            <h2>Course Registration Details</h2>
-            <div className='admincourseformsection'>
+        <form className="admindepartmentform" onSubmit={handleSubmit}>
+            <h2>Course Creation Form</h2>
+            <div className="admindepartmentformsection">
                 <input
                     type="text"
-                    name="courseName"
-                    placeholder="Name of course"
-                    value={formData.courseName}
+                    name="courseId"
+                    placeholder="Course ID"
+                    value={formData.courseId}
                     onChange={handleChange}
+                    required
                 />
                 <input
                     type="text"
-                    name="courseID"
-                    placeholder="Course code"
-                    value={formData.courseID}
+                    name="courseTitle"
+                    placeholder="Course Title"
+                    value={formData.courseTitle}
                     onChange={handleChange}
+                    required
                 />
+            </div>
+    
+            <h2>Course Details</h2>
+            <div className="admindepartmentformsection">
+                <textarea
+                    name="courseDescription"
+                    placeholder="Course Description"
+                    value={formData.courseDescription}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+    
+            <h2>Department Selection</h2>
+            <div className="admindepartmentformsection">
                 <select
-                    className='admincourseselect'
+                    name="departmentId"
+                    value={formData.departmentId}
+                    onChange={handleChange}
+                    required
+                >
+                    <option value="">Select Department</option>
+                    {departments.length > 0 ? (
+                        departments.map((dept) => (
+                            <option key={dept.department_id} value={dept.department_id}>
+                                {dept.name}
+                            </option>
+                        ))
+                    ) : (
+                        <option disabled>Loading departments...</option>
+                    )}
+                </select>
+    
+                <input
+                    type="text"
                     name="courseDepartment"
+                    placeholder="Department Name"
                     value={formData.courseDepartment}
                     onChange={handleChange}
-                >
-                    <option value="">Department</option>
-                    <option value="Computer Science and Engineering">Computer Science and Engineering</option>
-                    <option value="Electrical and Electronics Engineering">Electrical and Electronics Engineering</option>
-                    <option value="Mechanical and Production Engineering">Mechanical and Production Engineering</option>
-                    <option value="Civil and Environmental Engineering">Civil and Environmental Engineering</option>
-                    <option value="Industrial and Production Engineering">Industrial and Production Engineering</option>
-                    <option value="Business Technology and Management">Business Technology and Management</option>
-                </select>
-
-                <div className='admincourseinforegister'>
-                    <h2>Course Description Block</h2>
-                    <textarea
-                        name="courseInformation"
-                        placeholder="Description"
-                        value={formData.courseInformation}
-                        onChange={handleChange}
-                    />
-                </div>
+                    required
+                />
             </div>
-            <button className='studentregisterbutton' type="submit">Register this course</button>
-            {message && <p>{message}</p>} {/* Display success/error message */}
+    
+            <button className='studentregisterbutton' type="submit">Create Course</button>
+            {responseMessage && <p>{responseMessage}</p>}
         </form>
     );
 };
