@@ -14,6 +14,7 @@ import AdminPanel from "./Components/AdminDashboard";
 import AdminStudentRegister from "./Components/AdminStudentRegister";
 import AdminStudentEdit from "./Components/AdminStudentEdit";
 import AdminTeacherRegister from "./Components/AdminTeacherRegister";
+import AdminTeacherEdit from "./Components/AdminTeacherEdit";
 import CombinedCourseList from "./Components/CourseList";
 import AdminCourseRegister from "./Components/AdminCourseRegister";
 import AdminCourseEdit from "./Components/AdminCourseEdit";
@@ -50,6 +51,7 @@ function App() {
           <Route path="/admin/student/register" element={<AdminStudentRegister />} />
           <Route path="/admin/student/edit" element={<AdminStudentEdit/>} />
           <Route path="/admin/teacher/register" element={<AdminTeacherRegister />} />
+          <Route path="/admin/teacher/edit" element={<AdminTeacherEdit />} />
           <Route path="/admin/course/register" element={<AdminCourseRegister />} />
           <Route path="/admin/course/edit" element={<AdminCourseEdit />} />
           <Route path="/admin/department/register" element={<AdminDepartmentRegister />} />
