@@ -13,7 +13,7 @@ import Grades from './Components/Grades';
 import AdminPanel from "./Components/AdminDashboard";
 import AdminStudentRegister from "./Components/AdminStudentRegister";
 import AdminStudentEdit from "./Components/AdminStudentEdit";
-import AdminFacultyRegister from "./Components/AdminFacultyRegister";
+import AdminTeacherRegister from "./Components/AdminTeacherRegister";
 import CombinedCourseList from "./Components/CourseList";
 import AdminCourseRegister from "./Components/AdminCourseRegister";
 import AdminCourseEdit from "./Components/AdminCourseEdit";
@@ -49,13 +49,13 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin/student/register" element={<AdminStudentRegister />} />
           <Route path="/admin/student/edit" element={<AdminStudentEdit/>} />
-          <Route path="/admin/faculty/register" element={<AdminFacultyRegister />} />
+          <Route path="/admin/teacher/register" element={<AdminTeacherRegister />} />
           <Route path="/admin/course/register" element={<AdminCourseRegister />} />
           <Route path="/admin/course/edit" element={<AdminCourseEdit />} />
           <Route path="/admin/department/register" element={<AdminDepartmentRegister />} />
           <Route path="/admin/department/edit" element={<AdminDepartmentEdit />} />
           <Route path="/admin/student" element={<StudentsAdmin />} />
-          <Route path="/admin/faculty" element={<TeachersAdmin />} />
+          <Route path="/admin/teacher" element={<TeachersAdmin />} />
           <Route path="/admin/course" element={<CoursesAdmin />} />
           <Route path="/admin/department" element={<DepartmentsAdmin />} />
           <Route path="/teacherdashboard" element={<CombinedTeacherComponents />} />

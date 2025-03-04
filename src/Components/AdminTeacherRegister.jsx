@@ -1,24 +1,24 @@
 import React, { useState } from "react";
-import "../styles/AdminFacultyRegister.css";
+import "../styles/AdminTeacherRegister.css";
 
-const AdminFacultyRegister = () => {
+const AdminTeacherRegister = () => {
   const [formData, setFormData] = useState({
-    facultyfirstName: "",
-    facultymiddleName: "",
-    facultylastName: "",
-    facultydateOfBirth: "",
-    facultybloodGroup: "",
-    facultyDesignation: "",
-    facultyDepartment: "",
-    facultyDepartmentID: "",
-    facultystreetAddress: "",
-    facultycity: "",
-    facultystate: "",
-    facultycountry: "",
-    facultyzipCode: "",
-    facultyemail: "",
-    facultyphone: "",
-    facultyPass: "",
+    teacherFirstName: "",
+    teacherMiddleName: "",
+    teacherLastName: "",
+    teacherDateOfBirth: "",
+    teacherBloodGroup: "",
+    teacherDesignation: "",
+    teacherDepartment: "",
+    teacherDepartmentID: "",
+    teacherStreetAddress: "",
+    teacherCity: "",
+    teacherState: "",
+    teacherCountry: "",
+    teacherZipCode: "",
+    teacherEmail: "",
+    teacherPhone: "",
+    teacherPass: "",
   });
 
   const handleChange = (e) => {
@@ -35,45 +35,45 @@ const AdminFacultyRegister = () => {
   };
 
   return (
-    <form className="adminfacultyform" onSubmit={handleSubmit}>
-      <h2>Faculty Register Form</h2>
+    <form className="adminteacherform" onSubmit={handleSubmit}>
+      <h2>Teacher Register Form</h2>
 
       <fieldset>
         <legend>Personal Information</legend>
-        <div className="adminfacultyformsection">
+        <div className="adminteacherformsection">
           <input
             type="text"
-            name="facultyfirstName"
+            name="teacherFirstName"
             placeholder="First Name"
-            value={formData.facultyfirstName}
+            value={formData.teacherFirstName}
             onChange={handleChange}
           />
           <input
             type="text"
-            name="facultymiddleName"
+            name="teacherMiddleName"
             placeholder="Middle Name"
-            value={formData.facultymiddleName}
+            value={formData.teacherMiddleName}
             onChange={handleChange}
           />
           <input
             type="text"
-            name="facultylastName"
+            name="teacherLastName"
             placeholder="Last Name"
-            value={formData.facultylastName}
+            value={formData.teacherLastName}
             onChange={handleChange}
           />
           <input
             type="date"
-            name="facultydateOfBirth"
+            name="teacherDateOfBirth"
             placeholder="Date of Birth"
-            value={formData.facultydateOfBirth}
+            value={formData.teacherDateOfBirth}
             onChange={handleChange}
           />
           <input
             type="text"
-            name="facultybloodGroup"
+            name="teacherBloodGroup"
             placeholder="Blood Group"
-            value={formData.facultybloodGroup}
+            value={formData.teacherBloodGroup}
             onChange={handleChange}
           />
         </div>
@@ -81,26 +81,26 @@ const AdminFacultyRegister = () => {
 
       <fieldset>
         <legend>Designation and Department</legend>
-        <div className="adminfacultyformsection">
+        <div className="adminteacherformsection">
           <input
             type="text"
-            name="facultyDesignation"
+            name="teacherDesignation"
             placeholder="Designation"
-            value={formData.facultyDesignation}
+            value={formData.teacherDesignation}
             onChange={handleChange}
           />
           <input
             type="text"
-            name="facultyDepartment"
+            name="teacherDepartment"
             placeholder="Department name"
-            value={formData.facultyDepartment}
+            value={formData.teacherDepartment}
             onChange={handleChange}
           />
           <input
             type="text"
-            name="facultyDepartmentID"
+            name="teacherDepartmentID"
             placeholder="Department ID"
-            value={formData.facultyDepartmentID}
+            value={formData.teacherDepartmentID}
             onChange={handleChange}
           />
         </div>
@@ -108,40 +108,40 @@ const AdminFacultyRegister = () => {
 
       <fieldset>
         <legend>Address</legend>
-        <div className="adminfacultyformsection">
+        <div className="adminteacherformsection">
           <input
             type="text"
-            name="facultystreetAddress"
+            name="teacherStreetAddress"
             placeholder="Street Address"
-            value={formData.facultystreetAddress}
+            value={formData.teacherStreetAddress}
             onChange={handleChange}
           />
           <input
             type="text"
-            name="facultycity"
+            name="teacherCity"
             placeholder="City"
-            value={formData.facultycity}
+            value={formData.teacherCity}
             onChange={handleChange}
           />
           <input
             type="text"
-            name="facultystate"
+            name="teacherState"
             placeholder="State / Province"
-            value={formData.facultystate}
+            value={formData.teacherState}
             onChange={handleChange}
           />
           <input
             type="text"
-            name="facultycountry"
+            name="teacherCountry"
             placeholder="Country"
-            value={formData.facultycountry}
+            value={formData.teacherCountry}
             onChange={handleChange}
           />
           <input
             type="text"
-            name="facultyzipCode"
+            name="teacherZipCode"
             placeholder="ZIP Code"
-            value={formData.facultyzipCode}
+            value={formData.teacherZipCode}
             onChange={handleChange}
           />
         </div>
@@ -149,36 +149,36 @@ const AdminFacultyRegister = () => {
 
       <fieldset>
         <legend>Contact and Credentials Information</legend>
-        <div className="adminfacultyformsection">
+        <div className="adminteacherformsection">
           <input
             type="email"
-            name="facultyemail"
+            name="teacherEmail"
             placeholder="E-mail"
-            value={formData.facultyemail}
+            value={formData.teacherEmail}
             onChange={handleChange}
           />
           <input
             type="text"
-            name="facultyphone"
+            name="teacherPhone"
             placeholder="Phone"
-            value={formData.facultyphone}
+            value={formData.teacherPhone}
             onChange={handleChange}
           />
           <input
             type="text"
-            name="facultyPass"
+            name="teacherPass"
             placeholder="Default password"
-            value={formData.facultyPass}
+            value={formData.teacherPass}
             onChange={handleChange}
           />
         </div>
       </fieldset>
 
-      <button className="facultyregisterbutton" type="submit">
-        Register this faculty
+      <button className="teacherregisterbutton" type="submit">
+        Register this teacher
       </button>
     </form>
   );
 };
 
-export default AdminFacultyRegister;
+export default AdminTeacherRegister;
