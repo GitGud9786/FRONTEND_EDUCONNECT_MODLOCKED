@@ -18,13 +18,16 @@ function AdminTeacherEdit() {
                 throw new Error("Teacher not found.");
             }
             const data = await response.json();
-            setTeacherData(data);
+            
+            // Ensure teacherId is set in teacherData
+            setTeacherData({ ...data, teacherId });
         } catch (err) {
             setError(err.message);
             setTeacherData(null);
         }
         setLoading(false);
     };
+    
 
     // Handle form field updates
     const handleChange = (e) => {
@@ -35,11 +38,30 @@ function AdminTeacherEdit() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setMessage("");
+    
+        if (!teacherData.teacherId) {
+            setMessage("Teacher ID is required.");
+            return;
+        }
+    
+        const updatedTeacherData = {
+            teacher_id: teacherData.teacherId,
+            name: `${teacherData.teacherFirstName} ${teacherData.teacherMiddleName} ${teacherData.teacherLastName}`.trim(),
+            date_of_birth: teacherData.teacherDateOfBirth,
+            blood_group: teacherData.teacherBloodGroup,
+            department_name: teacherData.teacherDepartment,
+            department_id: teacherData.teacherDepartmentID,
+            email: teacherData.teacherEmail,
+            phone_number: teacherData.teacherPhone,
+            address: `${teacherData.teacherStreetAddress}, ${teacherData.teacherCity}, ${teacherData.teacherState}, ${teacherData.teacherCountry}, ${teacherData.teacherZipCode}`,
+            password: teacherData.teacherPass, // Include password only if it's changed
+        };
+    
         try {
             const response = await fetch(`http://localhost:8000/teacher/update/${teacherId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(teacherData),
+                body: JSON.stringify(updatedTeacherData),
             });
             const result = await response.json();
             setMessage(result.message);
@@ -47,6 +69,7 @@ function AdminTeacherEdit() {
             setMessage("Error updating teacher.");
         }
     };
+    
 
     return (
         <div style={{ maxWidth: "500px", margin: "auto", padding: "20px", textAlign: "center" }}>
