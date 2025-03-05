@@ -1,17 +1,17 @@
 import { gapi } from 'gapi-script';
 
-const CLIENT_ID = '204754049053-ei5vg5van10at4q6ksj20lp2ks38j6hg.apps.googleusercontent.com';
-const API_KEY = 'AIzaSyDiJhYDLjEZAjif2MH1AOFdxvWiPp1MdAI';
+const CLIENT_ID = 'dummy.apps.googleusercontent.com';
+const API_KEY = 'dummmy';
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-const SCOPES = "https://www.googleapis.com/auth/calendar.events";
+const SCOPES = "https://www.googleapis.com/auth/calendar";
 
-export const initClient = () => {
-  gapi.client.init({
-    apiKey: API_KEY,
-    clientId: CLIENT_ID,
-    discoveryDocs: DISCOVERY_DOCS,
-    scope: SCOPES,
-  });
+export const initClient = async () => {
+    gapi.client.init({
+      apiKey: API_KEY,
+      clientId: CLIENT_ID,
+      discoveryDocs: DISCOVERY_DOCS,
+      scope: SCOPES,
+    });
 };
 
 export const loadCalendarEvents = () => {
@@ -22,5 +22,11 @@ export const loadCalendarEvents = () => {
     singleEvents: true,
     maxResults: 10,
     orderBy: 'startTime',
+  });
+};
+
+export const signInAndLoadEvents = () => {
+  return gapi.auth2.getAuthInstance().signIn().then(() => {
+    return loadCalendarEvents();
   });
 };
