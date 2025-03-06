@@ -108,12 +108,14 @@ const StudentsAdmin = () => {
             </tbody>
           </table>
         </div>
-
-        <div className="stdadmin-controls">
+      </div>
+      <div className="stdadmin-controls">
+          <button>
           <Link to="/admin/department/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
           </Link>
+          </button>
           <button>
             <Link to="/admin/department/edit" className="stdadmin-controls-button">
                 <FontAwesomeIcon icon={faEdit} />
@@ -145,7 +147,6 @@ const StudentsAdmin = () => {
             <span>Delete</span>
           </button>
         </div>
-      </div>
     </div>
   );
 };

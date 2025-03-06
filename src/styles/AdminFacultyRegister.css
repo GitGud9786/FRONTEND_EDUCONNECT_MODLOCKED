@@ -1,0 +1,79 @@
+.adminfacultyform {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 60px;
+  padding: 35px;
+  border-radius: 10px;
+  background-color: #0a242e;
+  box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.7); /* Darker, more visible shadow */
+  font-family: Arial, sans-serif;
+}
+
+.adminfacultyform h2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.7em;
+  color: #ffffff;
+}
+
+fieldset {
+  border: 1px solid #3197a5;
+  border-radius: 5px;
+  margin-bottom: 25px;
+  padding: 14px;
+}
+
+legend {
+  padding: 0 10px;
+  color: #ffffff;
+  font-size: 1.2em;
+}
+
+.adminfacultyformsection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.adminfacultyformsection input {
+  flex: 1;
+  min-width: 150px;
+  padding: 10px;
+  border: 1px solid #a1a1a1;
+  border-radius: 4px;
+  background-color: #14445a;
+  color: #ffffff;
+  font-size: 1em;
+}
+
+.adminfacultyformsection input::placeholder {
+  color: #d3d3d3;
+}
+
+.facultyregisterbutton {
+  background-color: #defdff;
+  margin: auto;
+  width: 200px; 
+  color: black;
+  font-size: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6); /* Darker shadow for the button */
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.facultyregisterbutton:hover {
+  background-color: #ffa600;
+  transform: scale(1.05);
+}
+
+.facultyregisterbutton:active {
+  background-color: #1e7e34;
+  color: rgb(255, 255, 255);
+  transform: scale(1);
+}

@@ -152,11 +152,34 @@ const StudentsAdmin = () => {
           </table>
         </div>
 
-        <div className="stdadmin-controls">
+
+        {selectedStudent && (
+          <div className="student-info">
+            <h3>Student Information</h3>
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <p><strong>ID:</strong> {selectedStudent.student_id}</p>
+                <p><strong>Name:</strong> {selectedStudent.name}</p>
+                <p><strong>Email:</strong> {selectedStudent.email}</p>
+                <p><strong>Date of Birth:</strong> {selectedStudent.date_of_birth}</p>
+                <p><strong>Department:</strong> {selectedStudent.department}</p>
+                <p><strong>Address:</strong> {selectedStudent.address}</p>
+                <p><strong>Phone:</strong> {selectedStudent.phone_number}</p>
+                <p><strong>Blood Group:</strong> {selectedStudent.blood_group}</p>
+              </>
+            )}
+          </div>
+        )}
+      </div>
+      <div className="stdadmin-controls">
+          <button>
           <Link to="/admin/student/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
           </Link >
+          </button>
           <button>
             <Link to="/admin/student/edit" className="stdadmin-controls-button">
               <FontAwesomeIcon icon={faEdit} />
@@ -188,27 +211,6 @@ const StudentsAdmin = () => {
             <span>Delete</span>
           </button>
         </div>
-
-        {selectedStudent && (
-          <div className="student-info">
-            <h3>Student Information</h3>
-            {loading ? (
-              <p>Loading...</p>
-            ) : (
-              <>
-                <p><strong>ID:</strong> {selectedStudent.student_id}</p>
-                <p><strong>Name:</strong> {selectedStudent.name}</p>
-                <p><strong>Email:</strong> {selectedStudent.email}</p>
-                <p><strong>Date of Birth:</strong> {selectedStudent.date_of_birth}</p>
-                <p><strong>Department:</strong> {selectedStudent.department}</p>
-                <p><strong>Address:</strong> {selectedStudent.address}</p>
-                <p><strong>Phone:</strong> {selectedStudent.phone_number}</p>
-                <p><strong>Blood Group:</strong> {selectedStudent.blood_group}</p>
-              </>
-            )}
-          </div>
-        )}
-      </div>
     </div>
   );
 };

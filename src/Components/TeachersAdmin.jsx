@@ -130,11 +130,35 @@ const TeachersAdmin = () => {
           </table>
         </div>
 
-        <div className="stdadmin-controls">
+
+        {selectedTeacher && (
+          <div className="student-info">
+            <h3>Teacher Information</h3>
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <p><strong>ID:</strong> {selectedTeacher.teacher_id}</p>
+                <p><strong>Name:</strong> {selectedTeacher.name}</p>
+                <p><strong>Email:</strong> {selectedTeacher.email}</p>
+                <p><strong>Date of Birth:</strong> {selectedTeacher.date_of_birth}</p>
+                <p><strong>Department:</strong> {selectedTeacher.department}</p>
+                <p><strong>Address:</strong> {selectedTeacher.address}</p>
+                <p><strong>Phone:</strong> {selectedTeacher.phone_number}</p>
+                <p><strong>Blood Group:</strong> {selectedTeacher.blood_group}</p>
+              </>
+            )}
+          </div>
+        )}
+
+      </div>
+      <div className="stdadmin-controls">
+          <button>
           <Link to="/admin/teacher/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
           </Link>
+          </button>
           <button>
             <Link to="/admin/teacher/edit" className="stdadmin-controls-button">
               <FontAwesomeIcon icon={faEdit} />
@@ -166,28 +190,6 @@ const TeachersAdmin = () => {
             <span>Delete</span>
           </button>
         </div>
-
-        {selectedTeacher && (
-          <div className="student-info">
-            <h3>Teacher Information</h3>
-            {loading ? (
-              <p>Loading...</p>
-            ) : (
-              <>
-                <p><strong>ID:</strong> {selectedTeacher.teacher_id}</p>
-                <p><strong>Name:</strong> {selectedTeacher.name}</p>
-                <p><strong>Email:</strong> {selectedTeacher.email}</p>
-                <p><strong>Date of Birth:</strong> {selectedTeacher.date_of_birth}</p>
-                <p><strong>Department:</strong> {selectedTeacher.department}</p>
-                <p><strong>Address:</strong> {selectedTeacher.address}</p>
-                <p><strong>Phone:</strong> {selectedTeacher.phone_number}</p>
-                <p><strong>Blood Group:</strong> {selectedTeacher.blood_group}</p>
-              </>
-            )}
-          </div>
-        )}
-
-      </div>
     </div>
   );
 };
