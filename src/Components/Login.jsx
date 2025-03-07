@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
 import bike_icon from '../Assets/study.png';
 import logo from '../Assets/logo.jpg';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [user_id, setUserId] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("Select a Role");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -17,30 +16,38 @@ const Login = () => {
     e.preventDefault();
     setError("");
 
-    if (!email || !password) {
-      setError("Please enter both email and password.");
-      return;
-    }
-
-    if (role !== "student") {
-      setError("Only student login is implemented.");
+    if (!user_id || !password) {
+      setError("Please enter both User ID and Password.");
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:8000/students/studentlogin", {
+      const response = await fetch("http://localhost:8000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ user_id, user_password: password }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem("student", JSON.stringify(data.student)); // Save student info
-        navigate(`/student-profile/${data.student.student_id}`); // Redirect to profile page
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        switch (data.user.user_role) {
+          case "student":
+            navigate(`/student-profile/${data.user.user_id}`);
+            break;
+          case "teacher":
+            navigate(`/teacherdashboard`);
+            break;
+          case "admin":
+            navigate(`/admin`);
+            break;
+          default:
+            setError("Invalid role assigned to user.");
+        }
       } else {
         setError(data.message || "Login failed.");
       }
@@ -54,7 +61,7 @@ const Login = () => {
     <div className="login-page">
       <div className="container">
         <div className="left">
-          <img src={logo} alt="" />
+          <img src={logo} alt="logo" />
           <div className="header">
             <div className="heading">EDUCONNECT</div>
             <div className="subheading">Unlock Your Potential!</div>
@@ -62,21 +69,11 @@ const Login = () => {
 
           <div className="inputs">
             <div className="input">
-              <label htmlFor="role-select">Select Role:</label>
-              <select id="role-select" value={role} onChange={(e) => setRole(e.target.value)}>
-                <option value="">-- Choose an option --</option>
-                <option value="teacher">Teacher</option>
-                <option value="student">Student</option>
-                <option value="admin">Admin</option>
-              </select>
-            </div>
-
-            <div className="input">
               <input 
-                type="email" 
-                placeholder="Enter Your Email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)} 
+                type="text" 
+                placeholder="Enter Your User ID" 
+                value={user_id}
+                onChange={(e) => setUserId(e.target.value)} 
               />
             </div>
 
@@ -98,7 +95,7 @@ const Login = () => {
         </div>
 
         <div className="right">
-          <img src={bike_icon} alt="" />
+          <img src={bike_icon} alt="study" />
         </div>
       </div>
       <div className="bottom-login">Created by MODLOCKED©</div>
