@@ -1,0 +1,31 @@
+.teachersidebar {
+    margin-top: 20px;
+    margin-left: 10px;
+    border-radius: 10px;
+    width: 200px;
+    max-height: 400px;
+    background-color: #0A242E;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.teachersidebarbutton {
+    background-color: #0A242E;
+    color: white;
+    padding: 12px;
+    border-color: white;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.teachersidebarbutton:hover{
+    background-color: #ffd500;
+    color: black;
+    border-color: black;
+    
+}

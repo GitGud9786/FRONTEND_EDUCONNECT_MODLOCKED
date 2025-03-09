@@ -1,91 +1,104 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
 import bike_icon from '../Assets/study.png';
 import logo from '../Assets/logo.jpg';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [user_id, setUserId] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("Select a Role");
-  
-  const navigate = useNavigate(); // for programmatic navigation
+  const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
-    e.preventDefault(); // prevent the default form submission behavior
-    console.log("Email:", email);
-    console.log("Password:", password);
+  const navigate = useNavigate();
 
-    if (role === "admin") {
-      navigate('/admin');  // Navigate to the admin panel
-    } else if(role === "student") {
-      navigate('/dash');   // Navigate to the general dashboard
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!user_id || !password) {
+      setError("Please enter both User ID and Password.");
+      return;
     }
-    else if(role === "teacher")
-      navigate('/teacherdashboard');
-  };
 
-  
-  const handleRoleChange = (event) => {
-    setRole(event.target.value);
-  }
+    try {
+      const response = await fetch("http://localhost:8000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user_id, user_password: password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        switch (data.user.user_role) {
+          case "student":
+            navigate(`/student-profile/${data.user.user_id}`);
+            break;
+          case "teacher":
+            navigate(`/teacherdashboard`);
+            break;
+          case "admin":
+            navigate(`/admin`);
+            break;
+          default:
+            setError("Invalid role assigned to user.");
+        }
+      } else {
+        setError(data.message || "Login failed.");
+      }
+    } catch (error) {
+      setError("Error connecting to server.");
+      console.error("Login error:", error);
+    }
+  };
 
   return (
     <div className="login-page">
-    <div className="container">
-      <div className="left">
-        <img src={logo} alt="" />
-
-        <div className="header">
-          <div className="heading">EDUCONNECT</div>
-          <div className="subheading">Unlock Your Potential!</div>
-        </div>
-
-        <div className="inputs">
-        <div className="input">
-          <label htmlFor="role-select">Select Role:</label>
-          <select id="role-select" value={role} onChange={handleRoleChange}>
-            <option value="">-- Choose an option --</option>
-            <option value="teacher">Teacher</option>
-            <option value="student">Student</option>
-            <option value="admin">Admin</option>
-          </select>
-          <p>Selected Role: {role}</p>
-        </div>
-
-          <div className="input">
-            <input 
-              type="email" 
-              placeholder="Enter Your Email" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)} 
-            />
+      <div className="container">
+        <div className="left">
+          <img src={logo} alt="logo" />
+          <div className="header">
+            <div className="heading">EDUCONNECT</div>
+            <div className="subheading">Unlock Your Potential!</div>
           </div>
 
-          <div className="input">
-            <input 
-              type="password" 
-              placeholder="Enter Your Password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)} 
-            />
-          </div>
+          <div className="inputs">
+            <div className="input">
+              <input 
+                type="text" 
+                placeholder="Enter Your User ID" 
+                value={user_id}
+                onChange={(e) => setUserId(e.target.value)} 
+              />
+            </div>
 
-          <div className="submit-container">
-            <div className="submit" onClick={handleLogin}>
-              {/* Removed the <Link> and used navigate directly in handleLogin */}
-              Login
+            <div className="input">
+              <input 
+                type="password" 
+                placeholder="Enter Your Password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} 
+              />
+            </div>
+
+            {error && <p className="error">{error}</p>}
+
+            <div className="submit-container">
+              <div className="submit" onClick={handleLogin}>Login</div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="right">
-        <img src={bike_icon} alt="" />
+        <div className="right">
+          <img src={bike_icon} alt="study" />
+        </div>
       </div>
-    </div>
-    <div className="bottom-login">Created by MODLOCKED©</div>
+      <div className="bottom-login">Created by MODLOCKED©</div>
     </div>
   );
 };

@@ -37,7 +37,7 @@ const TopBar = () => {
               </NavLink>
 
               <NavLink
-                to="/admin/faculty"
+                to="/admin/teacher"
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
@@ -46,7 +46,7 @@ const TopBar = () => {
                   icon={faChalkboardTeacher}
                   className="icon-home"
                 />
-                <span>Faculties</span>
+                <span>Teachers</span>
               </NavLink>
 
               <NavLink

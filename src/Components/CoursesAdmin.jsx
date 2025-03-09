@@ -6,70 +6,41 @@ import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
 const CoursesAdmin = () => {
-  const initialStudents = [
-    { id: 4301, firstName: 'Coding 1',department: 'CSE' },
-    { id: 4779, firstName: 'Mecha 1', department: 'MPE' },
-    { id: 4321, firstName: 'Electric 1', department: 'EEE' },
-    { id: 4103, firstName: 'Coding 2', department: 'CSE' },
-    { id: 4389, firstName: 'Coding 3', department: 'CSE' },
-    { id: 4551, firstName: 'Mecha 2', department: 'MPE' },
-    { id: 4801, firstName: 'Electric 3', department: 'EEE' },
-    { id: 4310, firstName: 'Civil 1', department: 'CEE' },
-  ];
-
-  const [students, setStudents] = useState(initialStudents);
+  const [courses, setCourses] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState('All');
   const [searchText, setSearchText] = useState('');
-  const [filteredStudents, setFilteredStudents] = useState(initialStudents);
-  const [selectedStudentId, setSelectedStudentId] = useState(null); // Tracks the ID of the selected student
+  const [filteredCourses, setFilteredCourses] = useState([]);
   const [error, setError] = useState('');
 
-  // Function to filter students by department, year, and ID
-  const filterStudents = () => {
-    const searchResult = students.filter(student => {
-      const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
-      const idMatches = !searchText || student.id.toString().includes(searchText);
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/courses/');
+        const data = await response.json();
+        setCourses(data);
+        setFilteredCourses(data);
+      } catch (err) {
+        console.error('Error fetching courses:', err);
+        setError('Failed to fetch courses');
+      }
+    };
+    fetchCourses();
+  }, []);
 
+  const filterCourses = () => {
+    const searchResult = courses.filter(course => {
+      const departmentMatches = selectedDepartment === 'All' || course.course_department.includes(selectedDepartment);
+      const idMatches = !searchText || course.course_id.toString().includes(searchText);
       return departmentMatches && idMatches;
     });
 
-    if (searchResult.length > 0) {
-      setFilteredStudents(searchResult);
-      setError(''); // Clear error if students are found
-    } else {
-      setFilteredStudents([]); // No results
-      setError(`No courses found with the specified criteria.`); // Set error message
-    }
+    setFilteredCourses(searchResult);
+    setError(searchResult.length > 0 ? '' : 'No courses found.');
   };
 
-  // Call filterStudents whenever department, year, or searchText changes
   useEffect(() => {
-    filterStudents();
-  }, [selectedDepartment, searchText, students]);
-
-  // Handle checkbox selection
-  const handleCheckboxChange = (id) => {
-    if (selectedStudentId === id) {
-      setSelectedStudentId(null); // Unselect if already selected
-    } else {
-      setSelectedStudentId(id); // Select new ID
-    }
-  };
-
-  // Handle delete functionality
-  const handleDelete = () => {
-    if (selectedStudentId === null) {
-      setError('Please select one student to delete.');
-      return;
-    }
-
-    // Delete the selected student
-    const updatedStudents = students.filter(student => student.id !== selectedStudentId);
-    setStudents(updatedStudents);
-    setFilteredStudents(updatedStudents);
-    setSelectedStudentId(null); // Clear selection
-    setError(''); // Clear error
-  };
+    filterCourses();
+  }, [selectedDepartment, searchText]);
 
   return (
     <div className="studentsadmincontainer">
@@ -95,7 +66,7 @@ const CoursesAdmin = () => {
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
-              <button onClick={filterStudents}>
+              <button onClick={filterCourses}>
                 <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
@@ -106,52 +77,79 @@ const CoursesAdmin = () => {
           <table className="student-table">
             <thead>
               <tr>
-                <th><input type="checkbox" disabled /></th>
-                <th>ID</th>
-                <th>First name</th>
+                <th><input type="checkbox" /></th>
+                <th>Course ID</th>
+                <th>Course Title</th>
                 <th>Department</th>
+                <th>Description</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {filteredStudents.length > 0 ? (
-                filteredStudents.map((student) => (
-                  <tr key={student.id}>
+              {filteredCourses.length > 0 ? (
+                filteredCourses.map((course) => (
+                  <tr key={course.course_id}>
+                    <td><input type="checkbox" /></td>
+                    <td>{course.course_id}</td>
+                    <td>{course.title}</td>
+                    <td>{course.course_department}</td>
+                    <td>{course.description}</td>
                     <td>
-                      <input
-                        type="checkbox"
-                        checked={selectedStudentId === student.id}
-                        onChange={() => handleCheckboxChange(student.id)}
-                      />
+                      <Link to={`/admin/course/edit/${course.course_id}`} className="stdadmin-controls-button">
+                        <FontAwesomeIcon icon={faEdit} />
+                        <span>Edit</span>
+                      </Link>
                     </td>
-                    <td>{student.id}</td>
-                    <td>{student.firstName}</td>
-                    <td>{student.department}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="9" style={{ textAlign: 'center' }}>No students found for the selected filters.</td>
+                  <td colSpan="6" style={{ textAlign: 'center' }}>No courses found for the selected filters.</td>
                 </tr>
               )}
             </tbody>
           </table>
         </div>
 
-        <div className="stdadmin-controls">
-          <Link to="/admin/student/register" className="stdadmin-controls-button">
+      </div>
+      <div className="stdadmin-controls">
+          <button>
+          <Link to="/admin/course/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
           </Link>
-          <button>
-            <FontAwesomeIcon icon={faEdit} />
-            <span>Edit</span>
           </button>
-          <button onClick={handleDelete}>
+          <button>
+            <Link to="/admin/course/edit" className="stdadmin-controls-button">
+                <FontAwesomeIcon icon={faEdit} />
+                <span>Edit</span>
+            </Link >
+          </button>
+          <button
+            className="stdadmin-controls-button"
+            onClick={async () => {
+              const courseId = prompt("Enter Course ID to delete:");
+              if (courseId) {
+                try {
+                  const response = await fetch(`http://localhost:8000/courses/delete/${courseId}`, {
+                    method: "DELETE",
+                  });
+
+                  if (response.ok) {
+                    alert("Course deleted successfully");
+                  } else {
+                    alert("Failed to delete course");
+                  }
+                } catch (error) {
+                  console.error("Error deleting course:", error);
+                }
+              }
+            }}
+          >
             <FontAwesomeIcon icon={faDumpster} />
             <span>Delete</span>
           </button>
         </div>
-      </div>
     </div>
   );
 };

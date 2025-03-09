@@ -1,76 +1,68 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faEdit, faDumpster, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEdit, faDumpster, faSearch, faEye } from '@fortawesome/free-solid-svg-icons';
 import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
 const TeachersAdmin = () => {
-  const initialStudents = [
-    { id: 210041201, firstName: 'Daisy', lastName: 'Scott', email: 'daisy22@gmail.com', phone: '+442046886341', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041202, firstName: 'Isabel', lastName: 'Harris', email: 'isabel87@gmail.com', phone: '+442751886322', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041203, firstName: 'Dan', lastName: 'Thomas', email: 'dan98765@gmail.com', phone: '+442842635535', department: 'MPE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041204, firstName: 'Debra', lastName: 'Nelson', email: 'debra112@gmail.com', phone: '+442932223543', department: 'EEE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041205, firstName: 'Vera', lastName: 'Cooper', email: 'vera8888@gmail.com', phone: '+442198254644', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041206, firstName: 'Brian', lastName: 'Miller', email: 'brian5564@gmail.com', phone: '+442213233311', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041207, firstName: 'Lauren', lastName: 'Martin', email: 'lauren7712@gmail.com', phone: '+442089235622', department: 'MPE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041208, firstName: 'Milton', lastName: 'Smith', email: 'milton2244@gmail.com', phone: '+442044957517', department: 'EEE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041209, firstName: 'Molly', lastName: 'White', email: 'molly747@gmail.com', phone: '+442041963198', department: 'CEE' , photo: 'https://via.placeholder.com/40' },
-  ];
-
-  const [students, setStudents] = useState(initialStudents);
+  const [teachers, setTeachers] = useState([]);
+  const [filteredTeachers, setFilteredTeachers] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState('All');
   const [searchText, setSearchText] = useState('');
-  const [filteredStudents, setFilteredStudents] = useState(initialStudents);
-  const [selectedStudentId, setSelectedStudentId] = useState(null); // Tracks the ID of the selected student
   const [error, setError] = useState('');
+  const [selectedTeacher, setSelectedTeacher] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // Function to filter students by department, year, and ID
-  const filterStudents = () => {
-    const searchResult = students.filter(student => {
-      const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
-      const idMatches = !searchText || student.id.toString().includes(searchText);
+  useEffect(() => {
+    const fetchTeachers = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/teacher');
+        if (!response.ok) throw new Error('Failed to fetch teachers');
+        const data = await response.json();
+        setTeachers(data);
+        setFilteredTeachers(data);
+      } catch (error) {
+        console.error(error);
+        setError('Could not fetch teachers data');
+      }
+    };
+    fetchTeachers();
+  }, []);
 
+  const filterTeachers = () => {
+    const searchResult = teachers.filter(teacher => {
+      const departmentMatches = selectedDepartment === 'All' || teacher.department === selectedDepartment;
+      const idMatches = !searchText || teacher.teacher_id.toString().includes(searchText);
       return departmentMatches && idMatches;
     });
 
-    if (searchResult.length > 0) {
-      setFilteredStudents(searchResult);
-      setError(''); // Clear error if students are found
-    } else {
-      setFilteredStudents([]); // No results
-      setError(`No Teachers found with the specified criteria.`); // Set error message
-    }
+    setFilteredTeachers(searchResult);
+    setError(searchResult.length > 0 ? '' : 'No teachers found.');
   };
 
-  // Call filterStudents whenever department, year, or searchText changes
   useEffect(() => {
-    filterStudents();
-  }, [selectedDepartment, searchText, students]);
+    filterTeachers();
+  }, [selectedDepartment, searchText]);
 
-  // Handle checkbox selection
-  const handleCheckboxChange = (id) => {
-    if (selectedStudentId === id) {
-      setSelectedStudentId(null); // Unselect if already selected
-    } else {
-      setSelectedStudentId(id); // Select new ID
+
+  const fetchTeacherDetails = async (teacherId) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:8000/teacher/read/${teacherId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setSelectedTeacher(data.length > 0 ? data[0] : null);
+      } else {
+        setSelectedTeacher(null);
+        alert("Student not found!");
+      }
+    } catch (error) {
+      console.error("Error fetching teacher details:", error);
     }
+    setLoading(false);
   };
 
-  // Handle delete functionality
-  const handleDelete = () => {
-    if (selectedStudentId === null) {
-      setError('Please select one student to delete.');
-      return;
-    }
-
-    // Delete the selected student
-    const updatedStudents = students.filter(student => student.id !== selectedStudentId);
-    setStudents(updatedStudents);
-    setFilteredStudents(updatedStudents);
-    setSelectedStudentId(null); // Clear selection
-    setError(''); // Clear error
-  };
 
   return (
     <div className="studentsadmincontainer">
@@ -96,7 +88,7 @@ const TeachersAdmin = () => {
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
-              <button onClick={filterStudents}>
+              <button onClick={filterTeachers}>
                 <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
@@ -107,60 +99,97 @@ const TeachersAdmin = () => {
           <table className="student-table">
             <thead>
               <tr>
-                <th><input type="checkbox" disabled /></th>
-                <th>Photo</th>
                 <th>ID</th>
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Department</th>
+                
               </tr>
             </thead>
             <tbody>
-              {filteredStudents.length > 0 ? (
-                filteredStudents.map((student) => (
-                  <tr key={student.id}>
-                    <td>
-                      <input
-                        type="checkbox"
-                        checked={selectedStudentId === student.id}
-                        onChange={() => handleCheckboxChange(student.id)}
-                      />
-                    </td>
-                    <td><img src={student.photo} alt={`${student.firstName} ${student.lastName}`} className="photo" /></td>
-                    <td>{student.id}</td>
-                    <td>{student.firstName}</td>
-                    <td>{student.lastName}</td>
-                    <td>{student.email}</td>
-                    <td>{student.phone}</td>
-                    <td>{student.department}</td>
+              {filteredTeachers.length > 0 ? (
+                filteredTeachers.map((teacher) => (
+                  <tr key={teacher.teacher_id}>
+                    <td>{teacher.teacher_id}</td>
+                    <td>{teacher.first_name}</td>
+                    <td>{teacher.last_name}</td>
+                    <td>{teacher.email}</td>
+                    <td>{teacher.phone}</td>
+                    <td>{teacher.department}</td>
+                    
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="9" style={{ textAlign: 'center' }}>No students found for the selected filters.</td>
+                  <td colSpan="9" style={{ textAlign: 'center' }}>No teachers found for the selected filters.</td>
                 </tr>
               )}
             </tbody>
           </table>
         </div>
 
-        <div className="stdadmin-controls">
-          <Link to="/admin/student/register" className="stdadmin-controls-button">
+
+        {selectedTeacher && (
+          <div className="student-info">
+            <h3>Teacher Information</h3>
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <p><strong>ID:</strong> {selectedTeacher.teacher_id}</p>
+                <p><strong>Name:</strong> {selectedTeacher.name}</p>
+                <p><strong>Email:</strong> {selectedTeacher.email}</p>
+                <p><strong>Date of Birth:</strong> {selectedTeacher.date_of_birth}</p>
+                <p><strong>Department:</strong> {selectedTeacher.department}</p>
+                <p><strong>Address:</strong> {selectedTeacher.address}</p>
+                <p><strong>Phone:</strong> {selectedTeacher.phone_number}</p>
+                <p><strong>Blood Group:</strong> {selectedTeacher.blood_group}</p>
+              </>
+            )}
+          </div>
+        )}
+
+      </div>
+      <div className="stdadmin-controls">
+          <button>
+          <Link to="/admin/teacher/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
           </Link>
-          <button>
-            <FontAwesomeIcon icon={faEdit} />
-            <span>Edit</span>
           </button>
-          <button onClick={handleDelete}>
+          <button>
+            <Link to="/admin/teacher/edit" className="stdadmin-controls-button">
+              <FontAwesomeIcon icon={faEdit} />
+              <span>Edit</span>
+            </Link>
+          </button>
+          <button
+            className="stdadmin-controls-button"
+            onClick={async () => {
+              const teacherId = prompt("Enter Teacher ID to delete:");
+              if (teacherId) {
+                try {
+                  const response = await fetch(`http://localhost:8000/teacher/delete/${teacherId}`, {
+                    method: "DELETE",
+                  });
+
+                  if (response.ok) {
+                    alert("Teacher deleted successfully");
+                  } else {
+                    alert("Failed to delete teacher");
+                  }
+                } catch (error) {
+                  console.error("Error deleting teacher:", error);
+                }
+              }
+            }}
+          >
             <FontAwesomeIcon icon={faDumpster} />
             <span>Delete</span>
           </button>
         </div>
-      </div>
     </div>
   );
 };

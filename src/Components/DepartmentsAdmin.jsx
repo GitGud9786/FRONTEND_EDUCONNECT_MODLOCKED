@@ -6,49 +6,38 @@ import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
 const StudentsAdmin = () => {
-  const [departments, setDepartments] = useState([]); // Store fetched departments
+  const [departments, setDepartments] = useState([]);
   const [selectedBuilding, setSelectedBuilding] = useState('All');
   const [searchText, setSearchText] = useState('');
   const [filteredDepartments, setFilteredDepartments] = useState([]);
   const [error, setError] = useState('');
 
-  // Fetch departments from backend
-  const fetchDepartments = async () => {
-    try {
-      const response = await fetch('http://localhost:8000/departments/'); // Adjust this URL to match your backend
-      const data = await response.json();
-      setDepartments(data);
-      setFilteredDepartments(data); // Initialize filtered list with all departments
-    } catch (err) {
-      console.error('Error fetching departments:', err);
-      setError('Failed to fetch departments');
-    }
-  };
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/departments/');
+        const data = await response.json();
+        setDepartments(data);
+        setFilteredDepartments(data);
+      } catch (err) {
+        console.error('Error fetching departments:', err);
+        setError('Failed to fetch departments');
+      }
+    };
+    fetchDepartments();
+  }, []);
 
-  // Filter departments by building and ID
   const filterDepartments = () => {
     const searchResult = departments.filter(department => {
       const buildingMatches = selectedBuilding === 'All' || department.location.includes(selectedBuilding);
       const idMatches = !searchText || department.department_id.toString().includes(searchText);
-
       return buildingMatches && idMatches;
     });
 
-    if (searchResult.length > 0) {
-      setFilteredDepartments(searchResult);
-      setError(''); // Clear error if departments are found
-    } else {
-      setFilteredDepartments([]); // No results
-      setError(``); // Set error message
-    }
+    setFilteredDepartments(searchResult);
+    setError(searchResult.length > 0 ? '' : 'No departments found.');
   };
 
-  // Fetch departments when component mounts
-  useEffect(() => {
-    fetchDepartments();
-  }, []);
-
-  // Call filterDepartments whenever selectedBuilding or searchText changes
   useEffect(() => {
     filterDepartments();
   }, [selectedBuilding, searchText]);
@@ -91,6 +80,7 @@ const StudentsAdmin = () => {
                 <th>Department Name</th>
                 <th>Location</th>
                 <th>Email</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -102,32 +92,61 @@ const StudentsAdmin = () => {
                     <td>{department.name}</td>
                     <td>{department.location}</td>
                     <td>{department.dept_email}</td>
+                    <td>
+                      <Link to={`/admin/department/edit/${department.department_id}`} className="stdadmin-controls-button">
+                        <FontAwesomeIcon icon={faEdit} />
+                        <span>Edit</span>
+                      </Link>
+                    </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="5" style={{ textAlign: 'center' }}>No departments found for the selected filters.</td>
+                  <td colSpan="6" style={{ textAlign: 'center' }}>No departments found for the selected filters.</td>
                 </tr>
               )}
             </tbody>
           </table>
         </div>
-
-        <div className="stdadmin-controls">
+      </div>
+      <div className="stdadmin-controls">
+          <button>
           <Link to="/admin/department/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
           </Link>
-          <button>
-            <FontAwesomeIcon icon={faEdit} />
-            <span>Edit</span>
           </button>
           <button>
+            <Link to="/admin/department/edit" className="stdadmin-controls-button">
+                <FontAwesomeIcon icon={faEdit} />
+                <span>Edit</span>
+            </Link >
+          </button>
+          <button
+            className="stdadmin-controls-button"
+            onClick={async () => {
+              const departmentId = prompt("Enter Department ID to delete:");
+              if (departmentId) {
+                try {
+                  const response = await fetch(`http://localhost:8000/departments/delete/${departmentId}`, {
+                    method: "DELETE",
+                  });
+
+                  if (response.ok) {
+                    alert("Department deleted successfully");
+                  } else {
+                    alert("Failed to delete department");
+                  }
+                } catch (error) {
+                  console.error("Error deleting department:", error);
+                }
+              }
+            }}
+          >
             <FontAwesomeIcon icon={faDumpster} />
             <span>Delete</span>
           </button>
         </div>
-      </div>
     </div>
   );
 };

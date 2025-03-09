@@ -1,77 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faEdit, faDumpster, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEdit, faDumpster, faSearch, faEye } from '@fortawesome/free-solid-svg-icons';
 import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
 
 const StudentsAdmin = () => {
-  const initialStudents = [
-    { id: 210041201, firstName: 'Daisy', lastName: 'Scott', email: 'daisy22@gmail.com', phone: '+442046886341', year: 'Year 1', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041202, firstName: 'Isabel', lastName: 'Harris', email: 'isabel87@gmail.com', phone: '+442751886322', year: 'Year 3', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041203, firstName: 'Dan', lastName: 'Thomas', email: 'dan98765@gmail.com', phone: '+442842635535', year: 'Year 1', department: 'MPE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041204, firstName: 'Debra', lastName: 'Nelson', email: 'debra112@gmail.com', phone: '+442932223543', year: 'Year 2', department: 'EEE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041205, firstName: 'Vera', lastName: 'Cooper', email: 'vera8888@gmail.com', phone: '+442198254644', year: 'Year 3', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041206, firstName: 'Brian', lastName: 'Miller', email: 'brian5564@gmail.com', phone: '+442213233311', year: 'Year 3', department: 'CSE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041207, firstName: 'Lauren', lastName: 'Martin', email: 'lauren7712@gmail.com', phone: '+442089235622', year: 'Year 3', department: 'MPE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041208, firstName: 'Milton', lastName: 'Smith', email: 'milton2244@gmail.com', phone: '+442044957517', year: 'Year 1', department: 'EEE' , photo: 'https://via.placeholder.com/40' },
-    { id: 210041209, firstName: 'Molly', lastName: 'White', email: 'molly747@gmail.com', phone: '+442041963198', year: 'Year 3', department: 'CEE' , photo: 'https://via.placeholder.com/40' },
-  ];
-
-  const [students, setStudents] = useState(initialStudents);
+  const [students, setStudents] = useState([]);
+  const [filteredStudents, setFilteredStudents] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState('All');
   const [selectedYear, setSelectedYear] = useState('All');
   const [searchText, setSearchText] = useState('');
-  const [filteredStudents, setFilteredStudents] = useState(initialStudents);
-  const [selectedStudentId, setSelectedStudentId] = useState(null); // Tracks the ID of the selected student
   const [error, setError] = useState('');
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // Function to filter students by department, year, and ID
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/students');
+        if (!response.ok) throw new Error('Failed to fetch students');
+        const data = await response.json();
+        setStudents(data);
+        setFilteredStudents(data);
+      } catch (error) {
+        console.error(error);
+        setError('Could not fetch students data');
+      }
+    };
+    fetchStudents();
+  }, []);
+
   const filterStudents = () => {
     const searchResult = students.filter(student => {
       const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
       const yearMatches = selectedYear === 'All' || student.year === selectedYear;
-      const idMatches = !searchText || student.id.toString().includes(searchText);
-
+      const idMatches = !searchText || student.student_id.toString().includes(searchText);
       return departmentMatches && yearMatches && idMatches;
     });
 
-    if (searchResult.length > 0) {
-      setFilteredStudents(searchResult);
-      setError(''); // Clear error if students are found
-    } else {
-      setFilteredStudents([]); // No results
-      setError(`No students found with the specified criteria.`); // Set error message
-    }
+    setFilteredStudents(searchResult);
+    setError(searchResult.length > 0 ? '' : 'No students found.');
   };
 
-  // Call filterStudents whenever department, year, or searchText changes
   useEffect(() => {
     filterStudents();
-  }, [selectedDepartment, selectedYear, searchText, students]);
+  }, [selectedDepartment, selectedYear, searchText]);
 
-  // Handle checkbox selection
-  const handleCheckboxChange = (id) => {
-    if (selectedStudentId === id) {
-      setSelectedStudentId(null); // Unselect if already selected
-    } else {
-      setSelectedStudentId(id); // Select new ID
+  const fetchStudentDetails = async (studentId) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:8000/students/read/${studentId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setSelectedStudent(data.length > 0 ? data[0] : null);
+      } else {
+        setSelectedStudent(null);
+        alert("Student not found!");
+      }
+    } catch (error) {
+      console.error("Error fetching student details:", error);
     }
-  };
-
-  // Handle delete functionality
-  const handleDelete = () => {
-    if (selectedStudentId === null) {
-      setError('Please select one student to delete.');
-      return;
-    }
-
-    // Delete the selected student
-    const updatedStudents = students.filter(student => student.id !== selectedStudentId);
-    setStudents(updatedStudents);
-    setFilteredStudents(updatedStudents);
-    setSelectedStudentId(null); // Clear selection
-    setError(''); // Clear error
+    setLoading(false);
   };
 
   return (
@@ -120,8 +110,6 @@ const StudentsAdmin = () => {
           <table className="student-table">
             <thead>
               <tr>
-                <th><input type="checkbox" disabled /></th>
-                <th>Photo</th>
                 <th>ID</th>
                 <th>First name</th>
                 <th>Last name</th>
@@ -129,27 +117,30 @@ const StudentsAdmin = () => {
                 <th>Phone</th>
                 <th>Year</th>
                 <th>Department</th>
+                <th>Blood Group</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredStudents.length > 0 ? (
                 filteredStudents.map((student) => (
-                  <tr key={student.id}>
-                    <td>
-                      <input
-                        type="checkbox"
-                        checked={selectedStudentId === student.id}
-                        onChange={() => handleCheckboxChange(student.id)}
-                      />
-                    </td>
-                    <td><img src={student.photo} alt={`${student.firstName} ${student.lastName}`} className="photo" /></td>
-                    <td>{student.id}</td>
-                    <td>{student.firstName}</td>
-                    <td>{student.lastName}</td>
+                  <tr key={student.student_id}>
+                    <td>{student.student_id}</td>
+                    <td>{student.name}</td>
                     <td>{student.email}</td>
                     <td>{student.phone}</td>
                     <td>{student.year}</td>
                     <td>{student.department}</td>
+                    <td>{student.blood_group}</td>
+                    <td>
+                      <button
+                        className="stdadmin-controls-button"
+                        onClick={() => fetchStudentDetails(student.student_id)}
+                      >
+                        <FontAwesomeIcon icon={faEye} />
+                        <span>View</span>
+                      </button>
+                    </td>
                   </tr>
                 ))
               ) : (
@@ -161,21 +152,65 @@ const StudentsAdmin = () => {
           </table>
         </div>
 
-        <div className="stdadmin-controls">
+
+        {selectedStudent && (
+          <div className="student-info">
+            <h3>Student Information</h3>
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <p><strong>ID:</strong> {selectedStudent.student_id}</p>
+                <p><strong>Name:</strong> {selectedStudent.name}</p>
+                <p><strong>Email:</strong> {selectedStudent.email}</p>
+                <p><strong>Date of Birth:</strong> {selectedStudent.date_of_birth}</p>
+                <p><strong>Department:</strong> {selectedStudent.department}</p>
+                <p><strong>Address:</strong> {selectedStudent.address}</p>
+                <p><strong>Phone:</strong> {selectedStudent.phone_number}</p>
+                <p><strong>Blood Group:</strong> {selectedStudent.blood_group}</p>
+              </>
+            )}
+          </div>
+        )}
+      </div>
+      <div className="stdadmin-controls">
+          <button>
           <Link to="/admin/student/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
-          </Link>
-          <button>
-            <FontAwesomeIcon icon={faEdit} />
-            <span>Edit</span>
+          </Link >
           </button>
-          <button onClick={handleDelete}>
+          <button>
+            <Link to="/admin/student/edit" className="stdadmin-controls-button">
+              <FontAwesomeIcon icon={faEdit} />
+              <span>Edit</span>
+            </Link >
+          </button>
+          <button
+            className="stdadmin-controls-button"
+            onClick={async () => {
+              const studentId = prompt("Enter Student ID to delete:");
+              if (studentId) {
+                try {
+                  const response = await fetch(`http://localhost:8000/students/delete/${studentId}`, {
+                    method: "DELETE",
+                  });
+
+                  if (response.ok) {
+                    alert("Student deleted successfully");
+                  } else {
+                    alert("Failed to delete student");
+                  }
+                } catch (error) {
+                  console.error("Error deleting student:", error);
+                }
+              }
+            }}
+          >
             <FontAwesomeIcon icon={faDumpster} />
             <span>Delete</span>
           </button>
         </div>
-      </div>
     </div>
   );
 };

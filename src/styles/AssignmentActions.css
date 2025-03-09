@@ -1,0 +1,43 @@
+.assignment-action-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background-color: #0A242E;
+    width: 250px;
+    height: 100vh;
+    padding: 20px;
+}
+
+.upload-message {
+    color: white;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.login-btn {
+    background-color: #4285F4;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-btn {
+    background-color: #34A853;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-btn:hover {
+    background-color: #2C8C3A;
+}

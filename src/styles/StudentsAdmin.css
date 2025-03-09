@@ -1,46 +1,50 @@
-.studentsadmincontainer{
+.studentsadmincontainer {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background-color: #16222a; /* Dark background for a modern look */
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
 }
 
-.studentsadmin-subcontainer
-{
+.studentsadmin-subcontainer {
   display: flex;
   flex-direction: row;
 }
 
 .table-container {
-  width: 70%;
+  width: 75%;
   display: flex;
   flex-direction: column;
-  padding: 50px 0px 30px 70px;
+  padding: 30px 20px;
 }
 
 .student-table {
-  max-width: 1200px;
+  max-width: 100%;
+  width: 100%;
   border-collapse: collapse;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  color: #333;
-  background-color: #f8f8f8;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  color: #222;
+  background-color: #ffffff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .student-table th, .student-table td {
-  padding: 12px;
+  padding: 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  white-space: nowrap;
 }
 
 .student-table th {
-  background-color: #f1f1f1;
+  background-color: #3498db;
+  color: white;
   font-weight: bold;
 }
 
 .student-table tbody tr:hover {
-  background-color: #e9f6fa;
+  background-color: #f0f8ff;
 }
 
 .photo {
@@ -50,89 +54,69 @@
   object-fit: cover;
 }
 
-.student-table input[type="checkbox"]{
-  cursor: pointer;
-}
-
 .filter-controls {
-  margin-bottom: 15px ;
+  margin-bottom: 15px;
   display: flex;
-  gap: 20px;
+  gap: 15px;
   justify-content: flex-end;
 }
 
-.filter-controls label {
-  font-weight: bold;
-}
-
-.filter-controls select {
-  margin-left: 5px;
-  padding: 5px;
-  border-radius: 10px;
-}
-
+.filter-controls select,
 .filter-controls input {
-  width: 300px;
-  border-radius: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
 }
 
-.stdadmin-controls{
-  width: 30%;
+.stdadmin-controls {
+  margin-left: 1200px;
+  margin-top: -130px;
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 20px;
   justify-content: center;
   align-items: center;
 }
 
-.stdadmin-controls button{
-  width: 150px;
-  height: 80px;
+.stdadmin-controls button {
+  width: 160px;
+  height: 60px;
   border-radius: 10px;
-  background-color: #65bee7;
-  font-size: 30px;
-  justify-content: center;
-  align-items: center;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-
-.stdadmin-controls button:hover{
-  cursor: pointer;
-  background-color: #4fa8d8; /* Slightly darker shade on hover */
-  transform: scale(1.05); /* Slightly enlarge the button */
-}
-
-.stdadmin-controls-button{
-  width: 150px;
-  height: 80px;
-  border-radius: 10px;
-  background-color: #65bee7;
-  font-size: 30px;
+  background: linear-gradient(to right, #3498db, #2980b9);
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-decoration: none;
-  color: black;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.stdadmin-controls-button:hover {
-  background-color: #4fa8d8; /* Slightly darker shade on hover */
-  transform: scale(1.05); /* Slightly enlarge the button */
+.stdadmin-controls button:hover {
+  background: linear-gradient(to right, #2980b9, #1f6692);
+  transform: scale(1.05);
 }
 
 .stdadmin-searchbar {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  gap: 10px;
 }
 
 .stdadmin-searchbar button {
   border-radius: 10px;
-  background-color: #65bee7;
+  background: #3498db;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  font-weight: bold;
+  transition: 0.3s ease;
 }
 
 .stdadmin-searchbar button:hover {
-  background-color: #4fa8d8; /* Slightly darker shade on hover */
+  background: #1f6692;
   transform: scale(1.05);
 }

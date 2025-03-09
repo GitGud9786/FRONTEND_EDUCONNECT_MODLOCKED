@@ -1,13 +1,12 @@
-// Schedule.jsx
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import '../styles/Schedule.css'; // Import the styles for Schedule
+import '../styles/Schedule.css';
 import AddEventForm from './AddEventForm';
-import logo from '../Assets/schedule.png'; // Assuming your logo is in the 'assets' folder
-import TopBar from './TopBar'
+import TopBar from './TopBar';
+import { gapi } from 'gapi-script';
+import { initClient, loadCalendarEvents } from '../utils/googleCalendarApi';
 
 const localizer = momentLocalizer(moment);
 
@@ -17,18 +16,48 @@ const Schedule = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectEvent, setSelectEvent] = useState(null);
 
+  // Initialize Google API client
+  useEffect(() => {
+    gapi.load('client:auth2', () => {
+      initClient().then(() => {
+        console.log("Google API initialized ✅");
+
+        // Ensure Auth Instance is available
+        const authInstance = gapi.auth2.getAuthInstance();
+        if (authInstance) {
+          authInstance.signIn().then(googleUser => {
+            console.log("User signed in! 🎉", googleUser);
+            loadCalendarEvents().then(response => {
+              const googleEvents = response.result.items.map(event => ({
+                start: new Date(event.start.dateTime || event.start.date),
+                end: new Date(event.end.dateTime || event.end.date),
+                title: event.summary,
+              }));
+              setEvents(googleEvents);
+            });
+          }).catch(error => console.error("Google Sign-In Failed ❌", error));
+        } else {
+          console.error("Auth Instance not available ❌");
+        }
+      }).catch(error => console.error("Google API init failed ❌", error));
+    });
+  }, []);
+
+  // Handle slot (date) selection
   const handleSelectSlot = (slotInfo) => {
     setSelectedDate(slotInfo.start);
     setSelectEvent(null); // Deselect any event
     setShowAddEventForm(true); // Show Add Event Form when a date is clicked
   };
 
+  // Handle event selection
   const handleSelectedEvent = (event) => {
     setSelectedDate(event.start);
     setSelectEvent(event);
     setShowAddEventForm(true); // Show the form for editing the selected event
   };
 
+  // Handle Add Event to Google Calendar
   const handleAddEvent = (newEvent) => {
     if (selectEvent) {
       const updatedEvent = { ...selectEvent, ...newEvent };
@@ -42,17 +71,41 @@ const Schedule = () => {
         start: selectedDate,
         end: moment(selectedDate).add(1, "hours").toDate(),
       };
-      setEvents([...events, newEventWithDate]);
+
+      // Use Google API to insert the event to Google Calendar
+      const event = {
+        summary: newEvent.title,
+        start: {
+          dateTime: newEventWithDate.start,
+          timeZone: 'UTC',
+        },
+        end: {
+          dateTime: newEventWithDate.end,
+          timeZone: 'UTC',
+        },
+      };
+
+      gapi.client.calendar.events.insert({
+        calendarId: 'primary',
+        resource: event,
+      }).then(() => {
+        console.log("Event added to Google Calendar ✅");
+        setEvents([...events, newEventWithDate]); // Add event to local state
+      }).catch((error) => {
+        console.error("Error adding event to Google Calendar ❌", error);
+      });
     }
     setShowAddEventForm(false); // Close the form after adding the event
     setSelectEvent(null); // Clear selected event after adding or updating
   };
 
+  // Handle canceling the form
   const handleCancel = () => {
     setShowAddEventForm(false); // Close the form without adding an event
     setSelectEvent(null); // Reset selected event
   };
 
+  // Handle deleting the event
   const deleteEvents = () => {
     if (selectEvent) {
       const updatedEvents = events.filter((event) => event !== selectEvent);
@@ -64,10 +117,7 @@ const Schedule = () => {
 
   return (
     <div style={{ height: "750px" }}>
-      {/* Logo and Title Section */}
-      <TopBar></TopBar>
-
-      {/* Calendar Component */}
+      <TopBar />
       <Calendar
         localizer={localizer}
         events={events}
@@ -75,8 +125,8 @@ const Schedule = () => {
         endAccessor="end"
         style={{ margin: "50px" }}
         selectable={true}
-        onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectedEvent}
+        onSelectSlot={handleSelectSlot}
       />
 
       {/* Conditional rendering of the Add Event form */}
