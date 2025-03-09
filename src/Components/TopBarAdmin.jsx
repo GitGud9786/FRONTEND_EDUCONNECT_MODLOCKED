@@ -68,6 +68,27 @@ const TopBar = () => {
                 <FontAwesomeIcon icon={faBuilding} className="icon-home" />
                 <span>Departments</span>
               </NavLink>
+
+              <NavLink
+                to="/admin/student-enroll"
+                className={({ isActive }) =>
+                  isActive ? "nav-home-selected" : "nav-home"
+                }
+              >
+                <FontAwesomeIcon icon={faStar} className="icon-home" />
+                <span>Student Enroll</span>
+              </NavLink>
+
+              <NavLink
+                to="/admin/teacher-assignment"
+                className={({ isActive }) =>
+                  isActive ? "nav-home-selected" : "nav-home"
+                }
+              >
+                <FontAwesomeIcon icon={faStar} className="icon-home" />
+                <span>Teacher Assign</span>
+              </NavLink>
+
             </li>
           </ul>
         </div>

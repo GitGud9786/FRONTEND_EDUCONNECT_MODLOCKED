@@ -31,9 +31,9 @@ import CourseCardAssignment from "./Components/CourseCardAssignment";
 import FileUploader from "./Components/FileUploader";
 import MeetingPage from './Components/MeetingClassroom';
 import AdminCourseStudentEnrollment from "./Components/AdminCourseStudentEnroll";
+import AdminTeacherAssign from "./Components/AdminTeacherAssign";
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AdminTeacherAssign from "./Components/AdminTeacherAssign";
 
 function App() {
   return (
