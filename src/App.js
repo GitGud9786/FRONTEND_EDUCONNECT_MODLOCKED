@@ -30,6 +30,7 @@ import TeacherSideBar from "./Components/TeacherCourseSideBar";
 import CourseCardAssignment from "./Components/CourseCardAssignment";
 import FileUploader from "./Components/FileUploader";
 import MeetingPage from './Components/MeetingClassroom';
+import AdminCourseStudentEnrollment from "./Components/AdminCourseStudentEnroll";
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -65,6 +66,7 @@ function App() {
           <Route path="/dash/assignment" element={<CourseCardAssignment />} />
           <Route path="/dash/assignment/upload" element={<FileUploader />} />
           <Route path="/meetingpage" element={<MeetingPage />} />
+          <Route path="/admin/student-enroll" element={<AdminCourseStudentEnrollment />} />
         </Routes>
       </BrowserRouter>
     </div>
