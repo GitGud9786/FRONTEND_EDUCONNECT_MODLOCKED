@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faUniversity, faAddressCard, faTint } from '@fortawesome/free-solid-svg-icons';
 import profilePic from '../Assets/profilePic.jpg'; 
@@ -8,17 +8,26 @@ import TopBar from './TopBar';
 
 const Profile = () => {
     const navigate = useNavigate();
+    const { id } = useParams();
     const [student, setStudent] = useState(null);
 
     useEffect(() => {
-        const storedStudent = localStorage.getItem("student");
+        const fetchStudentInfo = async () => {
+            try {
+                const response = await fetch(`http://localhost:8000/students/read/${id}`);
+                const data = await response.json();
+                if (data.length > 0) {
+                    setStudent(data[0]);
+                } else {
+                    console.error('No student info found');
+                }
+            } catch (error) {
+                console.error('Error loading student info:', error);
+            }
+        };
 
-        if (storedStudent) {
-            setStudent(JSON.parse(storedStudent));
-        } else {
-            navigate('/login'); // Redirect if no student is logged in
-        }
-    }, [navigate]);
+        fetchStudentInfo();
+    }, [id]);
 
     if (!student) {
         return <p>Loading...</p>; // Display while fetching student data

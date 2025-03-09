@@ -2,6 +2,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 
+import React from "react";
 
 import Login from "./Components/Login";
 import Dashboard from "./Components/Dashboard";
@@ -18,14 +19,14 @@ import AdminTeacherEdit from "./Components/AdminTeacherEdit";
 import CombinedCourseList from "./Components/CourseList";
 import AdminCourseRegister from "./Components/AdminCourseRegister";
 import AdminCourseEdit from "./Components/AdminCourseEdit";
-import AdminDepartmentRegister from "./Components/AdminDepartmentRegister"
-import AdminDepartmentEdit from "./Components/AdminDepartmentEdit"
+import AdminDepartmentRegister from "./Components/AdminDepartmentRegister";
+import AdminDepartmentEdit from "./Components/AdminDepartmentEdit";
 import StudentsAdmin from './Components/StudentsAdmin';
 import TeachersAdmin from './Components/TeachersAdmin';
 import CoursesAdmin from './Components/CoursesAdmin';
 import DepartmentsAdmin from './Components/DepartmentsAdmin';
-import CombinedTeacherComponents from "./Components/TeacherDashboard"
-import CombinedTeacherClassroom from "./Components/TeacherCourseClassroom"
+import CombinedTeacherComponents from "./Components/TeacherDashboard";
+import CombinedTeacherClassroom from "./Components/TeacherCourseClassroom";
 import TeacherSideBar from "./Components/TeacherCourseSideBar";
 import CourseCardAssignment from "./Components/CourseCardAssignment";
 import FileUploader from "./Components/FileUploader";
@@ -34,7 +35,7 @@ import AdminCourseStudentEnrollment from "./Components/AdminCourseStudentEnroll"
 import AdminTeacherAssign from "./Components/AdminTeacherAssign";
 import AdminEnrollment from "./Components/AdminEnrollment";
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -52,7 +53,7 @@ function App() {
           <Route path="/courselist" element={<CombinedCourseList />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin/student/register" element={<AdminStudentRegister />} />
-          <Route path="/admin/student/edit" element={<AdminStudentEdit/>} />
+          <Route path="/admin/student/edit" element={<AdminStudentEdit />} />
           <Route path="/admin/teacher/register" element={<AdminTeacherRegister />} />
           <Route path="/admin/teacher/edit" element={<AdminTeacherEdit />} />
           <Route path="/admin/course/register" element={<AdminCourseRegister />} />
