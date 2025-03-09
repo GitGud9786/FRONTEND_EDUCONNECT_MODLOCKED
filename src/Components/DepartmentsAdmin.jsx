@@ -110,43 +110,43 @@ const StudentsAdmin = () => {
         </div>
       </div>
       <div className="stdadmin-controls">
-          <button>
+        <button>
           <Link to="/admin/department/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
             <span>Add</span>
           </Link>
-          </button>
-          <button>
-            <Link to="/admin/department/edit" className="stdadmin-controls-button">
-                <FontAwesomeIcon icon={faEdit} />
-                <span>Edit</span>
-            </Link >
-          </button>
-          <button
-            className="stdadmin-controls-button"
-            onClick={async () => {
-              const departmentId = prompt("Enter Department ID to delete:");
-              if (departmentId) {
-                try {
-                  const response = await fetch(`http://localhost:8000/departments/delete/${departmentId}`, {
-                    method: "DELETE",
-                  });
+        </button>
+        <button>
+          <Link to="/admin/department/edit" className="stdadmin-controls-button">
+            <FontAwesomeIcon icon={faEdit} />
+            <span>Edit</span>
+          </Link>
+        </button>
+        <button
+          className="stdadmin-controls-button"
+          onClick={async () => {
+            const departmentId = prompt("Enter Department ID to delete:");
+            if (departmentId) {
+              try {
+                const response = await fetch(`http://localhost:8000/departments/delete/${departmentId}`, {
+                  method: "DELETE",
+                });
 
-                  if (response.ok) {
-                    alert("Department deleted successfully");
-                  } else {
-                    alert("Failed to delete department");
-                  }
-                } catch (error) {
-                  console.error("Error deleting department:", error);
+                if (response.ok) {
+                  alert("Department deleted successfully");
+                } else {
+                  alert("Failed to delete department");
                 }
+              } catch (error) {
+                console.error("Error deleting department:", error);
               }
-            }}
-          >
-            <FontAwesomeIcon icon={faDumpster} />
-            <span>Delete</span>
-          </button>
-        </div>
+            }
+          }}
+        >
+          <FontAwesomeIcon icon={faDumpster} />
+          <span>Delete</span>
+        </button>
+      </div>
     </div>
   );
 };
