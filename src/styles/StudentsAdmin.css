@@ -70,8 +70,11 @@
 }
 
 .stdadmin-controls {
-  margin-left: 1200px;
-  margin-top: -130px;
+  position: fixed;
+  right: 20px;
+  top: 100px;
+  /* margin-left: 1200px;
+  margin-top: -130px; */
   display: flex;
   flex-direction: column;
   gap: 20px;
