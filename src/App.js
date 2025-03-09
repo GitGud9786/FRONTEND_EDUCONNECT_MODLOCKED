@@ -33,6 +33,7 @@ import MeetingPage from './Components/MeetingClassroom';
 import AdminCourseStudentEnrollment from "./Components/AdminCourseStudentEnroll";
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AdminTeacherAssign from "./Components/AdminTeacherAssign";
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
           <Route path="/dash/assignment/upload" element={<FileUploader />} />
           <Route path="/meetingpage" element={<MeetingPage />} />
           <Route path="/admin/student-enroll" element={<AdminCourseStudentEnrollment />} />
+          <Route path="/admin/teacher-assignment" element={<AdminTeacherAssign />} />
         </Routes>
       </BrowserRouter>
     </div>

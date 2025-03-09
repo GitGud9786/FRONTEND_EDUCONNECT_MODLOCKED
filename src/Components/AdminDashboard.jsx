@@ -42,6 +42,11 @@ const AdminPanel = () => {
                     <img src={admindepartment} alt="course-enroll" className="panel-icon" />
                     <p>Student Course Enroll</p>
                 </Link>
+
+                <Link to = "/admin/teacher-assignment" className = "adminpanelitem">
+                    <img src={admindepartment} alt="course-enroll" className="panel-icon" />
+                    <p>Teacher Course  Assign</p>
+                </Link>
                 
             </div>
             <div className="adminevaluation">
