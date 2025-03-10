@@ -11,9 +11,11 @@
 }
 
 .teacherusername {
+
     margin-top: 15px; 
     max-height: 50px;
     margin-left: 10px;
+    flex-grow: 1;
     display: inline-block;
     font-size: 18px;
     border-color: white;
@@ -44,6 +46,6 @@
 }
 
 .teacherlogout:hover{
-    color:white;
+    color: black;
     background-color: #ffd500;
 }

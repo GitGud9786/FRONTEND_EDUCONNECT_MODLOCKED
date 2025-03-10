@@ -24,7 +24,7 @@ const AdminPanel = () => {
                     <img src={adminstudent} alt="Students" className="panel-icon" />
                     <p>Students</p>
                 </Link>
-                <Link to = "/admin/faculty" className = "adminpanelitem">
+                <Link to = "/admin/teacher" className = "adminpanelitem">
                     <img src={adminfaculty} alt="Faculties" className="panel-icon" />
                     <p>Faculty</p>
                 </Link>
@@ -35,6 +35,17 @@ const AdminPanel = () => {
                 <Link to = "/admin/department" className = "adminpanelitem">
                     <img src={admindepartment} alt="Faculties" className="panel-icon" />
                     <p>Department</p>
+                </Link>
+
+
+                <Link to = "/admin/student-enroll" className = "adminpanelitem">
+                    <img src={admindepartment} alt="course-enroll" className="panel-icon" />
+                    <p>Student Course Enroll</p>
+                </Link>
+
+                <Link to = "/admin/teacher-assignment" className = "adminpanelitem">
+                    <img src={admindepartment} alt="course-enroll" className="panel-icon" />
+                    <p>Teacher Course  Assign</p>
                 </Link>
                 
             </div>

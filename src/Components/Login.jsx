@@ -6,7 +6,8 @@ import bike_icon from '../Assets/study.png';
 import logo from '../Assets/logo.jpg';
 
 const Login = () => {
-  const [user_id, setUserId] = useState("");
+  const [role, setRole] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -16,8 +17,8 @@ const Login = () => {
     e.preventDefault();
     setError("");
 
-    if (!user_id || !password) {
-      setError("Please enter both User ID and Password.");
+    if (!role || !email || !password) {
+      setError("Please enter role, email, and password.");
       return;
     }
 
@@ -27,7 +28,7 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ user_id, user_password: password }),
+        body: JSON.stringify({ role, email, password }),
       });
 
       const data = await response.json();
@@ -69,11 +70,20 @@ const Login = () => {
 
           <div className="inputs">
             <div className="input">
+              <select value={role} onChange={(e) => setRole(e.target.value)}>
+                <option value="">Select Role</option>
+                <option value="admin">Admin</option>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+              </select>
+            </div>
+
+            <div className="input">
               <input 
-                type="text" 
-                placeholder="Enter Your User ID" 
-                value={user_id}
-                onChange={(e) => setUserId(e.target.value)} 
+                type="email" 
+                placeholder="Enter Your Email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)} 
               />
             </div>
 
