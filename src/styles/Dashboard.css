@@ -236,3 +236,15 @@
   }
 }
 
+.delete-button {
+  background-color: rgb(107, 0, 0);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.delete-button:hover {
+  background-color: darkred;
+}

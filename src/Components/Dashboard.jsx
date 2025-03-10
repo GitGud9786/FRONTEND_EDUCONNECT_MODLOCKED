@@ -12,6 +12,7 @@ const Dashboard = () => {
   const [studentId, setStudentId] = useState(paramStudentId || null);
   const [events, setEvents] = useState([]);
 
+  // Fetch events based on student ID
   useEffect(() => {
     if (!studentId) {
       const currentUrl = window.location.href;
@@ -34,6 +35,24 @@ const Dashboard = () => {
       fetchEvents();
     }
   }, [studentId]);
+
+  // Function to handle event deletion
+  const deleteEvent = async (eventId) => {
+    try {
+      const response = await fetch(`http://localhost:8000/students/delete-event/${eventId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        // Remove the event from the UI by filtering it out of the events array
+        setEvents((prevEvents) => prevEvents.filter((event) => event.id !== eventId));
+      } else {
+        console.error('Failed to delete event');
+      }
+    } catch (error) {
+      console.error('Error deleting event:', error);
+    }
+  };
 
   const courses = [
     {
@@ -90,12 +109,6 @@ const Dashboard = () => {
         </div>
 
         <div className="main-right-home">
-          {/* <h1>To Do</h1> */}
-          {/* <div className="view-home">
-            <button className="nav-home-selected"><span>All</span></button>
-            <button className="nav-home"><span>Assignments</span></button>
-            <button className="nav-home"><span>Others</span></button>
-          </div> */}
           <div className="schedule-section">
             <h2>Upcoming Tasks for me</h2>
             <div>
@@ -109,6 +122,7 @@ const Dashboard = () => {
                     <p>
                       {new Date(event.start_time).toLocaleString()} - {new Date(event.end_time).toLocaleString()}
                     </p>
+                    <button onClick={() => deleteEvent(event.id)} className="delete-button">Delete</button>
                   </div>
                 ))
               )}

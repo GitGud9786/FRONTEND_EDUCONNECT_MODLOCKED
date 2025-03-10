@@ -9,6 +9,8 @@ const AddEventForm = ({ onAddEvent, onCancel, event }) => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [description, setDescription] = useState("");
+  const [selectedDate, setSelectedDate] = useState(""); // For storing the selected date
+  const [successMessage, setSuccessMessage] = useState(""); // For showing success message
 
   useEffect(() => {
     if (!studentId) {
@@ -20,14 +22,16 @@ const AddEventForm = ({ onAddEvent, onCancel, event }) => {
   useEffect(() => {
     if (event) {
       setEventTitle(event.title || "");
-      setStartTime(event.start ? formatDateTime(event.start) : "");
-      setEndTime(event.end ? formatDateTime(event.end) : "");
+      setStartTime(event.start ? formatDateTime(event.start).slice(11, 16) : ""); // Extract time from the event
+      setEndTime(event.end ? formatDateTime(event.end).slice(11, 16) : "");
       setDescription(event.description || "");
+      setSelectedDate(event.start ? formatDateTime(event.start).slice(0, 10) : ""); // Extract date
     } else {
       setEventTitle("");
       setStartTime("");
       setEndTime("");
       setDescription("");
+      setSelectedDate("");
     }
   }, [event]);
 
@@ -45,11 +49,15 @@ const AddEventForm = ({ onAddEvent, onCancel, event }) => {
       return;
     }
 
+    // Combine the selected date with the start time
+    const startDateTime = new Date(`${selectedDate}T${startTime}:00`);
+    const endDateTime = new Date(`${selectedDate}T${endTime}:00`);
+
     // Convert times to MySQL compatible format
     const eventData = {
       title: eventTitle,
-      start_time: formatDateTime(new Date(`1970-01-01T${startTime}:00`)), // Convert input time to full datetime
-      end_time: formatDateTime(new Date(`1970-01-01T${endTime}:00`)),
+      start_time: formatDateTime(startDateTime), // Full date and time
+      end_time: formatDateTime(endDateTime),     // Full date and time
       description: description,
     };
 
@@ -73,10 +81,20 @@ const AddEventForm = ({ onAddEvent, onCancel, event }) => {
         onAddEvent({ ...eventData, id: data.event_id });
       }
 
+      // Show success message
+      setSuccessMessage("Event added successfully!");
+
+      // Clear the form after adding event
       setEventTitle("");
       setStartTime("");
       setEndTime("");
       setDescription("");
+      setSelectedDate("");
+
+      // Hide the success message after 3 seconds
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000);
     } catch (error) {
       console.error("Error adding event:", error);
     }
@@ -94,6 +112,15 @@ const AddEventForm = ({ onAddEvent, onCancel, event }) => {
           value={eventTitle}
           onChange={(e) => setEventTitle(e.target.value)}
           placeholder="Enter event title"
+          required
+        />
+
+        <label htmlFor="selectedDate">Event Date:</label>
+        <input
+          type="date"
+          id="selectedDate"
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
           required
         />
 
@@ -129,6 +156,8 @@ const AddEventForm = ({ onAddEvent, onCancel, event }) => {
           <button type="button" className="cancel-button" onClick={onCancel}>Cancel</button>
         </div>
       </form>
+
+      {successMessage && <div className="success-message">{successMessage}</div>}
     </div>
   );
 };
