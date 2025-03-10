@@ -43,15 +43,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/dash" element={<Dashboard />} />
-          <Route path="/courselist/course" element={<Course />} />
-          <Route path="/schedule" element={<Schedule />} />
-          <Route path="/messages" element={<Messages />} />
+          <Route path="/studentdashboard/:id" element={<Dashboard />} />
+          <Route path="/student/courselist/course/:id" element={<Course />} />
+          <Route path="/student/schedule/:id" element={<Schedule />} />
+          <Route path="/student/messages/:id" element={<Messages />} />
           <Route path="/student-profile/:id" element={<Profile />} />
-          <Route path="/grades" element={<Grades />} />
+          <Route path="/student/grades/:id" element={<Grades />} />
           <Route path="/admin" element={<AdminPanel />} />
-          <Route path="/courselist" element={<CombinedCourseList />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/student/courselist/:id" element={<CombinedCourseList />} />
           <Route path="/admin/student/register" element={<AdminStudentRegister />} />
           <Route path="/admin/student/edit" element={<AdminStudentEdit />} />
           <Route path="/admin/teacher/register" element={<AdminTeacherRegister />} />
