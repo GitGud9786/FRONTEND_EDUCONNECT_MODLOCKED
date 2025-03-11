@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import '../styles/AdminCourseRegister.css';
 
 const AdminCourseRegister = () => {
-    const [formData, setFormData] = useState({
-        courseId: '',
-        courseTitle: '',
-        courseDescription: '',
-        departmentId: '',
-        courseDepartment: '',
-    });
+const [formData, setFormData] = useState({
+    courseId: '',
+    courseTitle: '',
+    courseDescription: '',
+    departmentId: '',
+    courseDepartment: '',
+});
 
     const [departments, setDepartments] = useState([]);
     const [responseMessage, setResponseMessage] = useState('');

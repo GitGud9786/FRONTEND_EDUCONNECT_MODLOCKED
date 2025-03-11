@@ -1,8 +1,8 @@
 .studentsadmincontainer {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  background-color: #0d374a; 
+  min-height: 100vh;
+  background: linear-gradient(135deg, #16222a 0%, #1e2a34 100%);
   color: #ffffff;
   font-family: "Poppins", sans-serif;
 }
@@ -10,41 +10,54 @@
 .studentsadmin-subcontainer {
   display: flex;
   flex-direction: row;
+  gap: 30px;
+  padding: 20px;
 }
 
 .table-container {
   width: 75%;
   display: flex;
   flex-direction: column;
-  padding: 30px 20px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .student-table {
   max-width: 100%;
   width: 100%;
-  border-collapse: collapse;
-  font-size: 16px;
-  color: #222;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 15px;
+  color: #333;
   background-color: #ffffff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  border-radius: 15px;
   overflow: hidden;
 }
 
-.student-table th, .student-table td {
-  padding: 15px;
+.student-table th,
+.student-table td {
+  padding: 18px 15px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
 }
 
 .student-table th {
-  background-color: #3498db;
+  background: linear-gradient(to right, #3498db, #2980b9);
   color: white;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .student-table tbody tr:hover {
-  background-color: #f0f8ff;
+  background-color: #f8f9ff;
+  transform: scale(1.005);
+  transition: all 0.2s ease;
 }
 
 .photo {
@@ -55,71 +68,122 @@
 }
 
 .filter-controls {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   display: flex;
-  gap: 15px;
+  gap: 20px;
   justify-content: flex-end;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
 }
 
 .filter-controls select,
 .filter-controls input {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: 2px solid rgba(52, 152, 219, 0.2);
+  background-color: rgba(255, 255, 255, 0.95);
+  font-size: 15px;
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.filter-controls select:focus,
+.filter-controls input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  outline: none;
 }
 
 .stdadmin-controls {
   position: fixed;
-  right: 20px;
-  top: 100px;
-  /* margin-left: 1200px;
-  margin-top: -130px; */
+  right: 30px;
+  top: 120px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
+  gap: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
 }
 
 .stdadmin-controls button {
-  width: 160px;
-  height: 60px;
-  border-radius: 10px;
-  background: linear-gradient(to right, #3498db, #2980b9);
+  width: 180px;
+  height: 65px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 600;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 12px;
   transition: all 0.3s ease;
   border: none;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .stdadmin-controls button:hover {
-  background: linear-gradient(to right, #2980b9, #1f6692);
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #2980b9, #1f6692);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
 }
 
 .stdadmin-searchbar {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+}
+
+.stdadmin-searchbar input {
+  min-width: 250px;
 }
 
 .stdadmin-searchbar button {
+  padding: 12px 25px;
   border-radius: 10px;
-  background: #3498db;
+  background: linear-gradient(135deg, #3498db, #2980b9);
   color: white;
-  padding: 10px 15px;
   border: none;
-  font-weight: bold;
-  transition: 0.3s ease;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .stdadmin-searchbar button:hover {
-  background: #1f6692;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #2980b9, #1f6692);
+  transform: translateY(-2px);
+}
+
+.student-info {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 15px;
+  margin-top: 25px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.student-info h3 {
+  color: #3498db;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.student-info p {
+  margin: 12px 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.student-info strong {
+  color: #3498db;
+  font-weight: 600;
+  margin-right: 10px;
 }

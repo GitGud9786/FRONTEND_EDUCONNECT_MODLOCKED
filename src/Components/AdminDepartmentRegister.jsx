@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import '../styles/AdminDepartmentRegister.css';
+import React, { useState } from "react";
+import "../styles/AdminDepartmentRegister.css";
 
 const AdminDepartmentRegister = () => {
   const [formData, setFormData] = useState({
-    departmentId: '',
-    departmentName: '',
-    departmentEmail: '',
-    departmentLocation: '',
+    departmentId: "",
+    departmentName: "",
+    departmentEmail: "",
+    departmentHead: "",
+    departmentShortHand: "",
+    departmentLocation: "",
   });
   const [responseMessage, setResponseMessage] = useState('');
 
@@ -70,28 +72,27 @@ const AdminDepartmentRegister = () => {
       </div>
 
       <h2>Department Contact and Location</h2>
-      <div className='admindepartmentformsection'>
+      <div className="admindepartmentformsection">
         <input
-          type="email"
+          type="text"
           name="departmentEmail"
           placeholder="Department Email"
           value={formData.departmentEmail}
           onChange={handleChange}
           required
         />
-        <select
-          name="departmentLocation"
-          value={formData.departmentLocation}
+        <select className="admindepartmentselect">
+          type="text" name="departmentLocation" placeholder="Establishment of
+          the Department" value={formData.departmentLocation}
           onChange={handleChange}
-          required
-        >
-          <option value="">Select Location</option>
+          <option value="null">Location</option>
           <option value="AB1">Academic Building 01</option>
           <option value="AB2">Academic Building 02</option>
         </select>
       </div>
-      <button className='studentregisterbutton' type="submit">Establish Department</button>
-      {responseMessage && <p>{responseMessage}</p>}
+      <button className="studentregisterbutton" type="submit">
+        Establish department
+      </button>
     </form>
   );
 };
