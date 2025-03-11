@@ -1,39 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import '../styles/Grades.css';
 import logo from '../Assets/grade.png';
 import TopBar from './TopBar';
+import axios from 'axios';
 
 const Grades = () => {
+  const { id } = useParams();
   const [selectedCourse, setSelectedCourse] = useState('');
   const [grades, setGrades] = useState(null);
+  const [courses, setCourses] = useState([]);
 
-  const courses = [
-    { code: 'CSE 4601', name: 'Computer Networks' },
-    { code: 'CSE 4705', name: 'Artificial Intelligence' },
-    { code: 'EEE 2411', name: 'Digital Electronics' }
-  ];
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/grades/courses/${id}`);
+        setCourses(response.data);
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+      }
+    };
 
-  const handleCourseChange = (event) => {
+    fetchCourses();
+  }, [id]);
+
+  const handleCourseChange = async (event) => {
     const course = event.target.value;
     setSelectedCourse(course);
-    // Mock data
-    setGrades({
-      quizzes: [10, 8, 9, 7],
-      midExam: 35,
-      assignments: [15, 20, 18],
-      projects: [25],
-    });
+
+    try {
+      const response = await axios.get(`http://localhost:8000/grades/grades/${id}/${course}`);
+      setGrades(response.data);
+    } catch (error) {
+      console.error('Error fetching grades:', error);
+      setGrades(null);
+    }
   };
 
   const getTopThreeQuizzesTotal = () => {
-    if (!grades || !grades.quizzes) return 0;
+    if (!grades || !grades.quiz1_marks || !grades.quiz2_marks || !grades.quiz3_marks) return 0;
 
-    const sortedQuizzes = [...grades.quizzes].sort((a, b) => b - a); // Sort in descending order
+    const quizzes = [grades.quiz1_marks, grades.quiz2_marks, grades.quiz3_marks];
+    const sortedQuizzes = quizzes.sort((a, b) => b - a); // Sort in descending order
     const topThree = sortedQuizzes.slice(0, 3); // Get top three scores
     return topThree.reduce((acc, score) => acc + score, 0); // Sum of top three scores
   };
 
   const quizTotal = getTopThreeQuizzesTotal();
+
+  const getGradeColor = (grade) => {
+    switch (grade) {
+      case 'A+':
+        return '#66FF66'; // Green
+      case 'A':
+        return '#66FF66'; // Light Green
+      case 'A-':
+        return '#99FF99'; // Lighter Green
+      case 'B+':
+        return '#CCFFCC'; // Even Lighter Green
+      case 'B':
+        return '#FFFF66'; // Yellowish
+      case 'B-':
+        return '#FFCC66'; // Light Orange
+      case 'C':
+        return '#FF9966'; // Orange
+      case 'D':
+        return '#FF6666'; // Light Red
+      case 'F':
+        return '#FF0000'; // Red
+      default:
+        return '#FFFFFF'; // Default to white if grade is unknown
+    }
+  };
 
   return (
     <div className="grades-page">
@@ -51,8 +89,8 @@ const Grades = () => {
           >
             <option value="">-- Choose a Course --</option>
             {courses.map((course) => (
-              <option key={course.code} value={course.code}>
-                {course.code}: {course.name}
+              <option key={course.course_id} value={course.course_id}>
+                {course.course_id}: {course.title}
               </option>
             ))}
           </select>
@@ -64,24 +102,25 @@ const Grades = () => {
             <div className="grades-grid">
               <div className="grade-card quizzes">
                 <h4>Quizzes</h4>
-                {grades.quizzes.map((quiz, index) => (
-                  <p key={index}>Quiz {index + 1}: {quiz}</p>
-                ))}
+                <p>Quiz 1: {grades.quiz1_marks}</p>
+                <p>Quiz 2: {grades.quiz2_marks}</p>
+                <p>Quiz 3: {grades.quiz3_marks}</p>
                 <p>Total of Best 3 Quizzes: {quizTotal}</p>
               </div>
               <div className="grade-card assignments">
-                <h4>Assignments</h4>
-                {grades.assignments.map((assignment, index) => (
-                  <p key={index}>Assignment {index + 1}: {assignment}</p>
-                ))}
+                <h4>Assignments & Attendance</h4>
+                <p>Assignments: {grades.assignments_marks}</p>
+                <p>Attendance: {grades.attendance_marks}</p>
               </div>
-              <div className="grade-card mid-exam">
-                <h4>Mid</h4>
-                <p>{grades.midExam}</p>
+              <div className="grade-card exams">
+                <h4>Mid & Final</h4>
+                <p>Mid: {grades.mid_sem_marks}</p>
+                <p>Final: {grades.final_sem_marks}</p>
               </div>
-              <div className="grade-card projects">
-                <h4>Projects</h4>
-                <p>{grades.projects[0]}</p>
+              <div className="grade-card total-grade" style={{ borderColor: getGradeColor(grades.grade) }}>
+                <h4>Total Marks & Grade</h4>
+                <p>Total Marks: {grades.total_marks}</p>
+                <p>Grade: {grades.grade}</p>
               </div>
             </div>
           </div>
