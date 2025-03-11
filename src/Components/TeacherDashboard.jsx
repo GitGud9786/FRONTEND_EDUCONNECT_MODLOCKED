@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import TeacherTopBar from "./TeacherTopBar";
-import TeacherSideBar from './TeacherCourseSideBar';
 import TeacherCourseClassroom from './TeacherCourseClassroom';
 import '../styles/TeacherDashboard.css';
 
@@ -85,7 +84,7 @@ const TeacherSchedule = () => {
 };
 
 const CombinedTeacherComponents = () => {
-    const [teacherName, setTeacherName] = useState('');
+    const [teacherInfo, setTeacherInfo] = useState({});
     const { id } = useParams();
 
     useEffect(() => {
@@ -93,9 +92,9 @@ const CombinedTeacherComponents = () => {
             try {
                 const response = await fetch(`http://localhost:8000/teacher/read/${id}`);
                 const data = await response.json();
-                console.log('Fetched teacher info:', data); // Log the fetched data
+                console.log('Fetched teacher info:', data);
                 if (data.length > 0) {
-                    setTeacherName(data[0].name);
+                    setTeacherInfo(data[0]);
                 } else {
                     console.error('No teacher info found');
                 }
@@ -109,9 +108,14 @@ const CombinedTeacherComponents = () => {
 
     return (
         <div className="combinedteachercomponents">
-            <TeacherTopBar teacherName={teacherName} />
+            <TeacherTopBar />
             <div className="teachersmainsection">
-                <TeacherSideBar />
+                <aside className="teachersidebar">
+                    <h3>Teacher Info</h3>
+                    <p><strong>Name:</strong> {teacherInfo.name}</p>
+                    <p><strong>Email:</strong> {teacherInfo.email}</p>
+                    <p><strong>Department:</strong> {teacherInfo.department}</p>
+                </aside>
                 <TeacherClass />
                 <TeacherSchedule />
             </div>

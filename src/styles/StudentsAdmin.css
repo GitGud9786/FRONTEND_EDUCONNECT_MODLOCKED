@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #16222a; /* Dark background for a modern look */
+  background-color: #0d374a; 
   color: #ffffff;
   font-family: "Poppins", sans-serif;
 }

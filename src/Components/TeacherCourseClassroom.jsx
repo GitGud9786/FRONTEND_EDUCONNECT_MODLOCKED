@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import AgoraRTC from 'agora-rtc-sdk-ng';
 import TeacherTopBar from './TeacherTopBar';
 import "../styles/TeacherCourseClassroom.css";
-import TeacherSideBar from './TeacherCourseSideBar';
 import axios from 'axios';
 
 const APP_ID = '5a3ef53cf05c49d5a7e6ad24ba307cdb';
@@ -129,7 +128,7 @@ const TeacherPostCard = ({ user, date, message }) => {
 
 const CombinedTeacherClassroom = () => {
   const [announcements, setAnnouncements] = useState([]);
-  const [teacherName, setTeacherName] = useState('');
+  const [teacherInfo, setTeacherInfo] = useState({});
   const { id } = useParams();
 
   const fetchAnnouncements = async () => {
@@ -152,7 +151,7 @@ const CombinedTeacherClassroom = () => {
         const data = await response.json();
         console.log('Fetched teacher info:', data); // Log the fetched data
         if (data.length > 0) {
-          setTeacherName(data[0].name);
+          setTeacherInfo(data[0]);
         } else {
           console.error('No teacher info found');
         }
@@ -166,9 +165,13 @@ const CombinedTeacherClassroom = () => {
 
   return (
     <div className="combinedteacherclassroom">
-      <TeacherTopBar teacherName={teacherName} />
+      <TeacherTopBar />
       <div className='teachercoursemain'>
-        <TeacherSideBar />
+        <aside className="teachersidebar">
+          <h3>Teacher Info</h3>
+          <p><strong>Email:</strong> {teacherInfo.email}</p>
+          <p><strong>Department:</strong> {teacherInfo.department}</p>
+        </aside>
         <div className='teacher-sidebar-announcements'>
           <h3>Announcements</h3>
           {announcements.map((announcement) => (
