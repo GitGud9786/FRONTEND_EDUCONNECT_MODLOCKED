@@ -111,10 +111,9 @@ const CombinedTeacherComponents = () => {
             <TeacherTopBar />
             <div className="teachersmainsection">
                 <aside className="teachersidebar">
-                    <h3>Teacher Info</h3>
-                    <p><strong>Name:</strong> {teacherInfo.name}</p>
-                    <p><strong>Email:</strong> {teacherInfo.email}</p>
-                    <p><strong>Department:</strong> {teacherInfo.department}</p>
+                    <h1>Teacher Info</h1>
+                    <p><strong>Name : </strong> {teacherInfo.name}</p>
+                    <p><strong>Email:</strong> {teacherInfo.email}</p>    
                 </aside>
                 <TeacherClass />
                 <TeacherSchedule />

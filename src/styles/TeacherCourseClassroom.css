@@ -35,6 +35,11 @@
     height: 100vh;
 }
 
+.teachercoursemain h3{
+    margin-top: 0px;
+    color: #fff;
+}
+
 .teacher-collapsible-container {
   margin-top: 20px;
   margin-left: 100px;
