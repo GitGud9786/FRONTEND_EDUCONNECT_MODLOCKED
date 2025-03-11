@@ -1,4 +1,3 @@
-//App.js
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -43,15 +42,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/dash" element={<Dashboard />} />
-          <Route path="/courselist/course" element={<Course />} />
-          <Route path="/schedule" element={<Schedule />} />
-          <Route path="/messages" element={<Messages />} />
+          <Route path="/studentdashboard/:id" element={<Dashboard />} />
+          <Route path="/student/courselist/course/:id" element={<Course />} />
+          <Route path="/student/schedule/:id" element={<Schedule />} />
+          <Route path="/student/messages/:id" element={<Messages />} />
           <Route path="/student-profile/:id" element={<Profile />} />
-          <Route path="/grades" element={<Grades />} />
+          <Route path="/student/grades/:id" element={<Grades />} />
           <Route path="/admin" element={<AdminPanel />} />
-          <Route path="/courselist" element={<CombinedCourseList />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/student/courselist/:id" element={<CombinedCourseList />} />
           <Route path="/admin/student/register" element={<AdminStudentRegister />} />
           <Route path="/admin/student/edit" element={<AdminStudentEdit />} />
           <Route path="/admin/teacher/register" element={<AdminTeacherRegister />} />
@@ -64,8 +62,8 @@ function App() {
           <Route path="/admin/teacher" element={<TeachersAdmin />} />
           <Route path="/admin/course" element={<CoursesAdmin />} />
           <Route path="/admin/department" element={<DepartmentsAdmin />} />
-          <Route path="/teacherdashboard" element={<CombinedTeacherComponents />} />
-          <Route path="/teacherclassroom" element={<CombinedTeacherClassroom />} />
+          <Route path="/teacherdashboard/:id" element={<CombinedTeacherComponents />} />
+          <Route path="/teacher/teacherclassroom/:id" element={<CombinedTeacherClassroom />} />
           <Route path="/dash/assignment" element={<CourseCardAssignment />} />
           <Route path="/dash/assignment/upload" element={<FileUploader />} />
           <Route path="/meetingpage" element={<MeetingPage />} />

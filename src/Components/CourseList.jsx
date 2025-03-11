@@ -34,7 +34,7 @@ const CourseListSideBar = () => {
 
 const CourseListCourseCard = ({ course }) => {
     return (
-        <Link to = '/courselist/course' className="courselistcoursecard">
+        <Link to = '/student/courselist/course' className="courselistcoursecard">
             <div className="courselistcourseinfo">
                 <p className="courselisttitle">{course.title}</p>
                 <p className="courselistdetails">{course.instructors.join(", ")}</p>

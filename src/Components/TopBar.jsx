@@ -24,6 +24,8 @@ const TopBar = () => {
     setDropdownOpen(!isDropdownOpen);
   };
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <div>
       <div className="topbar-home">
@@ -32,7 +34,7 @@ const TopBar = () => {
           <ul>
             <li>
               <NavLink
-                to="/dash"
+                to={`/studentdashboard/${user.user_id}`}
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
@@ -42,7 +44,7 @@ const TopBar = () => {
               </NavLink>
 
               <NavLink
-                to="/courselist"
+                to={`/student/courselist/${user.user_id}`}
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
@@ -52,7 +54,7 @@ const TopBar = () => {
               </NavLink>
 
               <NavLink
-                to="/schedule"
+                to={`/student/schedule/${user.user_id}`}
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
@@ -62,7 +64,7 @@ const TopBar = () => {
               </NavLink>
 
               <NavLink
-                to="/messages"
+                to={`/student/messages/${user.user_id}`}
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
@@ -72,7 +74,7 @@ const TopBar = () => {
               </NavLink>
 
               <NavLink
-                to="/grades"
+                to={`/student/grades/${user.user_id}`}
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
@@ -103,7 +105,7 @@ const TopBar = () => {
                 {isDropdownOpen && (
                   <div className="dropdown-menu">
                     <NavLink
-                      to="/profile"
+                      to={`/student-profile/${user.user_id}`}
                       onClick={() => setDropdownOpen(false)}
                     >
                       Profile

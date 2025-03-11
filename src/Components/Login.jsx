@@ -41,7 +41,7 @@ const Login = () => {
             navigate(`/student-profile/${data.user.user_id}`);
             break;
           case "teacher":
-            navigate(`/teacherdashboard`);
+            navigate(`/teacherdashboard/${data.user.user_id}`);
             break;
           case "admin":
             navigate(`/admin`);

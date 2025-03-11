@@ -6,6 +6,7 @@ import profileImage from '../Assets/logo.jpg';
 
 const TeacherTopBar = ({ teacherName }) => {
     const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const handleLogout = () => {
         // Add any logout logic here (e.g., clearing tokens, resetting state)

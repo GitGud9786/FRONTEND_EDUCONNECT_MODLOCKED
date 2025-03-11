@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import TopBarAdmin from './TopBarAdmin';
 
 const AdminCourseStudentEnrollment = () => {
     const [courses, setCourses] = useState([]);
@@ -98,7 +99,8 @@ const AdminCourseStudentEnrollment = () => {
     };
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div style={{ padding: "0px" }}>
+            <TopBarAdmin />
             <h2>Enroll Students to Course</h2>
 
             {/* Course Selection */}

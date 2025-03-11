@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import TopBarAdmin from "./TopBarAdmin";
 
 const AdminTeacherAssign = () => {
     const [teachers, setTeachers] = useState([]);
@@ -92,7 +93,8 @@ const AdminTeacherAssign = () => {
     };
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div style={{ padding: "0px" }}>
+            <TopBarAdmin />
             <h2>Assign Teacher to Course</h2>
             <div style={{ marginBottom: "10px" }}>
                 <label>Choose Teacher: </label>

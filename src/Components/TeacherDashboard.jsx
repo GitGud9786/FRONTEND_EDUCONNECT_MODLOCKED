@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TeacherTopBar from "./TeacherTopBar";
 import TeacherSideBar from './TeacherCourseSideBar';
 import TeacherCourseClassroom from './TeacherCourseClassroom';
@@ -8,12 +8,12 @@ import '../styles/TeacherDashboard.css';
 const TeacherClass = () => {
     const [courses, setCourses] = useState([]);
     const navigate = useNavigate();
+    const { id } = useParams();
 
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const user = JSON.parse(localStorage.getItem("user"));
-                const response = await fetch(`http://localhost:8000/teacherassign/courses/${user.user_id}`);
+                const response = await fetch(`http://localhost:8000/teacherassign/courses/${id}`);
                 const data = await response.json();
                 console.log('Fetched courses:', data); // Log the fetched data
                 if (Array.isArray(data)) {
@@ -27,10 +27,10 @@ const TeacherClass = () => {
         };
 
         fetchCourses();
-    }, []);
+    }, [id]);
 
     const handleCourseClick = (course) => {
-        navigate('/teacherclassroom');
+        navigate(`/teacher/teacherclassroom/${id}`);
     };
 
     return (
@@ -86,12 +86,12 @@ const TeacherSchedule = () => {
 
 const CombinedTeacherComponents = () => {
     const [teacherName, setTeacherName] = useState('');
+    const { id } = useParams();
 
     useEffect(() => {
         const fetchTeacherInfo = async () => {
             try {
-                const user = JSON.parse(localStorage.getItem("user"));
-                const response = await fetch(`http://localhost:8000/teacher/read/${user.user_id}`);
+                const response = await fetch(`http://localhost:8000/teacher/read/${id}`);
                 const data = await response.json();
                 console.log('Fetched teacher info:', data); // Log the fetched data
                 if (data.length > 0) {
@@ -105,7 +105,7 @@ const CombinedTeacherComponents = () => {
         };
 
         fetchTeacherInfo();
-    }, []);
+    }, [id]);
 
     return (
         <div className="combinedteachercomponents">
