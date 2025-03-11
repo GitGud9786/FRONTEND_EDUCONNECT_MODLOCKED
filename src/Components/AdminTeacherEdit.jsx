@@ -49,6 +49,7 @@ function AdminTeacherEdit() {
             name: `${teacherData.teacherFirstName} ${teacherData.teacherMiddleName} ${teacherData.teacherLastName}`.trim(),
             date_of_birth: teacherData.teacherDateOfBirth,
             blood_group: teacherData.teacherBloodGroup,
+            designation: teacherData.teacherDesignation,
             department_name: teacherData.teacherDepartment,
             department_id: teacherData.teacherDepartmentID,
             email: teacherData.teacherEmail,
