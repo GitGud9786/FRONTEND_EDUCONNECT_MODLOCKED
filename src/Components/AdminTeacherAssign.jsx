@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import TopBarAdmin from "./TopBarAdmin";
+import "../styles/AdminTeacherAssign.css";
 
 const AdminTeacherAssign = () => {
     const [teachers, setTeachers] = useState([]);
@@ -93,61 +94,71 @@ const AdminTeacherAssign = () => {
     };
 
     return (
-        <div style={{ padding: "0px" }}>
+        <div className="admin-page-container">
             <TopBarAdmin />
-            <h2>Assign Teacher to Course</h2>
-            <div style={{ marginBottom: "10px" }}>
-                <label>Choose Teacher: </label>
-                <select
-                    value={selectedTeacherId}
-                    onChange={(e) => setSelectedTeacherId(e.target.value)}
-                >
-                    <option value="">-- Select Teacher --</option>
-                    {teachers.map((teacher) => (
-                        <option key={teacher.teacher_id} value={teacher.teacher_id}>
-                            {teacher.name} (ID: {teacher.teacher_id})
-                        </option>
-                    ))}
-                </select>
-            </div>
-
-            <div style={{ marginBottom: "10px" }}>
-                <label>Choose Course: </label>
-                <select
-                    value={selectedCourseId}
-                    onChange={(e) => setSelectedCourseId(e.target.value)}
-                >
-                    <option value="">-- Select Course --</option>
-                    {courses.map((course) => (
-                        <option key={course.course_id} value={course.course_id}>
-                            {course.course_name} (ID: {course.course_id})
-                        </option>
-                    ))}
-                </select>
-            </div>
-
-            <button onClick={handleEnroll}>Assign</button>
-
-            <h2 style={{ marginTop: "30px" }}>Unenroll Teacher from Course</h2>
-            <div style={{ marginBottom: "10px" }}>
-                <label>Choose Assignment: </label>
-                <select
-                    value={unenrollAssignment}
-                    onChange={(e) => setUnenrollAssignment(e.target.value)}
-                >
-                    <option value="">-- Select Assignment --</option>
-                    {assignments.map((assignment, index) => (
-                        <option
-                            key={index}
-                            value={`${assignment.teacher_id}-${assignment.course_id}`}
+            <div className="admin-assign-container">
+                <div className="assign-section">
+                    <h2>Assign Teacher to Course</h2>
+                    <div className="form-group">
+                        <label>Choose Teacher: </label>
+                        <select
+                            value={selectedTeacherId}
+                            onChange={(e) => setSelectedTeacherId(e.target.value)}
                         >
-                            Teacher ID: {assignment.teacher_id} - Course ID: {assignment.course_id}
-                        </option>
-                    ))}
-                </select>
-            </div>
+                            <option value="">-- Select Teacher --</option>
+                            {teachers.map((teacher) => (
+                                <option key={teacher.teacher_id} value={teacher.teacher_id}>
+                                    {teacher.name} (ID: {teacher.teacher_id})
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
-            <button onClick={handleUnenroll}>Unenroll</button>
+                    <div className="form-group">
+                        <label>Choose Course: </label>
+                        <select
+                            value={selectedCourseId}
+                            onChange={(e) => setSelectedCourseId(e.target.value)}
+                        >
+                            <option value="">-- Select Course --</option>
+                            {courses.map((course) => (
+                                <option key={course.course_id} value={course.course_id}>
+                                    {course.course_name} (ID: {course.course_id})
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <button className="action-button" onClick={handleEnroll}>
+                        Assign
+                    </button>
+                </div>
+
+                <div className="unassign-section">
+                    <h2>Unassign Teacher from Course</h2>
+                    <div className="form-group">
+                        <label>Choose Assignment: </label>
+                        <select
+                            value={unenrollAssignment}
+                            onChange={(e) => setUnenrollAssignment(e.target.value)}
+                        >
+                            <option value="">-- Select Assignment --</option>
+                            {assignments.map((assignment, index) => (
+                                <option
+                                    key={index}
+                                    value={`${assignment.teacher_id}-${assignment.course_id}`}
+                                >
+                                    Teacher ID: {assignment.teacher_id} - Course ID: {assignment.course_id}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <button className="action-button unassign" onClick={handleUnenroll}>
+                        Unassign
+                    </button>
+                </div>
+            </div>
         </div>
     );
 };
