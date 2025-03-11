@@ -1,34 +1,76 @@
-// MessagesWithChat.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import chatbox from "../Assets/chatbox.png";
 import "../styles/Messages.css"; // Assuming the styles will be in this file
 import TopBar from "./TopBar";
+import { useParams } from "react-router-dom";
 
 const MessagesWithChat = () => {
+  const { student_id: paramStudentId } = useParams(); // Extract student_id from URL params
+  const [studentId, setStudentId] = useState(paramStudentId || null);
   const [selectedCourse, setSelectedCourse] = useState("");
-  const [recipientType, setRecipientType] = useState("");
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [isHovered, setIsHovered] = useState(null);
 
-  const courses = [
-    "CSE 4601: Computer Networks",
-    "CSE 4705: Artificial Intelligence",
-    "EEE 2411: Digital Electronics",
-  ];
+  useEffect(() => {
+    // If studentId is not set, extract it from the URL
+    if (!studentId) {
+      const extractedId = window.location.pathname.split("/").pop();
+      setStudentId(extractedId);
+    }
+  }, [studentId]);
+
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
+  useEffect(() => {
+    if (selectedCourse) {
+      fetchMessages();
+    }
+  }, [selectedCourse]);
+
+  const fetchCourses = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/courses");
+      setCourses(response.data);
+    } catch (error) {
+      console.error("Failed to fetch courses:", error);
+    }
+  };
+
+  const fetchMessages = async () => {
+    try {
+      const courseId = selectedCourse.split(" ")[0].trim(); // Extract course ID from selectedCourse
+      const response = await axios.get(`http://localhost:8000/messages/${courseId}`);
+      setMessages(response.data);
+    } catch (error) {
+      console.error("Failed to fetch messages:", error);
+    }
+  };
 
   const handleCourseChange = (e) => {
     setSelectedCourse(e.target.value);
-    setRecipientType("");
+    setMessages([]);
   };
 
-  const handleRecipientChange = (type) => {
-    setRecipientType(type);
-  };
-
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (message.trim()) {
-      // Handle message sending logic here
-      setMessage("");
+      try {
+        const courseId = selectedCourse.split(":")[0].trim(); // Extract course ID from selectedCourse
+        const payload = {
+          course_id: courseId,
+          student_id: studentId, // Use the actual student ID
+          content: message,
+        };
+        await axios.post("http://localhost:8000/messages/send", payload);
+        setMessage("");
+        fetchMessages(); // Refresh messages after sending
+      } catch (error) {
+        console.error("Failed to send message:", error);
+      }
     }
   };
 
@@ -52,73 +94,32 @@ const MessagesWithChat = () => {
               className="select-course"
             >
               <option value="">Choose a Course</option>
-              {courses.map((course, index) => (
-                <option key={index} value={course}>
-                  {course}
+              {courses.map((course) => (
+                <option key={course.course_id} value={`${course.course_id}`}>
+                  {course.course_id}={course.title}
                 </option>
               ))}
             </select>
           </div>
-
-          {selectedCourse && (
-            <div className="recipient-options">
-              <h3 className="selected-course-title">{selectedCourse}</h3>
-              <div className="recipient-buttons">
-                <button
-                  onMouseEnter={() => setIsHovered("teacher")}
-                  onMouseLeave={() => setIsHovered(null)}
-                  onClick={() => handleRecipientChange("teacher")}
-                  className={`recipient-button ${
-                    recipientType === "teacher" ? "active" : ""
-                  }`}
-                >
-                  <span className="icon">👨‍🏫</span>
-                  Message Teacher
-                </button>
-                <button
-                  onMouseEnter={() => setIsHovered("group")}
-                  onMouseLeave={() => setIsHovered(null)}
-                  onClick={() => handleRecipientChange("group")}
-                  className={`recipient-button ${
-                    recipientType === "group" ? "active" : ""
-                  }`}
-                >
-                  <span className="icon">👥</span>
-                  Message Group
-                </button>
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Right Panel */}
         <div className="right-panel">
-          {recipientType ? (
+          {selectedCourse ? (
             <div className="chatbox">
               <div className="chat-header">
-                <h3>
-                  {recipientType === "teacher" ? (
-                    <>👨‍🏫 Chat with Course Teacher</>
-                  ) : (
-                    <>👥 Student Group Chat</>
-                  )}
-                </h3>
+                <h3>👥 Student Group Chat</h3>
               </div>
               <div className="messages-container">
-                <div className="message received">
-                  <div className="message-content">
-                    <span className="sender">Teacher</span>
-                    <p>Please submit your assignment by Friday.</p>
-                    <span className="timestamp">2:30 PM</span>
+                {messages.map((msg, index) => (
+                  <div key={index} className={`message ${msg.student_id === studentId ? "sent" : "received"}`}>
+                    <div className="message-content">
+                      <span className="sender">{msg.student_id === studentId ? `(ID: ${msg.student_id})` : `Student ${msg.student_id}`}</span>
+                      <p>{msg.content}</p>
+                      <span className="timestamp">{new Date(msg.timestamp).toLocaleTimeString()}</span>
+                    </div>
                   </div>
-                </div>
-                <div className="message sent">
-                  <div className="message-content">
-                    <span className="sender">You</span>
-                    <p>Sure, I will submit it on time.</p>
-                    <span className="timestamp">2:31 PM</span>
-                  </div>
-                </div>
+                ))}
               </div>
               <div className="message-input-container">
                 <input
@@ -145,7 +146,7 @@ const MessagesWithChat = () => {
                 alt="Select Chat"
                 className="placeholder-icon"
               />
-              <h3>Select a course and recipient to start messaging</h3>
+              <h3>Select a course to start messaging</h3>
               <p>Choose from your enrolled courses to begin a conversation</p>
             </div>
           )}
