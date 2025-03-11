@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import TeacherTopBar from "./TeacherTopBar";
-import TeacherCourseClassroom from './TeacherCourseClassroom';
 import '../styles/TeacherDashboard.css';
 
 const TeacherClass = () => {
@@ -29,7 +28,7 @@ const TeacherClass = () => {
     }, [id]);
 
     const handleCourseClick = (course) => {
-        navigate(`/teacher/teacherclassroom/${id}`);
+        navigate(`/teacher/teacherclassroom/${id}`, { state: { course } });
     };
 
     return (

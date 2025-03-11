@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import AgoraRTC from 'agora-rtc-sdk-ng';
 import TeacherTopBar from './TeacherTopBar';
 import "../styles/TeacherCourseClassroom.css";
@@ -9,14 +9,14 @@ const APP_ID = '5a3ef53cf05c49d5a7e6ad24ba307cdb';
 const TOKEN = null; // use a token if needed for production
 const CHANNEL = 'test-channel';
 
-const TitleBlock = () => {
-    return(
+const TitleBlock = ({ course }) => {
+    return (
         <div className="block-container">
             <div className="title-header">
-                <h1>CSE 4510: Software and Development</h1>
+                <h1>{course.title}</h1>
             </div>
             <div className="section-header">
-                <h2>Section 1 & 2</h2>
+                <h2>Course ID: {course.course_id}</h2>
             </div>
         </div>
     );
@@ -130,6 +130,8 @@ const CombinedTeacherClassroom = () => {
   const [announcements, setAnnouncements] = useState([]);
   const [teacherInfo, setTeacherInfo] = useState({});
   const { id } = useParams();
+  const location = useLocation();
+  const course = location.state?.course || {};
 
   const fetchAnnouncements = async () => {
     try {
@@ -169,13 +171,11 @@ const CombinedTeacherClassroom = () => {
       <div className='teachercoursemain'>
         <aside className="teachersidebar">
           <h1>Teacher Info</h1>
-          
           <p><strong>Name : </strong>{teacherInfo.name}</p>
-          
           <p><strong>Email:</strong> {teacherInfo.email}</p>
         </aside>
         <div className='teachercoursecontents'>
-          <TitleBlock />
+          <TitleBlock course={course} />
           <MeetingClassroom />
           <Announcement fetchAnnouncements={fetchAnnouncements} />
           {announcements.map((announcement) => (
