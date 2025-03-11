@@ -27,13 +27,10 @@
 
 .profile-pic {
     width: 191px;
-
     height: 190px;
-
     border-radius: 60%;
     border: 3px solid #f5bc16;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    /* Improved shadow */
 }
 
 .profile-header-details {
@@ -57,11 +54,8 @@
 }
 
 .profile-details {
-
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
+    justify-content: center;
     width: 100%;
 }
 
@@ -69,7 +63,7 @@
     background-color: #14445a;
     border-radius: 10px;
     padding: 20px;
-    width: 30%;
+    width: 60%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: left;
 }
@@ -94,5 +88,33 @@
 }
 
 .card-profile p svg {
+    margin-right: 10px;
+}
+
+.info-card {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.info-card.even {
+    background-color: #1b5a75;
+}
+
+.info-card.odd {
+    background-color: #14445a;
+}
+
+.info-card p {
+    font-size: 16px;
+    color: #e0e0e0;
+    margin: 0;
+}
+
+.info-card p strong {
+    color: #f5bc16;
+}
+
+.info-card p svg {
     margin-right: 10px;
 }

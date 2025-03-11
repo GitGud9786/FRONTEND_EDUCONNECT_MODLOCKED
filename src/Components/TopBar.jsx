@@ -43,7 +43,7 @@ const TopBar = () => {
                 <span>Home</span>
               </NavLink>
 
-              <NavLink
+              {/* <NavLink
                 to={`/student/courselist/${user.user_id}`}
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
@@ -51,7 +51,7 @@ const TopBar = () => {
               >
                 <FontAwesomeIcon icon={faBook} className="icon-home" />
                 <span>Courses</span>
-              </NavLink>
+              </NavLink> */}
 
               <NavLink
                 to={`/student/schedule/${user.user_id}`}

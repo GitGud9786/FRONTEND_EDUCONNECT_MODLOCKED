@@ -88,16 +88,7 @@ const Dashboard = () => {
         <div className="main-left-home">
           <div className="maintop-home">
             <h1>Home</h1>
-            <div className="view-home">
-              <button className="nav-home-selected">
-                <FontAwesomeIcon icon={faTh} className="icon-home" />
-                <span>GridView</span>
-              </button>
-              <button className="nav-home">
-                <FontAwesomeIcon icon={faList} className="icon-home" />
-                <span>ListView</span>
-              </button>
-            </div>
+            
           </div>
           <div className="cards-home">
             {courses.map((course, index) => (

@@ -10,6 +10,7 @@ const Profile = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [student, setStudent] = useState(null);
+    const [country, setCountry] = useState("Not Available");
 
     useEffect(() => {
         const fetchStudentInfo = async () => {
@@ -17,7 +18,15 @@ const Profile = () => {
                 const response = await fetch(`http://localhost:8000/students/read/${id}`);
                 const data = await response.json();
                 if (data.length > 0) {
-                    setStudent(data[0]);
+                    const studentData = data[0];
+                    setStudent(studentData);
+
+                    // Extract country from address
+                    const address = studentData.address || "";
+                    const match = address.match(/(.*?)(\d{5})/); // Match any characters before the 5-digit postcode
+                    if (match && match[1]) {
+                        setCountry(match[1].trim());
+                    }
                 } else {
                     console.error('No student info found');
                 }
@@ -33,6 +42,23 @@ const Profile = () => {
         return <p>Loading...</p>; // Display while fetching student data
     }
 
+    const infoCards = [
+        { label: "Father's Name", value: student.father_name },
+        { label: "Mother's Name", value: student.mother_name },
+        { label: "Date of Birth", value: student.date_of_birth },
+        { label: "Address", value: student.address },
+        { label: "Phone", value: student.phone_number, icon: faPhone },
+        { label: "Email", value: student.email, icon: faEnvelope },
+        { label: "Blood Group", value: student.blood_group, icon: faTint },
+        { label: "Department", value: student.department },
+        { label: "Program", value: student.program },
+        { label: "CGPA", value: student.cgpa },
+        { label: "Credits Earned", value: student.credits_earned },
+        { label: "Emergency Contact Name", value: student.emergency_contact?.name },
+        { label: "Relationship", value: student.emergency_contact?.relationship },
+        { label: "Emergency Contact Phone", value: student.emergency_contact?.phone, icon: faPhone },
+    ];
+
     return (
         <div className="container-profile">
             <TopBar />
@@ -43,7 +69,7 @@ const Profile = () => {
                 <div className="profile-header-details">
                     <h1>{student.name}</h1>
                     <p><strong>ID:</strong> {student.student_id}</p>
-                    <p><strong>Country:</strong> {student.country || "Not Available"}</p>
+                    <p><strong>Country:</strong> {country}</p>
                     <p><strong>Session:</strong> {student.session || "Not Available"}</p>
                     <p><strong>Semester:</strong> {student.semester || "Not Available"}</p>
                 </div>
@@ -51,29 +77,16 @@ const Profile = () => {
 
             <div className="profile-details">
                 <div className="card-profile">
-                    <h2><FontAwesomeIcon icon={faAddressCard} /> Personal Details</h2>
-                    <p><strong>Father's Name:</strong> {student.father_name || "N/A"}</p>
-                    <p><strong>Mother's Name:</strong> {student.mother_name || "N/A"}</p>
-                    <p><strong>Date of Birth:</strong> {student.date_of_birth || "N/A"}</p>
-                    <p><strong>Address:</strong> {student.address || "N/A"}</p>
-                    <p><strong>Phone:</strong> <FontAwesomeIcon icon={faPhone} /> {student.phone_number || "N/A"}</p>
-                    <p><strong>Email:</strong> <FontAwesomeIcon icon={faEnvelope} /> {student.email}</p>
-                    <p><strong>Blood Group:</strong> <FontAwesomeIcon icon={faTint} /> {student.blood_group || "N/A"}</p>
-                </div>
-
-                <div className="card-profile">
-                    <h2><FontAwesomeIcon icon={faUniversity} /> Academic Details</h2>
-                    <p><strong>Department:</strong> {student.department || "N/A"}</p>
-                    <p><strong>Program:</strong> {student.program || "N/A"}</p>
-                    <p><strong>CGPA:</strong> {student.cgpa || "N/A"}</p>
-                    <p><strong>Credits Earned:</strong> {student.credits_earned || "N/A"}</p>
-                </div>
-
-                <div className="card-profile">
-                    <h2><FontAwesomeIcon icon={faAddressCard} /> Emergency Contact</h2>
-                    <p><strong>Name:</strong> {student.emergency_contact?.name || "N/A"}</p>
-                    <p><strong>Relationship:</strong> {student.emergency_contact?.relationship || "N/A"}</p>
-                    <p><strong>Phone:</strong> <FontAwesomeIcon icon={faPhone} /> {student.emergency_contact?.phone || "N/A"}</p>
+                    <h2><FontAwesomeIcon icon={faAddressCard} /> Personal & Academic Details</h2>
+                    {infoCards.map((info, index) => (
+                        info.value && (
+                            <div key={index} className={`info-card ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                                <p>
+                                    <strong>{info.label}:</strong> {info.icon && <FontAwesomeIcon icon={info.icon} />} {info.value}
+                                </p>
+                            </div>
+                        )
+                    ))}
                 </div>
             </div>
         </div>
