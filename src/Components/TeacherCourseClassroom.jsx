@@ -172,14 +172,6 @@ const CombinedTeacherClassroom = () => {
           <p><strong>Email:</strong> {teacherInfo.email}</p>
           <p><strong>Department:</strong> {teacherInfo.department}</p>
         </aside>
-        <div className='teacher-sidebar-announcements'>
-          <h3>Announcements</h3>
-          {announcements.map((announcement) => (
-            <div key={announcement.announcement_id} className='sidebar-announcement-item'>
-              <p>{announcement.title}</p>
-            </div>
-          ))}
-        </div>
         <div className='teachercoursecontents'>
           <TitleBlock />
           <MeetingClassroom />
