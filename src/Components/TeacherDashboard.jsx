@@ -54,33 +54,56 @@ const TeacherClass = () => {
 };
 
 const TeacherSchedule = () => {
-    const [schedule, setSchedule] = useState([]);
+    const [events, setEvents] = useState([]);
+    const { id } = useParams();
 
     useEffect(() => {
-        const fetchSchedule = async () => {
+        const fetchEvents = async () => {
             try {
-                const response = await fetch('http://localhost:8000/teacher/schedule'); // Ensure the correct endpoint
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+                const response = await fetch(`http://localhost:8000/teacher/get-event/${id}`);
                 const data = await response.json();
-                setSchedule(data);
+                setEvents(data);
             } catch (error) {
-                console.error('Error loading schedule:', error);
+                console.error('Error fetching events:', error);
             }
         };
 
-        fetchSchedule();
-    }, []);
+        fetchEvents();
+    }, [id]);
+
+    const deleteEvent = async (eventId) => {
+        try {
+            const response = await fetch(`http://localhost:8000/teacher/delete-event/${eventId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                setEvents((prevEvents) => prevEvents.filter((event) => event.id !== eventId));
+            } else {
+                console.error('Failed to delete event');
+            }
+        } catch (error) {
+            console.error('Error deleting event:', error);
+        }
+    };
 
     return (
         <aside className="teacherschedule">
             <h3>Upcoming Schedule</h3>
-            {schedule.map((item, index) => (
-                <div key={index} className="teacherscheduleitem">
-                    {item.course}
-                </div>
-            ))}
+            {Array.isArray(events) && events.length === 0 ? (
+                <p>No events scheduled</p>
+            ) : (
+                Array.isArray(events) && events.map((event) => (
+                    <div key={event.id} className="event-card">
+                        <h3>{event.title}</h3>
+                        <p>{event.description}</p>
+                        <p>
+                            {new Date(event.start_time).toLocaleString()} - {new Date(event.end_time).toLocaleString()}
+                        </p>
+                        <button onClick={() => deleteEvent(event.id)} className="delete-button">Delete</button>
+                    </div>
+                ))
+            )}
         </aside>
     );
 };
