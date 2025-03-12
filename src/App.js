@@ -33,6 +33,7 @@ import MeetingPage from './Components/MeetingClassroom';
 import AdminCourseStudentEnrollment from "./Components/AdminCourseStudentEnroll";
 import AdminTeacherAssign from "./Components/AdminTeacherAssign";
 import AdminEnrollment from "./Components/AdminEnrollment";
+import GradeAssign from "./Components/GradeAssign";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -65,14 +66,13 @@ function App() {
           <Route path="/teacherdashboard/:id" element={<CombinedTeacherComponents />} />
           <Route path="/teacher/teacherclassroom/:id" element={<CombinedTeacherClassroom />} />
           <Route path="/teacher/schedule/:id" element={<Schedule />} />
-
-
           <Route path="/dash/assignment" element={<CourseCardAssignment />} />
           <Route path="/dash/assignment/upload" element={<FileUploader />} />
           <Route path="/meetingpage" element={<MeetingPage />} />
           <Route path="/admin/student-enroll" element={<AdminCourseStudentEnrollment />} />
           <Route path="/admin/teacher-assignment" element={<AdminTeacherAssign />} />
           <Route path="/admin/enrollment" element={<AdminEnrollment />} />
+          <Route path="/teacher/grade-assign/:id" element={<GradeAssign />} />
         </Routes>
       </BrowserRouter>
     </div>
