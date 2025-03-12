@@ -24,7 +24,7 @@ const MessagesWithChat = () => {
 
   useEffect(() => {
     fetchCourses();
-  }, []);
+  }, [studentId]);
 
   useEffect(() => {
     if (selectedCourse) {
@@ -34,7 +34,7 @@ const MessagesWithChat = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/courses");
+      const response = await axios.get(`http://localhost:8000/courses/student/${studentId}`);
       setCourses(response.data);
     } catch (error) {
       console.error("Failed to fetch courses:", error);
@@ -43,7 +43,7 @@ const MessagesWithChat = () => {
 
   const fetchMessages = async () => {
     try {
-      const courseId = selectedCourse.split(" ")[0].trim(); // Extract course ID from selectedCourse
+      const courseId = selectedCourse.split(":")[0].trim(); // Extract course ID from selectedCourse
       const response = await axios.get(`http://localhost:8000/messages/${courseId}`);
       setMessages(response.data);
     } catch (error) {
@@ -95,8 +95,8 @@ const MessagesWithChat = () => {
             >
               <option value="">Choose a Course</option>
               {courses.map((course) => (
-                <option key={course.course_id} value={`${course.course_id}`}>
-                  {course.course_id}={course.title}
+                <option key={course.course_id} value={`${course.course_id}: ${course.title}`}>
+                  {course.course_id}: {course.title}
                 </option>
               ))}
             </select>
@@ -114,7 +114,7 @@ const MessagesWithChat = () => {
                 {messages.map((msg, index) => (
                   <div key={index} className={`message ${msg.student_id === studentId ? "sent" : "received"}`}>
                     <div className="message-content">
-                      <span className="sender">{msg.student_id === studentId ? `(ID: ${msg.student_id})` : `Student ${msg.student_id}`}</span>
+                      <span className="sender">{msg.student_id === studentId ? `You (ID: ${msg.student_id})` : `Student ${msg.student_id}`}</span>
                       <p>{msg.content}</p>
                       <span className="timestamp">{new Date(msg.timestamp).toLocaleTimeString()}</span>
                     </div>
