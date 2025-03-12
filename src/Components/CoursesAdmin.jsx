@@ -49,13 +49,15 @@ const CoursesAdmin = () => {
         <div className="table-container">
           <div className="filter-controls">
             <label>
-              Department:
+              <label className="holders">Department:</label>
               <select value={selectedDepartment} onChange={(e) => setSelectedDepartment(e.target.value)}>
                 <option value="All">All</option>
-                <option value="CSE">CSE</option>
-                <option value="EEE">EEE</option>
-                <option value="MPE">MPE</option>
-                <option value="CEE">CEE</option>
+                <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                <option value="Electrical and Electronics Engineering">Electrical and Electronics Engineering</option>
+                <option value="Mechanical and Production Engineering">Mechanical and Production Engineering</option>
+                <option value="Civil and Environmental Engineering">Civil and Environmental Engineering</option>
+                <option value="Industrial and Production Engineering">Industrial and Production Engineering</option>
+                <option value="Business Technology and Management">Business Technology and Management</option>
               </select>
             </label>
 
@@ -66,53 +68,13 @@ const CoursesAdmin = () => {
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
-              <button onClick={filterCourses}>
+              <button onClick={filterCourses} className="search-button">
                 <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
           </div>
 
-          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
-
-          <table className="student-table">
-            <thead>
-              <tr>
-                <th><input type="checkbox" /></th>
-                <th>Course ID</th>
-                <th>Course Title</th>
-                <th>Department</th>
-                <th>Description</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredCourses.length > 0 ? (
-                filteredCourses.map((course) => (
-                  <tr key={course.course_id}>
-                    <td><input type="checkbox" /></td>
-                    <td>{course.course_id}</td>
-                    <td>{course.title}</td>
-                    <td>{course.course_department}</td>
-                    <td>{course.description}</td>
-                    <td>
-                      <Link to={`/admin/course/edit/${course.course_id}`} className="stdadmin-controls-button">
-                        <FontAwesomeIcon icon={faEdit} />
-                        <span>Edit</span>
-                      </Link>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="6" style={{ textAlign: 'center' }}>No courses found for the selected filters.</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-      <div className="stdadmin-controls">
+          <div className="stdadmin-controls">
           <button>
           <Link to="/admin/course/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
@@ -150,6 +112,39 @@ const CoursesAdmin = () => {
             <span>Delete</span>
           </button>
         </div>
+
+          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+
+          <table className="student-table">
+            <thead>
+              <tr>
+                <th>Course ID</th>
+                <th>Course Title</th>
+                <th>Department</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredCourses.length > 0 ? (
+                filteredCourses.map((course) => (
+                  <tr key={course.course_id}>
+                    <td>{course.course_id}</td>
+                    <td>{course.title}</td>
+                    <td>{course.course_department}</td>
+                    <td>{course.description}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: 'center' }}>No courses found for the selected filters.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
     </div>
   );
 };

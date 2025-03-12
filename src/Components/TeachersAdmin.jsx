@@ -38,7 +38,6 @@ const TeachersAdmin = () => {
     });
 
     setFilteredTeachers(searchResult);
-    setError(searchResult.length > 0 ? '' : 'No teachers found.');
   };
 
   useEffect(() => {
@@ -71,13 +70,15 @@ const TeachersAdmin = () => {
         <div className="table-container">
           <div className="filter-controls">
             <label>
-              Department:
+              <label className="holders">Department:</label>
               <select value={selectedDepartment} onChange={(e) => setSelectedDepartment(e.target.value)}>
                 <option value="All">All</option>
-                <option value="CSE">CSE</option>
-                <option value="EEE">EEE</option>
-                <option value="MPE">MPE</option>
-                <option value="CEE">CEE</option>
+                <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                <option value="Electrical and Electronics Engineering">Electrical and Electronics Engineering</option>
+                <option value="Mechanical and Production Engineering">Mechanical and Production Engineering</option>
+                <option value="Civil and Environmental Engineering">Civil and Environmental Engineering</option>
+                <option value="Industrial and Production Engineering">Industrial and Production Engineering</option>
+                <option value="Business Technology and Management">Business Technology and Management</option>
               </select>
             </label>
 
@@ -88,71 +89,13 @@ const TeachersAdmin = () => {
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
-              <button onClick={filterTeachers}>
+              <button onClick={filterTeachers} className='search-button'>
                 <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
           </div>
 
-          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
-
-          <table className="student-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Department</th>
-                
-              </tr>
-            </thead>
-            <tbody>
-              {filteredTeachers.length > 0 ? (
-                filteredTeachers.map((teacher) => (
-                  <tr key={teacher.teacher_id}>
-                    <td>{teacher.teacher_id}</td>
-                    <td>{teacher.first_name}</td>
-                    <td>{teacher.last_name}</td>
-                    <td>{teacher.email}</td>
-                    <td>{teacher.phone}</td>
-                    <td>{teacher.department}</td>
-                    
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="9" style={{ textAlign: 'center' }}>No teachers found for the selected filters.</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-
-
-        {selectedTeacher && (
-          <div className="student-info">
-            <h3>Teacher Information</h3>
-            {loading ? (
-              <p>Loading...</p>
-            ) : (
-              <>
-                <p><strong>ID:</strong> {selectedTeacher.teacher_id}</p>
-                <p><strong>Name:</strong> {selectedTeacher.name}</p>
-                <p><strong>Email:</strong> {selectedTeacher.email}</p>
-                <p><strong>Date of Birth:</strong> {selectedTeacher.date_of_birth}</p>
-                <p><strong>Department:</strong> {selectedTeacher.department}</p>
-                <p><strong>Address:</strong> {selectedTeacher.address}</p>
-                <p><strong>Phone:</strong> {selectedTeacher.phone_number}</p>
-                <p><strong>Blood Group:</strong> {selectedTeacher.blood_group}</p>
-              </>
-            )}
-          </div>
-        )}
-
-      </div>
-      <div className="stdadmin-controls">
+          <div className="stdadmin-controls">
           <button>
           <Link to="/admin/teacher/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
@@ -190,6 +133,68 @@ const TeachersAdmin = () => {
             <span>Delete</span>
           </button>
         </div>
+
+
+          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+
+          <table className="student-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Department</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              {filteredTeachers.length > 0 ? (
+                filteredTeachers.map((teacher) => (
+                  <tr key={teacher.teacher_id}>
+                    <td>{teacher.teacher_id}</td>
+                    <td>{teacher.first_name}</td>
+                    <td>{teacher.last_name}</td>
+                    <td>{teacher.email}</td>
+                    <td>{teacher.phone_number}</td>
+                    <td>{teacher.department}</td>
+                    
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: 'center' }}>No teachers found for the selected filters.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+
+
+        </div>
+
+
+        {selectedTeacher && (
+          <div className="student-info">
+            <h3>Teacher Information</h3>
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <p><strong>ID:</strong> {selectedTeacher.teacher_id}</p>
+                <p><strong>Name:</strong> {selectedTeacher.name}</p>
+                <p><strong>Email:</strong> {selectedTeacher.email}</p>
+                <p><strong>Date of Birth:</strong> {selectedTeacher.date_of_birth}</p>
+                <p><strong>Department:</strong> {selectedTeacher.department}</p>
+                <p><strong>Address:</strong> {selectedTeacher.address}</p>
+                <p><strong>Phone:</strong> {selectedTeacher.phone_number}</p>
+                <p><strong>Blood Group:</strong> {selectedTeacher.blood_group}</p>
+              </>
+            )}
+          </div>
+        )}
+
+      </div>
     </div>
   );
 };
