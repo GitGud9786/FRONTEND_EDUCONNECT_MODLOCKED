@@ -1,29 +1,19 @@
-//CourseCard.jsx
 import React from 'react';
 import '../styles/CourseCard.css';
 
-const CourseCard = ({ courseTitle, instructorName, section, imageUrl, dueDate, task }) => {
+const CourseCard = ({ courseID, courseTitle, teacherName }) => {
   return (
     <div className="course-card">
       <div className="course-header">
         <div className="course-info">
+          <h2>{courseID}</h2>
           <h3>{courseTitle}</h3>
-          <p>Section {section}</p>
-          <p>{instructorName}</p>
-        </div>
-        <div className="course-avatar">
-          <img src={imageUrl} alt={instructorName} />
+          <p>Section 1 & 2</p>
         </div>
       </div>
       <div className="course-body">
-        {dueDate && task ? (
-          <div className="task-info">
-            <p>Due {dueDate}</p>
-            <p>{task}</p>
-          </div>
-        ) : (
-          <p>No upcoming tasks</p>
-        )}
+        <p><strong>Course Teacher:</strong></p>
+        <p>{teacherName}</p>
       </div>
     </div>
   );

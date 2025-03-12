@@ -56,28 +56,19 @@ const Dashboard = () => {
 
   const courses = [
     {
-      courseTitle: 'CSE 4601: Computer Networks',
-      instructorName: 'Dr. Hasan Mahmud',
-      section: '3A',
-      imageUrl: 'https://cse.iutoic-dhaka.edu/uploads/img/1727449400_1902.jpg',
-      dueDate: 'Wednesday',
-      task: 'Quiz on Chapter 4',
+      courseID: '4705',
+      courseTitle: 'Computer Networks',
+      teacherName: 'Dr. Hasan Mahmud',
     },
     {
-      courseTitle: 'CSE 4705: Artificial Intelligence',
-      instructorName: 'Sabbir Ahmed',
-      section: '1A',
-      imageUrl: 'https://cse.iutoic-dhaka.edu/uploads/img/1727033840_1989.png',
-      dueDate: 'Friday',
-      task: 'Project Proposal Submission',
+      courseID: '4501',
+      courseTitle: 'Artificial Intelligence',
+      teacherName: 'Sabbir Ahmed',
     },
     {
-      courseTitle: 'CSE 4501: Operating Systems',
-      instructorName: 'Ridwan Kabir',
-      section: '2B',
-      imageUrl: 'https://cse.iutoic-dhaka.edu/uploads/img/1601107075_1082.jpg',
-      dueDate: 'Thursday',
-      task: 'Lab Report Submission',
+      courseID: '4105',
+      courseTitle: 'Operating Systems',
+      teacherName: 'Ridwan Kabir',
     },
   ];
 

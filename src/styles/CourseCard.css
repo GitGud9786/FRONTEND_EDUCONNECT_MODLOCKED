@@ -21,10 +21,10 @@
     position: relative;
     padding: 20px;
     background-color: #f9fafa;
-    color: white;
+    color: rgb(255, 0, 0);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
     background-image: url('../Assets/iut.jpg');
     background-size: cover;
     background-position: center;
@@ -45,11 +45,18 @@
 
 .course-info {
     z-index: 1;
+    text-align: center; /* Center text */
+}
+
+.course-info h2 {
+    font-size: 1.4rem;
+    color: #f5bc16; /* Update color */
+    margin: 0;
 }
 
 .course-info h3 {
     font-size: 1.4rem;
-    color: #f6fa09;
+    color: #f5bc16; /* Update color */
     margin: 0;
 }
 

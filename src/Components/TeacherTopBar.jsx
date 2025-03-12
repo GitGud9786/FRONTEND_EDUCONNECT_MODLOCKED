@@ -11,7 +11,7 @@ import {
   faClipboardList,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../Assets/logo.jpg";
-import dp from "../Assets/dp.jpg";
+import logout from "../Assets/logoutButton2.png";
 import "../styles/Dashboard.css";
 
 const TeacherTopBar = () => {
@@ -54,7 +54,7 @@ const TeacherTopBar = () => {
                 <span>Schedule</span>
               </NavLink>
 
-              <NavLink
+              {/* <NavLink
                 to={`/teacher/messages/${user.user_id}`}
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
@@ -62,7 +62,7 @@ const TeacherTopBar = () => {
               >
                 <FontAwesomeIcon icon={faMessage} className="icon-home" />
                 <span>Messages</span>
-              </NavLink>
+              </NavLink> */}
 
               <NavLink
                 to={`/teacher/grade-assign/${user.user_id}`}
@@ -80,14 +80,12 @@ const TeacherTopBar = () => {
         <div className="topbar-right-home">
           <ul>
             <li>
-              <button className="nav-home">
-                <FontAwesomeIcon icon={faCog} className="icon-home" />
-              </button>
+              
               <span className="date-home">{formattedDate}</span>
 
               <div className="profile-dropdown">
                 <img
-                  src={dp}
+                  src={logout}
                   alt="Profile"
                   className="dps"
                   onClick={toggleDropdown}
