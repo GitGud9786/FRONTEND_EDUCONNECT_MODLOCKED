@@ -158,12 +158,13 @@
   gap: 4px;
 }
 
+/* .message.sent {
+  align-self: flex-end;
+  color: #fff;
+} */
+
 .message.received {
   align-self: flex-start;
-}
-
-.message.sent {
-  align-self: flex-end;
 }
 
 .message-content {

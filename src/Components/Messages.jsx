@@ -12,7 +12,6 @@ const MessagesWithChat = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [courses, setCourses] = useState([]);
-  const [isHovered, setIsHovered] = useState(null);
 
   useEffect(() => {
     // If studentId is not set, extract it from the URL
@@ -114,7 +113,7 @@ const MessagesWithChat = () => {
                 {messages.map((msg, index) => (
                   <div key={index} className={`message ${msg.student_id === studentId ? "sent" : "received"}`}>
                     <div className="message-content">
-                      <span className="sender">{msg.student_id === studentId ? `You (ID: ${msg.student_id})` : `Student ${msg.student_id}`}</span>
+                      <span className="sender">{msg.student_id === studentId ? `(ID: ${msg.student_id})` : `Student ${msg.student_id}`}</span>
                       <p>{msg.content}</p>
                       <span className="timestamp">{new Date(msg.timestamp).toLocaleTimeString()}</span>
                     </div>
