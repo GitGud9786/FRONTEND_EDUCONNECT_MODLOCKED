@@ -35,16 +35,14 @@
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-.teachersidebarbutton:hover{
+.teachersidebarbutton:hover {
     background-color: #ffd500;
     color: black;
     border-color: black;
-    
 }
 
 .teacherclassrooms {
-    flex: display;
-    width: 900px;
+    flex: 1;
     flex-direction: column;
     margin-left: 10px;
     padding: 20px;
@@ -79,8 +77,6 @@
     transform: scale(1.01);
 }
 
-
-
 .teachercoursetitle {
     text-decoration: underline;
     margin-left: -5px;
@@ -90,7 +86,7 @@
     color: white;
 }
 
-.teachersection{
+.teachersection {
     text-align: left;
     margin-left: -5px;
     margin-top: -10px;
@@ -98,27 +94,31 @@
 
 .teachercountsemester {
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     color: white;
 }
 
-.teachercount{
-    text-align:left;
+.teachercount {
+    text-align: left;
     margin-top: 5px;
     margin-left: -5px;
 }
 
-.teachersemester{
+.teachersemester {
     margin-top: 5px;
     margin-right: -5px;
 }
 
 .teacherschedule {
-    width: 250px;
+    width: 200px;
     padding: 20px;
     color: white;
+    background-color: #0A242E;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
 }
 
 .teacherschedule h3 {

@@ -19,10 +19,9 @@
     margin-left: 20px; /* Creates space between main content and buttons */
     background-color: #0A242E;
     width: 250px;
-    height: 100vh;
     align-items: center; /* Center horizontally */
     justify-content: center; /* Center vertically */
-    height: 75%;
+    height: 300px;
     margin-top: 20px;
     border-radius: 20px;
   }

@@ -16,14 +16,19 @@
     height: 250px;
 }
 
+.title-header {
+    text-align: left; /* Align text to the left */
+    padding-left: 20px; /* Add padding to the left if needed */
+}
+
 .title-header h1{
-    margin-top: 150px;
-    margin-left: -380px;
     font-weight: bold;
+  font: 48px Arial, sans-serif;
+  margin-left: 5px;
 }
 
 .section-header h2{
-    margin-top: -5px;
+    margin-top: 125px;
     margin-left: -790px;
     font-weight: lighter;
 }
