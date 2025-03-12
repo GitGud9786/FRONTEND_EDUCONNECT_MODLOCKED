@@ -12,7 +12,16 @@ const GradeAssign = () => {
 
   const [selectedEnrollment, setSelectedEnrollment] = useState("");
   const [selectedGrade, setSelectedGrade] = useState("");
-  const [gradeData, setGradeData] = useState({
+  const [assignGradeData, setAssignGradeData] = useState({
+    quiz1_marks: "",
+    quiz2_marks: "",
+    quiz3_marks: "",
+    assignments_marks: "",
+    attendance_marks: "",
+    mid_sem_marks: "",
+    final_sem_marks: "",
+  });
+  const [updateGradeData, setUpdateGradeData] = useState({
     quiz1_marks: "",
     quiz2_marks: "",
     quiz3_marks: "",
@@ -39,7 +48,7 @@ const GradeAssign = () => {
 
   const fetchEnrollments = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/student-enrollments");
+      const response = await axios.get("http://localhost:8000/studentenroll/enrollments");
       setEnrollments(response.data);
     } catch (error) {
       console.error("Error fetching enrollments:", error);
@@ -48,7 +57,7 @@ const GradeAssign = () => {
 
   const fetchGrades = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/all-grades");
+      const response = await axios.get("http://localhost:8000/grades/all-grades");
       setGrades(response.data);
     } catch (error) {
       console.error("Error fetching grades:", error);
@@ -56,11 +65,12 @@ const GradeAssign = () => {
   };
 
   const handleEnrollmentChange = (e) => {
-    const [student_id, course_id] = e.target.value.split("-");
-    setSelectedEnrollment({ student_id, course_id });
+    const value = e.target.value;
+    const [student_id, course_id] = value.split("-");
+    setSelectedEnrollment(value);
 
-    // Reset grade data
-    setGradeData({
+    // Reset assign grade data
+    setAssignGradeData({
       quiz1_marks: "",
       quiz2_marks: "",
       quiz3_marks: "",
@@ -71,18 +81,26 @@ const GradeAssign = () => {
     });
   };
 
-  const handleGradeChange = (e) => {
-    const [student_id, course_id] = e.target.value.split("-");
-    setSelectedGrade({ student_id, course_id });
+  const handleGradeChange = async (e) => {
+    const value = e.target.value;
+    const [student_id, course_id] = value.split("-");
+    setSelectedGrade(value);
 
-    // Fetch existing grade data if available
-    const existingGrade = grades.find(
-      (grade) => grade.student_id === parseInt(student_id, 10) && grade.course_id === parseInt(course_id, 10)
-    );
-    if (existingGrade) {
-      setGradeData(existingGrade);
-    } else {
-      setGradeData({
+    try {
+      const response = await axios.get(`http://localhost:8000/grades/grades/${student_id}/${course_id}`);
+      const gradeData = response.data;
+      setUpdateGradeData({
+        quiz1_marks: gradeData.quiz1_marks,
+        quiz2_marks: gradeData.quiz2_marks,
+        quiz3_marks: gradeData.quiz3_marks,
+        assignments_marks: gradeData.assignments_marks,
+        attendance_marks: gradeData.attendance_marks,
+        mid_sem_marks: gradeData.mid_sem_marks,
+        final_sem_marks: gradeData.final_sem_marks,
+      });
+    } catch (error) {
+      console.error("Error fetching grade data:", error);
+      setUpdateGradeData({
         quiz1_marks: "",
         quiz2_marks: "",
         quiz3_marks: "",
@@ -94,9 +112,14 @@ const GradeAssign = () => {
     }
   };
 
-  const handleGradeDataChange = (e) => {
+  const handleAssignGradeDataChange = (e) => {
     const { name, value } = e.target;
-    setGradeData({ ...gradeData, [name]: value });
+    setAssignGradeData({ ...assignGradeData, [name]: value });
+  };
+
+  const handleUpdateGradeDataChange = (e) => {
+    const { name, value } = e.target;
+    setUpdateGradeData({ ...updateGradeData, [name]: value });
   };
 
   const handleAssignGrade = async () => {
@@ -106,10 +129,10 @@ const GradeAssign = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/assign-grade", {
-        student_id: parseInt(selectedEnrollment.student_id, 10),
-        course_id: parseInt(selectedEnrollment.course_id, 10),
-        ...gradeData,
+      const response = await axios.post("http://localhost:8000/grades/assign-grade", {
+        student_id: parseInt(selectedEnrollment.split("-")[0], 10),
+        course_id: parseInt(selectedEnrollment.split("-")[1], 10),
+        ...assignGradeData,
       });
 
       alert(response.data.message);
@@ -126,10 +149,10 @@ const GradeAssign = () => {
     }
 
     try {
-      const response = await axios.put("http://localhost:8000/update-grade", {
-        student_id: parseInt(selectedGrade.student_id, 10),
-        course_id: parseInt(selectedGrade.course_id, 10),
-        ...gradeData,
+      const response = await axios.put("http://localhost:8000/grades/update-grade", {
+        student_id: parseInt(selectedGrade.split("-")[0], 10),
+        course_id: parseInt(selectedGrade.split("-")[1], 10),
+        ...updateGradeData,
       });
 
       alert(response.data.message);
@@ -153,7 +176,7 @@ const GradeAssign = () => {
               <option value="">-- Select Enrollment --</option>
               {enrollments.map((enrollment, index) => (
                 <option key={index} value={`${enrollment.student_id}-${enrollment.course_id}`}>
-                  Student ID: {enrollment.student_id} - Course ID: {enrollment.course_id}
+                  Student ID: {enrollment.student_id} ------ Course ID: {enrollment.course_id}
                 </option>
               ))}
             </select>
@@ -166,32 +189,32 @@ const GradeAssign = () => {
               type="number"
               name="quiz1_marks"
               placeholder="Quiz 1 (out of 15)"
-              value={gradeData.quiz1_marks}
-              onChange={handleGradeDataChange}
+              value={assignGradeData.quiz1_marks}
+              onChange={handleAssignGradeDataChange}
               min="0"
             />
             <input
               type="number"
               name="quiz2_marks"
               placeholder="Quiz 2 (out of 15)"
-              value={gradeData.quiz2_marks}
-              onChange={handleGradeDataChange}
+              value={assignGradeData.quiz2_marks}
+              onChange={handleAssignGradeDataChange}
               min="0"
             />
             <input
               type="number"
               name="quiz3_marks"
               placeholder="Quiz 3 (out of 15)"
-              value={gradeData.quiz3_marks}
-              onChange={handleGradeDataChange}
+              value={assignGradeData.quiz3_marks}
+              onChange={handleAssignGradeDataChange}
               min="0"
             />
             <input
               type="number"
               name="assignments_marks"
-              placeholder="Assignments (out of 20)"
-              value={gradeData.assignments_marks}
-              onChange={handleGradeDataChange}
+              placeholder="Assignments (out of 15)"
+              value={assignGradeData.assignments_marks}
+              onChange={handleAssignGradeDataChange}
               min="0"
             />
           </div>
@@ -202,25 +225,25 @@ const GradeAssign = () => {
             <input
               type="number"
               name="attendance_marks"
-              placeholder="Attendance (out of 10)"
-              value={gradeData.attendance_marks}
-              onChange={handleGradeDataChange}
+              placeholder="Attendance (out of 30)"
+              value={assignGradeData.attendance_marks}
+              onChange={handleAssignGradeDataChange}
               min="0"
             />
             <input
               type="number"
               name="mid_sem_marks"
-              placeholder="Mid-Sem (out of 20)"
-              value={gradeData.mid_sem_marks}
-              onChange={handleGradeDataChange}
+              placeholder="Mid-Sem (out of 75)"
+              value={assignGradeData.mid_sem_marks}
+              onChange={handleAssignGradeDataChange}
               min="0"
             />
             <input
               type="number"
               name="final_sem_marks"
-              placeholder="Final-Sem (out of 30)"
-              value={gradeData.final_sem_marks}
-              onChange={handleGradeDataChange}
+              placeholder="Final-Sem (out of 150)"
+              value={assignGradeData.final_sem_marks}
+              onChange={handleAssignGradeDataChange}
               min="0"
             />
           </div>
@@ -240,7 +263,7 @@ const GradeAssign = () => {
               <option value="">-- Select Grade --</option>
               {grades.map((grade, index) => (
                 <option key={index} value={`${grade.student_id}-${grade.course_id}`}>
-                  Student ID: {grade.student_id} - Course ID: {grade.course_id}
+                  Student ID: {grade.student_id} ------ Course ID: {grade.course_id}
                 </option>
               ))}
             </select>
@@ -253,32 +276,32 @@ const GradeAssign = () => {
               type="number"
               name="quiz1_marks"
               placeholder="Quiz 1 (out of 15)"
-              value={gradeData.quiz1_marks}
-              onChange={handleGradeDataChange}
+              value={updateGradeData.quiz1_marks}
+              onChange={handleUpdateGradeDataChange}
               min="0"
             />
             <input
               type="number"
               name="quiz2_marks"
               placeholder="Quiz 2 (out of 15)"
-              value={gradeData.quiz2_marks}
-              onChange={handleGradeDataChange}
+              value={updateGradeData.quiz2_marks}
+              onChange={handleUpdateGradeDataChange}
               min="0"
             />
             <input
               type="number"
               name="quiz3_marks"
               placeholder="Quiz 3 (out of 15)"
-              value={gradeData.quiz3_marks}
-              onChange={handleGradeDataChange}
+              value={updateGradeData.quiz3_marks}
+              onChange={handleUpdateGradeDataChange}
               min="0"
             />
             <input
               type="number"
               name="assignments_marks"
-              placeholder="Assignments (out of 20)"
-              value={gradeData.assignments_marks}
-              onChange={handleGradeDataChange}
+              placeholder="Assignments (out of 15)"
+              value={updateGradeData.assignments_marks}
+              onChange={handleUpdateGradeDataChange}
               min="0"
             />
           </div>
@@ -289,25 +312,25 @@ const GradeAssign = () => {
             <input
               type="number"
               name="attendance_marks"
-              placeholder="Attendance (out of 10)"
-              value={gradeData.attendance_marks}
-              onChange={handleGradeDataChange}
+              placeholder="Attendance (out of 30)"
+              value={updateGradeData.attendance_marks}
+              onChange={handleUpdateGradeDataChange}
               min="0"
             />
             <input
               type="number"
               name="mid_sem_marks"
-              placeholder="Mid-Sem (out of 20)"
-              value={gradeData.mid_sem_marks}
-              onChange={handleGradeDataChange}
+              placeholder="Mid-Sem (out of 75)"
+              value={updateGradeData.mid_sem_marks}
+              onChange={handleUpdateGradeDataChange}
               min="0"
             />
             <input
               type="number"
               name="final_sem_marks"
-              placeholder="Final-Sem (out of 30)"
-              value={gradeData.final_sem_marks}
-              onChange={handleGradeDataChange}
+              placeholder="Final-Sem (out of 150)"
+              value={updateGradeData.final_sem_marks}
+              onChange={handleUpdateGradeDataChange}
               min="0"
             />
           </div>
