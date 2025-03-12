@@ -159,68 +159,69 @@ const GradeAssign = () => {
             </select>
           </div>
 
-          {/* Grade Input Form */}
+          <h3>Quiz and Assignments</h3>
+          {/* Quiz and Assignment Marks */}
           <div className="form-group">
-            <label>Quiz 1 Marks: </label>
             <input
               type="number"
               name="quiz1_marks"
+              placeholder="Quiz 1 (out of 15)"
               value={gradeData.quiz1_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
-          </div>
-          <div className="form-group">
-            <label>Quiz 2 Marks: </label>
             <input
               type="number"
               name="quiz2_marks"
+              placeholder="Quiz 2 (out of 15)"
               value={gradeData.quiz2_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
-          </div>
-          <div className="form-group">
-            <label>Quiz 3 Marks: </label>
             <input
               type="number"
               name="quiz3_marks"
+              placeholder="Quiz 3 (out of 15)"
               value={gradeData.quiz3_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
-          </div>
-          <div className="form-group">
-            <label>Assignments Marks: </label>
             <input
               type="number"
               name="assignments_marks"
+              placeholder="Assignments (out of 20)"
               value={gradeData.assignments_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
           </div>
+
+          <h3>Attendance and Exams</h3>
+          {/* Attendance and Exam Marks */}
           <div className="form-group">
-            <label>Attendance Marks: </label>
             <input
               type="number"
               name="attendance_marks"
+              placeholder="Attendance (out of 10)"
               value={gradeData.attendance_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
-          </div>
-          <div className="form-group">
-            <label>Mid-Sem Marks: </label>
             <input
               type="number"
               name="mid_sem_marks"
+              placeholder="Mid-Sem (out of 20)"
               value={gradeData.mid_sem_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
-          </div>
-          <div className="form-group">
-            <label>Final-Sem Marks: </label>
             <input
               type="number"
               name="final_sem_marks"
+              placeholder="Final-Sem (out of 30)"
               value={gradeData.final_sem_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
           </div>
 
@@ -245,68 +246,69 @@ const GradeAssign = () => {
             </select>
           </div>
 
-          {/* Grade Input Form */}
+          <h3>Quiz and Assignments</h3>
+          {/* Quiz and Assignment Marks */}
           <div className="form-group">
-            <label>Quiz 1 Marks: </label>
             <input
               type="number"
               name="quiz1_marks"
+              placeholder="Quiz 1 (out of 15)"
               value={gradeData.quiz1_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
-          </div>
-          <div className="form-group">
-            <label>Quiz 2 Marks: </label>
             <input
               type="number"
               name="quiz2_marks"
+              placeholder="Quiz 2 (out of 15)"
               value={gradeData.quiz2_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
-          </div>
-          <div className="form-group">
-            <label>Quiz 3 Marks: </label>
             <input
               type="number"
               name="quiz3_marks"
+              placeholder="Quiz 3 (out of 15)"
               value={gradeData.quiz3_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
-          </div>
-          <div className="form-group">
-            <label>Assignments Marks: </label>
             <input
               type="number"
               name="assignments_marks"
+              placeholder="Assignments (out of 20)"
               value={gradeData.assignments_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
           </div>
+
+          <h3>Attendance and Exams</h3>
+          {/* Attendance and Exam Marks */}
           <div className="form-group">
-            <label>Attendance Marks: </label>
             <input
               type="number"
               name="attendance_marks"
+              placeholder="Attendance (out of 10)"
               value={gradeData.attendance_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
-          </div>
-          <div className="form-group">
-            <label>Mid-Sem Marks: </label>
             <input
               type="number"
               name="mid_sem_marks"
+              placeholder="Mid-Sem (out of 20)"
               value={gradeData.mid_sem_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
-          </div>
-          <div className="form-group">
-            <label>Final-Sem Marks: </label>
             <input
               type="number"
               name="final_sem_marks"
+              placeholder="Final-Sem (out of 30)"
               value={gradeData.final_sem_marks}
               onChange={handleGradeDataChange}
+              min="0"
             />
           </div>
 
