@@ -2,34 +2,15 @@ import React, { useState, useEffect } from 'react';
 import '../styles/AdminCourseRegister.css';
 
 const AdminCourseRegister = () => {
-const [formData, setFormData] = useState({
-    courseId: '',
-    courseTitle: '',
-    courseDescription: '',
-    departmentId: '',
-    courseDepartment: '',
-});
+    const [formData, setFormData] = useState({
+        courseId: '',
+        courseTitle: '',
+        courseDescription: '',
+        departmentId: '',
+        courseDepartment: '',
+    });
 
-    const [departments, setDepartments] = useState([]);
     const [responseMessage, setResponseMessage] = useState('');
-
-    // Fetch departments from the backend
-    useEffect(() => {
-        const fetchDepartments = async () => {
-            try {
-                const response = await fetch('http://localhost:8000/departments/');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch departments');
-                }
-                const data = await response.json();
-                setDepartments(data); // Store department data in state
-            } catch (error) {
-                console.error('Error fetching departments:', error);
-            }
-        };
-
-        fetchDepartments();
-    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -41,7 +22,7 @@ const [formData, setFormData] = useState({
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
             const response = await fetch('http://localhost:8000/courses/create', {
                 method: 'POST',
@@ -56,7 +37,7 @@ const [formData, setFormData] = useState({
                     course_department: formData.courseDepartment,
                 }),
             });
-    
+
             const result = await response.json();
             if (response.ok) {
                 setResponseMessage('Course created successfully!');
@@ -90,7 +71,7 @@ const [formData, setFormData] = useState({
                     required
                 />
             </div>
-    
+
             <h2>Course Details</h2>
             <div className="admindepartmentformsection">
                 <textarea
@@ -101,27 +82,31 @@ const [formData, setFormData] = useState({
                     required
                 />
             </div>
-    
-            <h2>Department Selection</h2>
+
+            <h2>Department ID</h2>
             <div className="admindepartmentformsection">
-                <select
+                <input
+                    type="text"
                     name="departmentId"
+                    placeholder="Department ID"
                     value={formData.departmentId}
                     onChange={handleChange}
                     required
-                >
-                    <option value="">Select Department</option>
-                    {departments.length > 0 ? (
-                        departments.map((dept) => (
-                            <option key={dept.department_id} value={dept.department_id}>
-                                {dept.name}
-                            </option>
-                        ))
-                    ) : (
-                        <option disabled>Loading departments...</option>
-                    )}
-                </select>
+                />
             </div>
+
+            <h2>Course Department</h2>
+            <div className="admindepartmentformsection">
+                <input
+                    type="text"
+                    name="courseDepartment"
+                    placeholder="Course Department"
+                    value={formData.courseDepartment}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+
             <button className='studentregisterbutton' type="submit">Create Course</button>
             {responseMessage && <p>{responseMessage}</p>}
         </form>
