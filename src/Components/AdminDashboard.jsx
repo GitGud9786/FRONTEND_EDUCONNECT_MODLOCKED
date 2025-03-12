@@ -8,6 +8,7 @@ import adminreview from '../Assets/adminreview.png';
 import adminstudent from '../Assets/adminstudent.png'; 
 import admindepartment from '../Assets/admindepartment.png';
 
+
 const AdminPanel = () => {
     return (
         <div className = 'adminpanel'>
@@ -49,10 +50,6 @@ const AdminPanel = () => {
                 </Link>
                 
             </div>
-            <div className="adminevaluation">
-                    <img src={adminreview} alt="Review students' evaluation" className="panel-icon" />
-                    <p>Review student's evaluation</p>
-                </div>
         </div>
     );
 };
