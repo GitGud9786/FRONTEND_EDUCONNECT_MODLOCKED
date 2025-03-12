@@ -66,7 +66,7 @@ function App() {
           <Route path="/teacherdashboard/:id" element={<CombinedTeacherComponents />} />
           <Route path="/teacher/teacherclassroom/:id" element={<CombinedTeacherClassroom />} />
           <Route path="/teacher/schedule/:id" element={<Schedule />} />
-          <Route path="/dash/assignment" element={<CourseCardAssignment />} />
+          <Route path="/dash/assignment/:course_id" element={<CourseCardAssignment />} />
           <Route path="/dash/assignment/upload" element={<FileUploader />} />
           <Route path="/meetingpage" element={<MeetingPage />} />
           <Route path="/admin/student-enroll" element={<AdminCourseStudentEnrollment />} />

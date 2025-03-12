@@ -104,8 +104,8 @@ const Dashboard = () => {
             <h1>Home</h1>
           </div>
           <div className="cards-home">
-            {courses.map((course, index) => (
-              <Link to="/dash/assignment" key={index}>
+          {courses.map((course, index) => (
+              <Link to={`/dash/assignment/${course.courseID}`} key={index}>
                 <CourseCard {...course} />
               </Link>
             ))}
