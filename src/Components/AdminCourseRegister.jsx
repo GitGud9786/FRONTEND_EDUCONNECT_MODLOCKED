@@ -72,7 +72,7 @@ const [formData, setFormData] = useState({
     return (
         <form className="admindepartmentform" onSubmit={handleSubmit}>
             <h2>Course Creation Form</h2>
-            <div className="admindepartmentformsection">
+            <div className="admincourseformsection">
                 <input
                     type="text"
                     name="courseId"
@@ -121,17 +121,7 @@ const [formData, setFormData] = useState({
                         <option disabled>Loading departments...</option>
                     )}
                 </select>
-    
-                <input
-                    type="text"
-                    name="courseDepartment"
-                    placeholder="Department Name"
-                    value={formData.courseDepartment}
-                    onChange={handleChange}
-                    required
-                />
             </div>
-    
             <button className='studentregisterbutton' type="submit">Create Course</button>
             {responseMessage && <p>{responseMessage}</p>}
         </form>

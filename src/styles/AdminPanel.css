@@ -17,10 +17,8 @@
 
 .admintopbar img {
   margin-right: auto;
-  height: 60px; /* Reduced height */
+  height: 100%; /* Reduced height */
   width: auto;
-  padding: 10px;
-  margin-left: 110px; /* Align with header */
 }
 
 .adminlogout {
@@ -64,8 +62,8 @@
 
 .adminpanelgrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(3,1fr);
+  gap: 100px;
   max-width: 1200px;
   margin: 30px auto;
   padding: 0 20px;
