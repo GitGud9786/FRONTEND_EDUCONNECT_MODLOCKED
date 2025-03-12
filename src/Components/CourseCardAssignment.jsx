@@ -19,13 +19,13 @@ const TitleBlock = ({ courseTitle }) => {
   );
 };
 
-const TeacherPostCard = ({ user, date, message }) => {
+const TeacherPostCard = ({ user, designation, date, message }) => {
   return (
     <div className="teacher-announcement-card">
       {/* Header: User Info */}
       <div className="teacher-announcement-header">
         <div className="user-info">
-          <span className="teacher-user-name">{user}</span>
+          <span className="teacher-user-name">{user}, {designation}</span>
           <span className="teacher-announcement-date">{date}</span>
         </div>
         <div className="teacher-options-menu">⋮</div>
@@ -48,13 +48,13 @@ const TeacherPostCard = ({ user, date, message }) => {
 };
 
 const CourseCardAssignment = () => {
-    console.log("CourseCardAssignment component mounted!");
   const { course_id } = useParams();
-  console.log("course_id from useParams:", course_id);
   const [isMarkedDone, setIsMarkedDone] = useState(false);
   const [url, setUrl] = useState("");
   const [courseTitle, setCourseTitle] = useState("");
   const [announcements, setAnnouncements] = useState([]);
+  const [teacherName, setTeacherName] = useState("");
+  const [teacherDesignation, setTeacherDesignation] = useState("");
 
   useEffect(() => {
     const fetchCourseTitle = async () => {
@@ -84,9 +84,31 @@ const CourseCardAssignment = () => {
       }
     };
 
+    const fetchTeacherDetails = async () => {
+      try {
+        // Fetch the teacher assignment for the course
+        const assignmentResponse = await fetch(`http://localhost:8000/teacherassign/teacher/${course_id}`);
+        const assignment = await assignmentResponse.json();
+        const { teacher_id } = assignment;
+
+        // Fetch the teacher details
+        const teacherResponse = await fetch(`http://localhost:8000/teacher/read/${teacher_id}`);
+        const teacher = await teacherResponse.json();
+        if (teacher && teacher.length > 0) {
+          setTeacherName(teacher[0].name);
+          setTeacherDesignation(teacher[0].designation);
+        } else {
+          console.error('Teacher details not found');
+        }
+      } catch (error) {
+        console.error('Error fetching teacher details:', error);
+      }
+    };
+
     if (course_id) {
       fetchCourseTitle();
       fetchAnnouncements();
+      fetchTeacherDetails();
     }
   }, [course_id]);
 
@@ -113,14 +135,19 @@ const CourseCardAssignment = () => {
         {/* Main Course Content */}
         <div className="teachercoursecontents">
           <TitleBlock courseTitle={courseTitle} />
-          {announcements.map((announcement, index) => (
-            <TeacherPostCard
-              key={index}
-              user="Teacher Name" // Replace with actual teacher name if available
-              date={new Date(announcement.created_at).toLocaleDateString()}
-              message={announcement.description}
-            />
-          ))}
+          {announcements.map((announcement, index) => {
+            const announcementDate = new Date(announcement.created_at);
+            const formattedDate = isNaN(announcementDate) ? new Date().toLocaleDateString() : announcementDate.toLocaleDateString();
+            return (
+              <TeacherPostCard
+                key={index}
+                user={teacherName}
+                designation={teacherDesignation}
+                date={formattedDate}
+                message={announcement.description}
+              />
+            );
+          })}
         </div>
 
         {/* Action Buttons */}
