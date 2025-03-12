@@ -150,6 +150,7 @@
 
 .action-button.unenroll {
   background-color: #ffd700;
+  margin-top: 130px;
 }
 
 .action-button.unenroll:hover {
@@ -161,11 +162,12 @@
 }
 
 .unenroll-section {
-  margin-top: 1rem;
   flex: 1;
-  padding: 1rem;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
+  height: 100%;
 }
 
 @media (max-width: 768px) {
