@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEdit, faDumpster, faSearch, faEye } from '@fortawesome/free-solid-svg-icons';
 import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
+import { color } from '@cloudinary/url-gen/qualifiers/background';
 
 const StudentsAdmin = () => {
   const [students, setStudents] = useState([]);
@@ -86,7 +87,7 @@ const StudentsAdmin = () => {
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
-              <button onClick={filterStudents}>
+              <button onClick={filterStudents} className='search-button'>
                 <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
