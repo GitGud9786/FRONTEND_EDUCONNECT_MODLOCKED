@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faUniversity, faAddressCard, faTint } from '@fortawesome/free-solid-svg-icons';
-import profilePic from '../Assets/profilePic.jpg'; 
+import studentLogo from '../Assets/studentLogo.png';
 import '../styles/Profile.css';
 import TopBar from './TopBar';
 
@@ -50,7 +50,7 @@ const Profile = () => {
         { label: "Phone", value: student.phone_number, icon: faPhone },
         { label: "Email", value: student.email, icon: faEnvelope },
         { label: "Blood Group", value: student.blood_group, icon: faTint },
-        { label: "Department", value: student.department },
+        // { label: "Department", value: student.department },
         { label: "Program", value: student.program },
         { label: "CGPA", value: student.cgpa },
         { label: "Credits Earned", value: student.credits_earned },
@@ -64,14 +64,14 @@ const Profile = () => {
             <TopBar />
             <div className="profile-header">
                 <div className="profile-pic-container">
-                    <img src={profilePic} alt="Profile" className="profile-pic" />
+                    <img src={studentLogo} alt="Profile" className="profile-pic" />
                 </div>
                 <div className="profile-header-details">
                     <h1>{student.name}</h1>
                     <p><strong>ID:</strong> {student.student_id}</p>
-                    <p><strong>Country:</strong> {country}</p>
-                    <p><strong>Session:</strong> {student.session || "Not Available"}</p>
-                    <p><strong>Semester:</strong> {student.semester || "Not Available"}</p>
+                    <p><strong>Country : </strong> Bangladesh </p>
+                    <p><strong>Department : </strong> {student.department || "Not Available"}</p>
+                    <p><strong>Semester : </strong> 5th</p>
                 </div>
             </div>
 

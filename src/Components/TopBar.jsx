@@ -10,7 +10,7 @@ import {
   faMessage,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../Assets/logo.jpg";
-import dp from "../Assets/dp.jpg";
+import logout from "../Assets/logoutButton2.png";
 import "../styles/Dashboard.css";
 
 const TopBar = () => {
@@ -89,14 +89,12 @@ const TopBar = () => {
         <div className="topbar-right-home">
           <ul>
             <li>
-              <button className="nav-home">
-                <FontAwesomeIcon icon={faCog} className="icon-home" />
-              </button>
+              
               <span className="date-home">{formattedDate}</span>
 
               <div className="profile-dropdown">
                 <img
-                  src={dp}
+                  src={logout}
                   alt="Profile"
                   className="dps"
                   onClick={toggleDropdown}
