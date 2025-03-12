@@ -59,7 +59,10 @@ const TeacherSchedule = () => {
     useEffect(() => {
         const fetchSchedule = async () => {
             try {
-                const response = await fetch('teacher_schedules.json');
+                const response = await fetch('http://localhost:8000/teacher/schedule'); // Ensure the correct endpoint
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 const data = await response.json();
                 setSchedule(data);
             } catch (error) {
@@ -90,6 +93,9 @@ const CombinedTeacherComponents = () => {
         const fetchTeacherInfo = async () => {
             try {
                 const response = await fetch(`http://localhost:8000/teacher/read/${id}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 const data = await response.json();
                 console.log('Fetched teacher info:', data);
                 if (data.length > 0) {

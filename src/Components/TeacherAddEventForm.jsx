@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "../styles/AddEventForm.css";
 
-const TeacherAddEventForm = ({ onAddEvent, onCancel, event }) => {
-  const { teacher_id: paramTeacherId } = useParams();
-  const [teacherId, setTeacherId] = useState(paramTeacherId || null);
+const AddEventForm = ({ onAddEvent, onCancel, event }) => {
+  const { teacher_id: paramteacherId } = useParams();
+  const [teacherId, setteacherId] = useState(paramteacherId || null);
   const [eventTitle, setEventTitle] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -15,7 +15,7 @@ const TeacherAddEventForm = ({ onAddEvent, onCancel, event }) => {
   useEffect(() => {
     if (!teacherId) {
       const extractedId = window.location.pathname.split("/").pop();
-      setTeacherId(extractedId);
+      setteacherId(extractedId);
     }
   }, [teacherId]);
 
@@ -45,7 +45,7 @@ const TeacherAddEventForm = ({ onAddEvent, onCancel, event }) => {
     e.preventDefault();
 
     if (!teacherId) {
-      console.error("Teacher ID is missing");
+      console.error("teacher ID is missing");
       return;
     }
 
@@ -62,7 +62,7 @@ const TeacherAddEventForm = ({ onAddEvent, onCancel, event }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:8000/teachers/add-event/${teacherId}`, {
+      const response = await fetch(`http://localhost:8000/teacher/add-event/${teacherId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const TeacherAddEventForm = ({ onAddEvent, onCancel, event }) => {
   return (
     <div className="add-event-box">
       <form onSubmit={handleSubmit}>
-        <h2>{event ? "Edit Event" : "Add New Event"} - Teacher {teacherId}</h2>
+        <h2>{event ? "Edit Event" : "Add New Event"} - teacher {teacherId}</h2>
 
         <label htmlFor="eventTitle">Event Title:</label>
         <input
@@ -162,4 +162,4 @@ const TeacherAddEventForm = ({ onAddEvent, onCancel, event }) => {
   );
 };
 
-export default TeacherAddEventForm;
+export default AddEventForm;
