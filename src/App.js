@@ -36,6 +36,7 @@ import AdminEnrollment from "./Components/AdminEnrollment";
 import GradeAssign from "./Components/GradeAssign";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TeacherSchedule from "./Components/TeacherSchedule";
 
 function App() {
   return (
@@ -65,7 +66,7 @@ function App() {
           <Route path="/admin/department" element={<DepartmentsAdmin />} />
           <Route path="/teacherdashboard/:id" element={<CombinedTeacherComponents />} />
           <Route path="/teacher/teacherclassroom/:id" element={<CombinedTeacherClassroom />} />
-          <Route path="/teacher/schedule/:id" element={<Schedule />} />
+          <Route path="/teacher/schedule/:id" element={<TeacherSchedule />} />
           <Route path="/dash/assignment" element={<CourseCardAssignment />} />
           <Route path="/dash/assignment/upload" element={<FileUploader />} />
           <Route path="/meetingpage" element={<MeetingPage />} />

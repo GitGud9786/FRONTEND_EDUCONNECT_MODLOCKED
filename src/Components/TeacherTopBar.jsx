@@ -45,7 +45,7 @@ const TeacherTopBar = () => {
               </NavLink>
 
               <NavLink
-                to={`/teacherdashboard/${user.user_id}`}
+                to={`/teacher/schedule/${user.user_id}`}
                 className={({ isActive }) =>
                   isActive ? "nav-home-selected" : "nav-home"
                 }
