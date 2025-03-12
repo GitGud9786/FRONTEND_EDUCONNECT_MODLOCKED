@@ -51,21 +51,21 @@ const Grades = () => {
   const getGradeColor = (grade) => {
     switch (grade) {
       case 'A+':
-        return '#66FF66'; // Green
+        return '#00FF00'; // Green
       case 'A':
         return '#66FF66'; // Light Green
       case 'A-':
-        return '#99FF99'; // Lighter Green
+        return '#00FF4C'; // Lighter Green
       case 'B+':
-        return '#CCFFCC'; // Even Lighter Green
+        return '#00FF62'; // Even Lighter Green
       case 'B':
-        return '#FFFF66'; // Yellowish
+        return '#A26600'; // Yellowish
       case 'B-':
-        return '#FFCC66'; // Light Orange
+        return '#F26600'; // Light Orange
       case 'C':
-        return '#FF9966'; // Orange
+        return '#FFC800'; // Orange
       case 'D':
-        return '#FF6666'; // Light Red
+        return '#FF6A00'; // Light Red
       case 'F':
         return '#FF0000'; // Red
       default:

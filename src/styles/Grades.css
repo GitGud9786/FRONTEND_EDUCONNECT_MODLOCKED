@@ -49,6 +49,12 @@ h2 {
     gap: 20px;
 }
 
+.h1 {
+    font-size: 1.5em;
+    color: #00ff4c;
+    margin-bottom: 10px;
+}
+
 .grade-card {
     padding: 40px;
     border-radius: 10px;
