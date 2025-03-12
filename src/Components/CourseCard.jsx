@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/CourseCard.css';
 
-const CourseCard = ({ courseID, courseTitle, teacherName }) => {
+const CourseCard = ({ courseID, courseTitle, teacherName, teacherDesignation }) => {
   return (
     <div className="course-card">
       <div className="course-header">
@@ -12,8 +12,8 @@ const CourseCard = ({ courseID, courseTitle, teacherName }) => {
         </div>
       </div>
       <div className="course-body">
-        <p><strong>Course Teacher:</strong></p>
         <p>{teacherName}</p>
+        <p>{teacherDesignation}</p>
       </div>
     </div>
   );

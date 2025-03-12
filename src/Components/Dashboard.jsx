@@ -4,13 +4,12 @@ import '../styles/Dashboard.css';
 import '../styles/Schedule.css';
 import CourseCard from './CourseCard';
 import TopBar from './TopBar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTh, faList } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
   const { student_id: paramStudentId } = useParams();
   const [studentId, setStudentId] = useState(paramStudentId || null);
   const [events, setEvents] = useState([]);
+  const [courses, setCourses] = useState([]);
 
   // Fetch events based on student ID
   useEffect(() => {
@@ -36,6 +35,48 @@ const Dashboard = () => {
     }
   }, [studentId]);
 
+  useEffect(() => {
+    if (studentId) {
+      const fetchCourses = async () => {
+        try {
+          // Fetch all course IDs for the student
+          const enrollmentsResponse = await fetch(`http://localhost:8000/studentenroll/enrollments/${studentId}`);
+          const enrollments = await enrollmentsResponse.json();
+
+          const courseDataPromises = enrollments.map(async (enrollment) => {
+            const { course_id } = enrollment;
+
+            // Fetch the course details
+            const courseResponse = await fetch(`http://localhost:8000/courses/read/${course_id}`);
+            const course = await courseResponse.json();
+
+            // Fetch the teacher assignment for the course
+            const assignmentResponse = await fetch(`http://localhost:8000/teacherassign/teacher/${course_id}`);
+            const assignment = await assignmentResponse.json();
+            const { teacher_id } = assignment;
+
+            // Fetch the teacher details
+            const teacherResponse = await fetch(`http://localhost:8000/teacher/read/${teacher_id}`);
+            const teacher = await teacherResponse.json();
+
+            return {
+              courseID: course[0].course_id,
+              courseTitle: course[0].title,
+              teacherName: teacher[0].name,
+              teacherDesignation: teacher[0].designation,
+            };
+          });
+
+          const courseData = await Promise.all(courseDataPromises);
+          setCourses(courseData);
+        } catch (error) {
+          console.error('Error fetching courses:', error);
+        }
+      };
+      fetchCourses();
+    }
+  }, [studentId]);
+
   // Function to handle event deletion
   const deleteEvent = async (eventId) => {
     try {
@@ -54,24 +95,6 @@ const Dashboard = () => {
     }
   };
 
-  const courses = [
-    {
-      courseID: '4705',
-      courseTitle: 'Computer Networks',
-      teacherName: 'Dr. Hasan Mahmud',
-    },
-    {
-      courseID: '4501',
-      courseTitle: 'Artificial Intelligence',
-      teacherName: 'Sabbir Ahmed',
-    },
-    {
-      courseID: '4105',
-      courseTitle: 'Operating Systems',
-      teacherName: 'Ridwan Kabir',
-    },
-  ];
-
   return (
     <div className="container-home">
       <TopBar />
@@ -79,7 +102,6 @@ const Dashboard = () => {
         <div className="main-left-home">
           <div className="maintop-home">
             <h1>Home</h1>
-            
           </div>
           <div className="cards-home">
             {courses.map((course, index) => (
