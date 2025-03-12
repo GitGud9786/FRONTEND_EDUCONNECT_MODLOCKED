@@ -96,9 +96,6 @@ const TopBar = () => {
         <div className="topbar-right-home">
           <ul>
             <li>
-              <button className="nav-home">
-                <FontAwesomeIcon icon={faCog} className="icon-home" />
-              </button>
               <span className="date-home">{formattedDate}</span>
               <NavLink
                 to="/"
