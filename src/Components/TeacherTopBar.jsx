@@ -8,6 +8,7 @@ import {
   faChartBar,
   faCog,
   faMessage,
+  faClipboardList,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../Assets/logo.jpg";
 import dp from "../Assets/dp.jpg";
@@ -63,7 +64,15 @@ const TeacherTopBar = () => {
                 <span>Messages</span>
               </NavLink>
 
-              
+              <NavLink
+                to={`/teacher/grade-assign/${user.user_id}`}
+                className={({ isActive }) =>
+                  isActive ? "nav-home-selected" : "nav-home"
+                }
+              >
+                <FontAwesomeIcon icon={faClipboardList} className="icon-home" />
+                <span>Assign Grades</span>
+              </NavLink>
             </li>
           </ul>
         </div>
