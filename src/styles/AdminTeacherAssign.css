@@ -52,7 +52,6 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
     font-size: 1rem;
-    background-color: rgba(255, 255, 255, 0.05);
     color: white;
     transition: all 0.3s ease;
     letter-spacing: 0.5px;
@@ -81,9 +80,9 @@
     color: #18323b;
     border: none;
     padding: 0.8rem 1.2rem;
-    margin-top: 1rem;
+    margin-top: 110px;
     font-size: 0.9rem;
-    border-radius: 6px;
+    border-radius: 10px;
     cursor: pointer;
     font-weight: 600;
     text-transform: uppercase;
@@ -99,6 +98,7 @@
 
 .action-button.unassign {
     background-color: #ffd700;
+    margin-top: 130px;  
 }
 
 .action-button.unassign:hover {
@@ -121,4 +121,25 @@
     .unassign-section {
         padding: 1.5rem;
     }
+}
+
+
+select {
+    appearance: none; /* Remove the default arrow */
+    -webkit-appearance: none; /* Remove default arrow in Safari */
+    -moz-appearance: none; /* Remove default arrow in Firefox */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    padding-right: 30px; /* Add space for custom arrow */
+    font-size: 16px;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23666" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-position: right 10px center; /* Adjust position of the custom arrow */
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: #007bff;
 }

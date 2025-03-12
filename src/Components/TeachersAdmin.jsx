@@ -141,8 +141,7 @@ const TeachersAdmin = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>First name</th>
-                <th>Last name</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Department</th>
@@ -154,17 +153,16 @@ const TeachersAdmin = () => {
                 filteredTeachers.map((teacher) => (
                   <tr key={teacher.teacher_id}>
                     <td>{teacher.teacher_id}</td>
-                    <td>{teacher.first_name}</td>
-                    <td>{teacher.last_name}</td>
+                    <td>{teacher.name}</td>
                     <td>{teacher.email}</td>
                     <td>{teacher.phone_number}</td>
-                    <td>{teacher.department}</td>
+                    <td>{teacher.department_name}</td>
                     
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="6" style={{ textAlign: 'center' }}>No teachers found for the selected filters.</td>
+                  <td colSpan="5" style={{ textAlign: 'center' }}>No teachers found for the selected filters.</td>
                 </tr>
               )}
             </tbody>

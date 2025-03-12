@@ -35,7 +35,6 @@ const CoursesAdmin = () => {
     });
 
     setFilteredCourses(searchResult);
-    setError(searchResult.length > 0 ? '' : 'No courses found.');
   };
 
   useEffect(() => {
@@ -136,7 +135,7 @@ const CoursesAdmin = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="6" style={{ textAlign: 'center' }}>No courses found for the selected filters.</td>
+                  <td colSpan="4" style={{ textAlign: 'center' }}>No courses found for the selected filters.</td>
                 </tr>
               )}
             </tbody>

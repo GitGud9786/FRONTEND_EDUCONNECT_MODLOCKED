@@ -35,7 +35,6 @@ const StudentsAdmin = () => {
     });
 
     setFilteredDepartments(searchResult);
-    setError(searchResult.length > 0 ? '' : 'No departments found.');
   };
 
   useEffect(() => {
@@ -49,7 +48,7 @@ const StudentsAdmin = () => {
         <div className="table-container">
           <div className="filter-controls">
             <label>
-              Building:
+              <label className="holders">Building:</label>
               <select value={selectedBuilding} onChange={(e) => setSelectedBuilding(e.target.value)}>
                 <option value="All">All</option>
                 <option value="AB1">AB1</option>
@@ -64,52 +63,14 @@ const StudentsAdmin = () => {
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
-              <button onClick={filterDepartments}>
+              <button onClick={filterDepartments} className = "search-button">
                 <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
           </div>
 
-          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
 
-          <table className="student-table">
-            <thead>
-              <tr>
-                <th><input type="checkbox" /></th>
-                <th>Department ID</th>
-                <th>Department Name</th>
-                <th>Location</th>
-                <th>Email</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredDepartments.length > 0 ? (
-                filteredDepartments.map((department) => (
-                  <tr key={department.department_id}>
-                    <td><input type="checkbox" /></td>
-                    <td>{department.department_id}</td>
-                    <td>{department.name}</td>
-                    <td>{department.location}</td>
-                    <td>{department.dept_email}</td>
-                    <td>
-                      <Link to={`/admin/department/edit/${department.department_id}`} className="stdadmin-controls-button">
-                        <FontAwesomeIcon icon={faEdit} />
-                        <span>Edit</span>
-                      </Link>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="6" style={{ textAlign: 'center' }}>No departments found for the selected filters.</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div className="stdadmin-controls">
+          <div className="stdadmin-controls">
         <button>
           <Link to="/admin/department/register" className="stdadmin-controls-button">
             <FontAwesomeIcon icon={faPlus} />
@@ -146,6 +107,37 @@ const StudentsAdmin = () => {
           <FontAwesomeIcon icon={faDumpster} />
           <span>Delete</span>
         </button>
+      </div>
+
+          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+
+          <table className="student-table">
+            <thead>
+              <tr>
+                <th>Department ID</th>
+                <th>Department Name</th>
+                <th>Location</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredDepartments.length > 0 ? (
+                filteredDepartments.map((department) => (
+                  <tr key={department.department_id}>
+                    <td>{department.department_id}</td>
+                    <td>{department.name}</td>
+                    <td>{department.location}</td>
+                    <td>{department.dept_email}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="4" style={{ textAlign: 'center' }}>No departments found for the selected filters.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
