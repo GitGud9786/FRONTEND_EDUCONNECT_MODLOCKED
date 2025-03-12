@@ -70,23 +70,12 @@ const StudentsAdmin = () => {
               <label className='holders'>Department:</label>
               <select value={selectedDepartment} onChange={(e) => setSelectedDepartment(e.target.value)}>
                 <option value="All">All</option>
-                <option value="CSE">Computer Science and Engineering</option>
-                <option value="EEE">Electrical and Electronics Engineering</option>
-                <option value="MPE">Mechanical and Production Engineering</option>
-                <option value="CEE">Civil and Environmental Engineering</option>
-                <option value="CEE">Industrial and Production Engineering</option>
-                <option value="CEE">Business Technology and Management</option>
-              </select>
-            </label>
-
-            <label>
-            <label className='holders'>Year group:</label>
-              <select value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
-                <option value="All">All</option>
-                <option value="Year 1">Year 1</option>
-                <option value="Year 2">Year 2</option>
-                <option value="Year 3">Year 3</option>
-                <option value="Year 4">Year 4</option>
+                <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                <option value="Electrical and Electronics Engineering">Electrical and Electronics Engineering</option>
+                <option value="Mechanical and Production Engineering">Mechanical and Production Engineering</option>
+                <option value="Civil and Environmental Engineering">Civil and Environmental Engineering</option>
+                <option value="Industrial and Production Engineering">Industrial and Production Engineering</option>
+                <option value="Business Technology and Management">Business Technology and Management</option>
               </select>
             </label>
 
@@ -163,7 +152,7 @@ const StudentsAdmin = () => {
                     <td>{student.student_id}</td>
                     <td>{student.name}</td>
                     <td>{student.email}</td>
-                    <td>{student.phone}</td>
+                    <td>{student.phone_number}</td>
                     <td>{student.department}</td>
                     <td>
                       <button
@@ -178,7 +167,7 @@ const StudentsAdmin = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="9" style={{ textAlign: 'center' }}>No students found for the selected filters.</td>
+                  <td colSpan="6" style={{ textAlign: 'center' }}>No students found for the selected filters.</td>
                 </tr>
               )}
             </tbody>
