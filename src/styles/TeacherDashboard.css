@@ -14,7 +14,7 @@
     margin-top: 20px;
     margin-left: 10px;
     border-radius: 10px;
-    width: 200px;
+    width: 300px; /* Increased width */
     max-height: 400px;
     background-color: #0A242E;
     padding: 20px;
@@ -112,7 +112,7 @@
 }
 
 .teacherschedule {
-    width: 200px;
+    width: 20%;
     padding: 20px;
     color: white;
     background-color: #0A242E;

@@ -82,7 +82,7 @@ const Profile = () => {
 
             <div className="profile-details">
                 <div className="card-profile">
-                    <h2><FontAwesomeIcon icon={faAddressCard} /> Personal & Academic Details</h2>
+                    <h2><FontAwesomeIcon icon={faAddressCard} /> Personal Details</h2>
                     {infoCards.map((info, index) => (
                         info.value && (
                             <div key={index} className={`info-card ${index % 2 === 0 ? 'even' : 'odd'}`}>
