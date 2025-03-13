@@ -4,9 +4,10 @@ import '../styles/AdminPanel.css';
 import logo from '../Assets/logo.jpg';
 import admincourse from '../Assets/admincourse.png';
 import adminfaculty from '../Assets/adminfaculty.png';
-import adminreview from '../Assets/adminreview.png';
+import enroll from '../Assets/enroll.png';
 import adminstudent from '../Assets/adminstudent.png'; 
 import admindepartment from '../Assets/admindepartment.png';
+import teacher from '../Assets/teacherAssign.png';
 
 
 const AdminPanel = () => {
@@ -26,27 +27,27 @@ const AdminPanel = () => {
                     <p>Students</p>
                 </Link>
                 <Link to = "/admin/teacher" className = "adminpanelitem">
-                    <img src={adminfaculty} alt="Faculties" className="panel-icon" />
-                    <p>Faculty</p>
+                    <img src={teacher} alt="Faculties" className="panel-icon" />
+                    <p>Teachers</p>
                 </Link>
                 <Link to = "/admin/course" className = "adminpanelitem">
                     <img src={admincourse} alt="Courses" className="panel-icon" />
-                    <p>Course</p>
+                    <p>Courses</p>
                 </Link>
                 <Link to = "/admin/department" className = "adminpanelitem">
                     <img src={admindepartment} alt="Faculties" className="panel-icon" />
-                    <p>Department</p>
+                    <p>Departments</p>
                 </Link>
 
 
                 <Link to = "/admin/student-enroll" className = "adminpanelitem">
-                    <img src={admindepartment} alt="course-enroll" className="panel-icon" />
-                    <p>Student Course Enroll</p>
+                    <img src={enroll} alt="course-enroll" className="panel-icon" />
+                    <p>Student Course Enrollment</p>
                 </Link>
 
                 <Link to = "/admin/teacher-assignment" className = "adminpanelitem">
-                    <img src={admindepartment} alt="course-enroll" className="panel-icon" />
-                    <p>Teacher Course  Assign</p>
+                    <img src={adminfaculty} alt="course-enroll" className="panel-icon" />
+                    <p>Teacher Course Assign</p>
                 </Link>
                 
             </div>
