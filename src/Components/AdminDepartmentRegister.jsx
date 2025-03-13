@@ -6,8 +6,6 @@ const AdminDepartmentRegister = () => {
     departmentId: "",
     departmentName: "",
     departmentEmail: "",
-    departmentHead: "",
-    departmentShortHand: "",
     departmentLocation: "",
   });
   const [responseMessage, setResponseMessage] = useState('');

@@ -38,7 +38,7 @@ const TeacherClass = () => {
                     <button key={index} className="teacherclasscard" onClick={() => handleCourseClick(course)}>
                         <div className='teachertitlesection'>
                             <h2 className="teachercoursetitle">{course.title}</h2>
-                            <p className='teachersection'>Section: {course.section}</p>
+                            <p className='teachersection'><strong>Section :</strong> 1 & 2</p>
                         </div>
                         <div className='teachercountsemester'>
                             <p className='teachercount'>Student count: {course.student_count}</p>

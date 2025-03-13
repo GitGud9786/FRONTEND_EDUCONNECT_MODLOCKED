@@ -51,12 +51,12 @@ const CoursesAdmin = () => {
               <label className="holders">Department:</label>
               <select value={selectedDepartment} onChange={(e) => setSelectedDepartment(e.target.value)}>
                 <option value="All">All</option>
-                <option value="Computer Science and Engineering">Computer Science and Engineering</option>
-                <option value="Electrical and Electronics Engineering">Electrical and Electronics Engineering</option>
-                <option value="Mechanical and Production Engineering">Mechanical and Production Engineering</option>
-                <option value="Civil and Environmental Engineering">Civil and Environmental Engineering</option>
-                <option value="Industrial and Production Engineering">Industrial and Production Engineering</option>
-                <option value="Business Technology and Management">Business Technology and Management</option>
+                <option value="CSE">Computer Science and Engineering</option>
+                <option value="EEE">Electrical and Electronics Engineering</option>
+                <option value="MPE">Mechanical and Production Engineering</option>
+                <option value="CEE">Civil and Environmental Engineering</option>
+                <option value="TVE">Technical and Vocational Education</option>
+                <option value="BTM">Business Technology and Management</option>
               </select>
             </label>
 

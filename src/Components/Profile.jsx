@@ -42,10 +42,15 @@ const Profile = () => {
         return <p>Loading...</p>; // Display while fetching student data
     }
 
+    const formatDate = (dateString) => {
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        return new Date(dateString).toLocaleDateString('en-GB', options);
+    };
+
     const infoCards = [
         { label: "Father's Name", value: student.father_name },
         { label: "Mother's Name", value: student.mother_name },
-        { label: "Date of Birth", value: student.date_of_birth },
+        { label: "Date of Birth", value: formatDate(student.date_of_birth) },
         { label: "Address", value: student.address },
         { label: "Phone", value: student.phone_number, icon: faPhone },
         { label: "Email", value: student.email, icon: faEnvelope },
