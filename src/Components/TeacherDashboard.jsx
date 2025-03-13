@@ -41,7 +41,7 @@ const TeacherClass = () => {
                             <p className='teachersection'><strong>Section :</strong> 1 & 2</p>
                         </div>
                         <div className='teachercountsemester'>
-                            <p className='teachercount'>Student count: {course.student_count}</p>
+                            {/* <p className='teachercount'>Student count: {course.student_count}</p> */}
                             <p className='teachersemester'>Semester: {course.semester}</p>
                         </div>
                     </button>
