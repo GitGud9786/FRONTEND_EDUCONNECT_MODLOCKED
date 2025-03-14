@@ -54,12 +54,15 @@ const AdminStudentRegister = () => {
 
       if (response.ok) {
         const data = await response.json();
+        alert("Student Registered Successfully");
         console.log("Student Registered Successfully:", data);
       } else {
         const error = await response.json();
+        alert("Failed to Register Student");
         console.error("Failed to Register Student:", error);
       }
     } catch (error) {
+      alert("Error submitting form");
       console.error("Error submitting form:", error);
     }
   };
