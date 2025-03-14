@@ -22,7 +22,7 @@ const AdminDepartmentRegister = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8000/departments/create', {  // Adjust this URL based on your backend configuration
+      const response = await fetch('http://localhost:8000/departments/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,11 +79,13 @@ const AdminDepartmentRegister = () => {
           onChange={handleChange}
           required
         />
-        <select className="admindepartmentselect">
-          type="text" name="departmentLocation" placeholder="Establishment of
-          the Department" value={formData.departmentLocation}
+        <select
+          name="departmentLocation"
+          value={formData.departmentLocation}
           onChange={handleChange}
-          <option value="null">Location</option>
+          required
+        >
+          <option value="">Select Location</option>
           <option value="AB1">Academic Building 01</option>
           <option value="AB2">Academic Building 02</option>
         </select>
@@ -91,6 +93,7 @@ const AdminDepartmentRegister = () => {
       <button className="studentregisterbutton" type="submit">
         Establish department
       </button>
+      {responseMessage && <p>{responseMessage}</p>}
     </form>
   );
 };
