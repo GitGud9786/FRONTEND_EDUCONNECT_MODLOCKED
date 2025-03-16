@@ -62,3 +62,60 @@ This will display the installed versions of Node.js and npm.
 
 This will display the installed versions of Node.js and npm.
 
+### Step 3: Clone the Repositories
+EDUCONNECT has two separate repositories for the frontend and backend. Clone both repositories to your local machine:
+
+   git clone https://github.com/your-username/educonnect-frontend.git
+   git clone https://github.com/your-username/educonnect-backend.git
+
+### Step 4: Set Up the Database
+1. Navigate to the backend repository:
+
+   cd educonnect-backend
+
+2. Locate the database setup file:
+   - Go to the directory: backend/Admin/Config.
+   - You will find a file named db.sql.
+   - Import the db.sql file into your MySQL database:
+
+3. Open MySQL and log in:
+
+   mysql -u your_username -p
+   source backend/Admin/Config/db.sql
+
+4. Update the database configuration:
+   - Open the db.js file located in backend/Admin/Config.
+   - Update the MySQL connection details (username, password, and database name) to match your local setup.
+
+### Step 5: Install Dependencies and Run the Backend
+1. Navigate to the backend directory:
+
+   cd educonnect-backend
+
+2. Install the required dependencies:
+
+   npm install
+
+3. Start the backend server:
+
+   npm run dev
+
+The backend server will start running.
+   
+
+### Step 6: Install Dependencies and Run the Frontend
+1. Navigate to the frontend directory:
+
+   cd educonnect-frontend
+
+2. Install the required dependencies:
+
+   npm install
+
+3. Start the frontend application:
+
+   npm start
+
+The React application will start and automatically open in your browser at http://localhost:3000.
+
+
