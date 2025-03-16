@@ -57,6 +57,7 @@ This will display the installed versions of Node.js and npm.
 2.Set up MySQL with a username and password during installation.
 3.Verify the installation by running the following commands in your terminal:
    ```bash
+   node -v
    npm -v
 
 This will display the installed versions of Node.js and npm.
