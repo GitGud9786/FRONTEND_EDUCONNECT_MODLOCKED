@@ -55,7 +55,9 @@ This will display the installed versions of Node.js and npm.
 ### Step 2: Install MySQL
 1.Download and install MySQL from the official website.
 2.Set up MySQL with a username and password during installation.
-3.Verify the installation by running:
+3.Verify the installation by running the following commands in your terminal:
    ```bash
-   mysql --version
+   npm -v
+
+This will display the installed versions of Node.js and npm.
 
