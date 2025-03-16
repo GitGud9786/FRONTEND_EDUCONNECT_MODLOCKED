@@ -40,8 +40,8 @@ To set up EDUCONNECT locally, follow these steps. Copy and paste the commands be
 
 
 ## Step 1: Install Node.js and npm
-### Download and install Node.js from https://nodejs.org/
-### Verify installation:
+#### Download and install Node.js from https://nodejs.org/
+#### Verify installation:
 ```bash
 node -v
 npm -v
