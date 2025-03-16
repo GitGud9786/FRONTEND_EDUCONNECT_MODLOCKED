@@ -39,64 +39,75 @@ EDUCONNECT offers a wide range of features tailored to three types of users: **A
 To set up EDUCONNECT locally, follow these steps. Copy and paste the commands below into your terminal:
 
 
-# Step 1: Install Node.js and npm
-# Download and install Node.js from https://nodejs.org/
-# Verify installation:
+## Step 1: Install Node.js and npm
+### Download and install Node.js from https://nodejs.org/
+### Verify installation:
 ```bash
 node -v
 npm -v
 ```
 
-# Step 2: Install MySQL
-# Download and install MySQL from https://dev.mysql.com/downloads/mysql/
-# Set up MySQL with a username and password during installation.
-# Verify installation:
+## Step 2: Install MySQL
+### Download and install MySQL from https://dev.mysql.com/downloads/mysql/
+### Set up MySQL with a username and password during installation.
+### Verify installation:
 ```bash
 mysql --version
 ```
-# Step 3: Clone the Repositories
-# Clone the frontend and backend repositories:
+## Step 3: Clone the Repositories
+### Clone the frontend and backend repositories:
+```bash
 git clone https://github.com/your-username/educonnect-frontend.git
 git clone https://github.com/your-username/educonnect-backend.git
-
-# Step 4: Set Up the Database
-# Navigate to the backend repository:
+```
+## Step 4: Set Up the Database
+### Navigate to the backend repository:
+```bash
 cd educonnect-backend
-
-# Import the database setup file:
-# Open MySQL and log in:
+```
+### Import the database setup file:
+### Open MySQL and log in:
+```bash
 mysql -u your_username -p
+```
 
-# Create a new database (if not already created):
-CREATE DATABASE educonnect;
-USE educonnect;
-
-# Import the db.sql file:
+### Import the db.sql file:
+```bash
 source backend/Admin/Config/db.sql;
+```
+### Update the database configuration:
+Open the db.js file located in backend/Admin/Config and update the MySQL connection details (username, password, and database name).
 
-# Update the database configuration:
-# Open the db.js file located in backend/Admin/Config and update the MySQL connection details (username, password, and database name).
-
-# Step 5: Install Dependencies and Run the Backend
-# Navigate to the backend directory:
+## Step 5: Install Dependencies and Run the Backend
+### Navigate to the backend directory:
+```bash
 cd educonnect-backend
-
-# Install dependencies:
+```
+### Install dependencies:
+```bash
 npm install
-
-# Start the backend server:
+```
+### Start the backend server:
+```bash
 npm run dev
-
-# Step 6: Install Dependencies and Run the Frontend
-# Navigate to the frontend directory:
+```
+## Step 6: Install Dependencies and Run the Frontend
+### Navigate to the frontend directory:
+```bash
 cd ../educonnect-frontend
-
-# Install dependencies:
+```
+### Install dependencies:
+```bash
 npm install
-
-# Start the frontend application:
+```
+### Start the frontend application:
+```bash
 npm start
+```
 
-# Step 7: Access the Application
-# Once both the backend and frontend are running, access EDUCONNECT at:
-# http://localhost:3000
+This will start the application on your browser at localhost://3000.
+
+
+
+
+
