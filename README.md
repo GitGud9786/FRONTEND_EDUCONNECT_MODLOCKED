@@ -1,3 +1,59 @@
+# EDUCONNECT
+
+## Description
+EDUCONNECT is a comprehensive university management system designed to streamline and unify all academic and administrative processes within a single platform. Unlike existing solutions that require multiple apps (e.g., Google Classroom for classes, Google Meet for meetings, and separate tools for enrollment, grading, and announcements), EDUCONNECT integrates all these functionalities into one cohesive system. 
+
+With EDUCONNECT, universities can manage student and teacher enrollment, course creation, online classes, assignments, grading, announcements, and more—all in one place. This eliminates the need for multiple platforms and provides a seamless experience for admins, teachers, and students.
+
+## Features
+EDUCONNECT offers a wide range of features tailored to three types of users: **Admin**, **Teacher**, and **Student**.
+
+### **Admin Features**
+- **Enrollment Management**: Enroll students, teachers, and staff into the system.
+- **Department and Course Creation**: Create and manage departments and courses.
+- **Teacher Assignment**: Assign teachers to specific courses.
+- **Student Enrollment**: Enroll students into courses.
+- **System Oversight**: Monitor and manage the overall system.
+
+### **Teacher Features**
+- **Announcements**: Post announcements to respective classes.
+- **Online Classes**: Conduct live online classes.
+- **File and Assignment Upload**: Share files and assignments with students.
+- **Grading**: Grade students' assignments and exams.
+- **Calendar**: Manage events, reminders, and schedules.
+- **Communication**: Interact with students via group chats.
+
+### **Student Features**
+- **Course Management**: View enrolled courses and related details.
+- **Announcements**: Receive and view announcements from teachers.
+- **Assignment Submission**: Submit assignments and upload files.
+- **Group Chats**: Participate in course-specific group chats.
+- **Results**: View grades and results.
+- **Online Classes**: Join live classes hosted by teachers.
+- **Calendar**: Access a personalized calendar for events and reminders.
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
