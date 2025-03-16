@@ -107,7 +107,56 @@ npm start
 
 This will start the application on your browser at localhost://3000.
 
+---
 
+## Usage
 
+EDUCONNECT is designed to be intuitive and user-friendly. Here’s how to use the application:
 
+1. **Login**:
+   - Open the application in your browser at `http://localhost:3000`.
+   - On the login page, select your role: **Admin**, **Teacher**, or **Student**.
+   - Enter your registered email and password.
+   - Click the **Login** button.
+
+2. **Dashboard**:
+   - After a successful login, you will be redirected to your respective dashboard based on your role:
+     - **Admin**: Manage enrollments, departments, courses, and assignments.
+     - **Teacher**: Announcements, online classes, file uploads, grading students, and calendar.
+     - **Student**: Course lists, announcements, assignment submissions, group chats, and calendar.
+
+3. **Navigation**:
+   - Use the **navigation bar** at the top of the application to access different features.
+   - Each role has specific functionalities accessible through the navigation bar.
+
+4. **Performing Tasks**:
+   - For any task (e.g., creating a course, uploading a file, or grading an assignment), click the respective button with a conventional name (e.g., **Create Course**, **Upload File**, **Grade Assignment**).
+   - Follow the on-screen instructions to complete the task.
+
+5. **Logout**:
+   - To log out, click the **Logout** button in the navigation bar.
+
+---
+
+## Technologies Used
+EDUCONNECT is built using the following technologies:
+
+### Frontend
+- **ReactJS**: A JavaScript library for building user interfaces.
+- **HTML/CSS**: For structuring and styling the application.
+- **JavaScript**: For adding interactivity and dynamic features.
+
+### Backend
+- **Node.js**: A JavaScript runtime for building the backend server.
+- **Express.js**: A web application framework for Node.js.
+- **JavaScript**: The primary programming language for backend logic.
+
+### Database
+- **MySQL**: A relational database management system for storing and managing data.
+
+### Additional Tools
+- **npm**: Package manager for installing dependencies.
+- **Git**: Version control system for managing the codebase.
+
+---
 
