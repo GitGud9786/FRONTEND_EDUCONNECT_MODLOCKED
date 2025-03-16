@@ -35,7 +35,28 @@ EDUCONNECT offers a wide range of features tailored to three types of users: **A
 ---
 
 
+## Installation
+To set up EDUCONNECT locally, follow these steps:
 
+### Prerequisites
+Before starting, ensure you have the following installed on your system:
+- **Node.js** and **npm**: Required to run the ReactJS application and backend server.
+- **MySQL**: The database used for this project.
+
+### Step 1: Install Node.js and npm
+1. Download and install Node.js from the [official website](https://nodejs.org/).
+2. Verify the installation by running the following commands in your terminal:
+   ```bash
+   node -v
+   npm -v
+
+This will display the installed versions of Node.js and npm.
+
+### Step 2: Install MySQL
+1.Download and install MySQL from the official website.
+2.Set up MySQL with a username and password during installation.
+3.Verify the installation by running:
+    mysql --version
 
 
 
