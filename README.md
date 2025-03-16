@@ -38,19 +38,22 @@ EDUCONNECT offers a wide range of features tailored to three types of users: **A
 ## Installation
 To set up EDUCONNECT locally, follow these steps. Copy and paste the commands below into your terminal:
 
-```bash
+
 # Step 1: Install Node.js and npm
 # Download and install Node.js from https://nodejs.org/
 # Verify installation:
+```bash
 node -v
 npm -v
+```
 
 # Step 2: Install MySQL
 # Download and install MySQL from https://dev.mysql.com/downloads/mysql/
 # Set up MySQL with a username and password during installation.
 # Verify installation:
+```bash
 mysql --version
-
+```
 # Step 3: Clone the Repositories
 # Clone the frontend and backend repositories:
 git clone https://github.com/your-username/educonnect-frontend.git
