@@ -57,15 +57,15 @@ mysql --version
 ## Step 3: Clone the Repositories
 ### Clone the frontend and backend repositories:
 ```bash
-git clone https://github.com/your-username/educonnect-frontend.git
-git clone https://github.com/your-username/educonnect-backend.git
+git clone https://github.com/GitGud9786/FRONTEND_EDUCONNECT_MODLOCKED.git
+git clone https://github.com/Oshayer-Siddique/EDUCONNECT-MODLOCKED-1-Backend-.git
 ```
 ## Step 4: Set Up the Database
 ### Navigate to the backend repository:
 ```bash
-cd educonnect-backend
+cd EDUCONNECT-MODLOCKED-1-Backend-/BACKEND
 ```
-### Import the database setup file:
+### Setup your database for the project
 ### Open MySQL and log in:
 ```bash
 mysql -u your_username -p
@@ -73,15 +73,15 @@ mysql -u your_username -p
 
 ### Import the db.sql file:
 ```bash
-source backend/Admin/Config/db.sql;
+source EDUCONNECT-MODLOCKED-1-Backend-/BACKEND/Admin/Config/db.sql;
 ```
 ### Update the database configuration:
-Open the db.js file located in backend/Admin/Config and update the MySQL connection details (username, password, and database name).
+Open the db.js file located in EDUCONNECT-MODLOCKED-1-Backend-/BACKEND/Admin/Config and update the MySQL connection details (username, password, and database name).
 
 ## Step 5: Install Dependencies and Run the Backend
 ### Navigate to the backend directory:
 ```bash
-cd educonnect-backend
+cd EDUCONNECT-MODLOCKED-1-Backend-/BACKEND
 ```
 ### Install dependencies:
 ```bash
@@ -94,7 +94,7 @@ npm run dev
 ## Step 6: Install Dependencies and Run the Frontend
 ### Navigate to the frontend directory:
 ```bash
-cd ../educonnect-frontend
+cd ../FRONTEND_EDUCONNECT_MODLOCKED
 ```
 ### Install dependencies:
 ```bash
