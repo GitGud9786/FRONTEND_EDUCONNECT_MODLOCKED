@@ -36,86 +36,64 @@ EDUCONNECT offers a wide range of features tailored to three types of users: **A
 
 
 ## Installation
-To set up EDUCONNECT locally, follow these steps:
+To set up EDUCONNECT locally, follow these steps. Copy and paste the commands below into your terminal:
 
-### Prerequisites
-Before starting, ensure you have the following installed on your system:
-- **Node.js** and **npm**: Required to run the ReactJS application and backend server.
-- **MySQL**: The database used for this project.
+```bash
+# Step 1: Install Node.js and npm
+# Download and install Node.js from https://nodejs.org/
+# Verify installation:
+node -v
+npm -v
 
-### Step 1: Install Node.js and npm
-1. Download and install Node.js from the [official website](https://nodejs.org/).
-2. Verify the installation by running the following commands in your terminal:
-   ```bash
-   node -v
-   npm -v
+# Step 2: Install MySQL
+# Download and install MySQL from https://dev.mysql.com/downloads/mysql/
+# Set up MySQL with a username and password during installation.
+# Verify installation:
+mysql --version
 
-This will display the installed versions of Node.js and npm.
+# Step 3: Clone the Repositories
+# Clone the frontend and backend repositories:
+git clone https://github.com/your-username/educonnect-frontend.git
+git clone https://github.com/your-username/educonnect-backend.git
 
-### Step 2: Install MySQL
-1.Download and install MySQL from the official website.
-2.Set up MySQL with a username and password during installation.
-3.Verify the installation by running the following commands in your terminal:
-   ```bash
-   node -v
-   npm -v
+# Step 4: Set Up the Database
+# Navigate to the backend repository:
+cd educonnect-backend
 
-This will display the installed versions of Node.js and npm.
+# Import the database setup file:
+# Open MySQL and log in:
+mysql -u your_username -p
 
-### Step 3: Clone the Repositories
-EDUCONNECT has two separate repositories for the frontend and backend. Clone both repositories to your local machine:
+# Create a new database (if not already created):
+CREATE DATABASE educonnect;
+USE educonnect;
 
-   git clone https://github.com/your-username/educonnect-frontend.git
-   git clone https://github.com/your-username/educonnect-backend.git
+# Import the db.sql file:
+source backend/Admin/Config/db.sql;
 
-### Step 4: Set Up the Database
-1. Navigate to the backend repository:
+# Update the database configuration:
+# Open the db.js file located in backend/Admin/Config and update the MySQL connection details (username, password, and database name).
 
-   cd educonnect-backend
+# Step 5: Install Dependencies and Run the Backend
+# Navigate to the backend directory:
+cd educonnect-backend
 
-2. Locate the database setup file:
-   - Go to the directory: backend/Admin/Config.
-   - You will find a file named db.sql.
-   - Import the db.sql file into your MySQL database:
+# Install dependencies:
+npm install
 
-3. Open MySQL and log in:
+# Start the backend server:
+npm run dev
 
-   mysql -u your_username -p
-   source backend/Admin/Config/db.sql
+# Step 6: Install Dependencies and Run the Frontend
+# Navigate to the frontend directory:
+cd ../educonnect-frontend
 
-4. Update the database configuration:
-   - Open the db.js file located in backend/Admin/Config.
-   - Update the MySQL connection details (username, password, and database name) to match your local setup.
+# Install dependencies:
+npm install
 
-### Step 5: Install Dependencies and Run the Backend
-1. Navigate to the backend directory:
+# Start the frontend application:
+npm start
 
-   cd educonnect-backend
-
-2. Install the required dependencies:
-
-   npm install
-
-3. Start the backend server:
-
-   npm run dev
-
-The backend server will start running.
-   
-
-### Step 6: Install Dependencies and Run the Frontend
-1. Navigate to the frontend directory:
-
-   cd educonnect-frontend
-
-2. Install the required dependencies:
-
-   npm install
-
-3. Start the frontend application:
-
-   npm start
-
-The React application will start and automatically open in your browser at http://localhost:3000.
-
-
+# Step 7: Access the Application
+# Once both the backend and frontend are running, access EDUCONNECT at:
+# http://localhost:3000
