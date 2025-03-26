@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserGraduate,
@@ -8,16 +8,21 @@ import {
   faBuilding,
   faStar,
   faUser,
-  faCog,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../Assets/logo.jpg";
+import logout from "../Assets/logoutButton2.png";
 import "../styles/Dashboard.css";
 
 const TopBar = () => {
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
   const currentDate = new Date();
   const formattedDate = `${
     currentDate.getMonth() + 1
   }/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
 
   return (
     <div>
@@ -88,7 +93,6 @@ const TopBar = () => {
                 <FontAwesomeIcon icon={faStar} className="icon-home" />
                 <span>Teacher Assign</span>
               </NavLink>
-
             </li>
           </ul>
         </div>
@@ -97,15 +101,29 @@ const TopBar = () => {
           <ul>
             <li>
               <span className="date-home">{formattedDate}</span>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive ? "nav-home-selected" : "nav-home"
-                }
-              >
-                <FontAwesomeIcon icon={faUser} className="icon-home" />
-                <span>Admin</span>
-              </NavLink>
+
+              <div className="profile-dropdown">
+                <img
+                  src={logout}
+                  alt="Profile"
+                  className="dps"
+                  onClick={toggleDropdown}
+                />
+
+                {isDropdownOpen && (
+                  <div className="dropdown-menu">
+                    <NavLink
+                      to="/admin"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Admin
+                    </NavLink>
+                    <NavLink to="/" onClick={() => setDropdownOpen(false)}>
+                      LogOut
+                    </NavLink>
+                  </div>
+                )}
+              </div>
             </li>
           </ul>
         </div>
