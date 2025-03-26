@@ -44,7 +44,6 @@ const TeachersAdmin = () => {
     filterTeachers();
   }, [selectedDepartment, searchText]);
 
-
   const fetchTeacherDetails = async (teacherId) => {
     setLoading(true);
     try {
@@ -54,14 +53,13 @@ const TeachersAdmin = () => {
         setSelectedTeacher(data.length > 0 ? data[0] : null);
       } else {
         setSelectedTeacher(null);
-        alert("Student not found!");
+        alert("Teacher not found!");
       }
     } catch (error) {
       console.error("Error fetching teacher details:", error);
     }
     setLoading(false);
   };
-
 
   return (
     <div className="studentsadmincontainer">
@@ -96,46 +94,50 @@ const TeachersAdmin = () => {
           </div>
 
           <div className="stdadmin-controls">
-          <button>
-          <Link to="/admin/teacher/register" className="stdadmin-controls-button">
-            <FontAwesomeIcon icon={faPlus} />
-            <span>Add</span>
-          </Link>
-          </button>
-          <button>
-            <Link to="/admin/teacher/edit" className="stdadmin-controls-button">
-              <FontAwesomeIcon icon={faEdit} />
-              <span>Edit</span>
-            </Link>
-          </button>
-          <button
-            className="stdadmin-controls-button"
-            onClick={async () => {
-              const teacherId = prompt("Enter Teacher ID to delete:");
-              if (teacherId) {
-                try {
-                  const response = await fetch(`http://localhost:8000/teacher/delete/${teacherId}`, {
-                    method: "DELETE",
-                  });
+            <button>
+              <Link to="/admin/teacher/register" className="stdadmin-controls-button">
+                <FontAwesomeIcon icon={faPlus} />
+                <span>Add</span>
+              </Link>
+            </button>
+            <button>
+              <Link to="/admin/teacher/edit" className="stdadmin-controls-button">
+                <FontAwesomeIcon icon={faEdit} />
+                <span>Edit</span>
+              </Link>
+            </button>
+            <button
+              className="stdadmin-controls-button"
+              onClick={async () => {
+                const teacherId = prompt("Enter Teacher ID to delete:");
+                if (teacherId) {
+                  try {
+                    const response = await fetch(`http://localhost:8000/teacher/delete/${teacherId}`, {
+                      method: "DELETE",
+                    });
 
-                  if (response.ok) {
-                    alert("Teacher deleted successfully");
-                  } else {
-                    alert("Failed to delete teacher");
+                    if (response.ok) {
+                      alert("Teacher deleted successfully");
+                    } else {
+                      alert("Failed to delete teacher");
+                    }
+                  } catch (error) {
+                    console.error("Error deleting teacher:", error);
                   }
-                } catch (error) {
-                  console.error("Error deleting teacher:", error);
                 }
-              }
-            }}
-          >
-            <FontAwesomeIcon icon={faDumpster} />
-            <span>Delete</span>
-          </button>
-        </div>
-
+              }}
+            >
+              <FontAwesomeIcon icon={faDumpster} />
+              <span>Delete</span>
+            </button>
+          </div>
 
           {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+
+          {/* Total Teachers Count */}
+          <div className="total-students">
+            <p>Total Teachers Available: {filteredTeachers.length}</p>
+          </div>
 
           <table className="student-table">
             <thead>
@@ -145,7 +147,6 @@ const TeachersAdmin = () => {
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Department</th>
-                
               </tr>
             </thead>
             <tbody>
@@ -157,7 +158,6 @@ const TeachersAdmin = () => {
                     <td>{teacher.email}</td>
                     <td>{teacher.phone_number}</td>
                     <td>{teacher.department_name}</td>
-                    
                   </tr>
                 ))
               ) : (
@@ -167,10 +167,7 @@ const TeachersAdmin = () => {
               )}
             </tbody>
           </table>
-
-
         </div>
-
 
         {selectedTeacher && (
           <div className="student-info">
@@ -191,7 +188,6 @@ const TeachersAdmin = () => {
             )}
           </div>
         )}
-
       </div>
     </div>
   );

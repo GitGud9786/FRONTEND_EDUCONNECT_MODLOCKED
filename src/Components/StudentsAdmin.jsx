@@ -4,13 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEdit, faDumpster, faSearch, faEye } from '@fortawesome/free-solid-svg-icons';
 import TopBarAdmin from './TopBarAdmin';
 import '../styles/StudentsAdmin.css';
-import { color } from '@cloudinary/url-gen/qualifiers/background';
 
 const StudentsAdmin = () => {
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState('All');
-  const [selectedYear, setSelectedYear] = useState('All');
   const [searchText, setSearchText] = useState('');
   const [error, setError] = useState('');
   const [selectedStudent, setSelectedStudent] = useState(null);
@@ -35,9 +33,8 @@ const StudentsAdmin = () => {
   const filterStudents = () => {
     const searchResult = students.filter(student => {
       const departmentMatches = selectedDepartment === 'All' || student.department === selectedDepartment;
-      const yearMatches = selectedYear === 'All' || student.year === selectedYear;
       const idMatches = !searchText || student.student_id.toString().includes(searchText);
-      return departmentMatches && yearMatches && idMatches;
+      return departmentMatches && idMatches;
     });
 
     setFilteredStudents(searchResult);
@@ -45,7 +42,7 @@ const StudentsAdmin = () => {
 
   useEffect(() => {
     filterStudents();
-  }, [selectedDepartment, selectedYear, searchText]);
+  }, [selectedDepartment, searchText]);
 
   const fetchStudentDetails = async (studentId) => {
     setLoading(true);
@@ -101,44 +98,48 @@ const StudentsAdmin = () => {
           {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
 
           <div className="stdadmin-controls">
-          <button>
-          <Link to="/admin/student/register" className="stdadmin-controls-button">
-            <FontAwesomeIcon icon={faPlus} />
-            <span>Add</span>
-          </Link >
-          </button>
-          <button>
-            <Link to="/admin/student/edit" className="stdadmin-controls-button">
-              <FontAwesomeIcon icon={faEdit} />
-              <span>Edit</span>
-            </Link >
-          </button>
-          <button
-            className="stdadmin-controls-button"
-            onClick={async () => {
-              const studentId = prompt("Enter Student ID to delete:");
-              if (studentId) {
-                try {
-                  const response = await fetch(`http://localhost:8000/students/delete/${studentId}`, {
-                    method: "DELETE",
-                  });
+            <button>
+              <Link to="/admin/student/register" className="stdadmin-controls-button">
+                <FontAwesomeIcon icon={faPlus} />
+                <span>Add</span>
+              </Link>
+            </button>
+            <button>
+              <Link to="/admin/student/edit" className="stdadmin-controls-button">
+                <FontAwesomeIcon icon={faEdit} />
+                <span>Edit</span>
+              </Link>
+            </button>
+            <button
+              className="stdadmin-controls-button"
+              onClick={async () => {
+                const studentId = prompt("Enter Student ID to delete:");
+                if (studentId) {
+                  try {
+                    const response = await fetch(`http://localhost:8000/students/delete/${studentId}`, {
+                      method: "DELETE",
+                    });
 
-                  if (response.ok) {
-                    alert("Student deleted successfully");
-                  } else {
-                    alert("Failed to delete student");
+                    if (response.ok) {
+                      alert("Student deleted successfully");
+                    } else {
+                      alert("Failed to delete student");
+                    }
+                  } catch (error) {
+                    console.error("Error deleting student:", error);
                   }
-                } catch (error) {
-                  console.error("Error deleting student:", error);
                 }
-              }
-            }}
-          >
-            <FontAwesomeIcon icon={faDumpster} />
-            <span>Delete</span>
-          </button>
-        </div>
+              }}
+            >
+              <FontAwesomeIcon icon={faDumpster} />
+              <span>Delete</span>
+            </button>
+          </div>
 
+          {/* Total Students Count */}
+          <div className="total-students">
+            <p>Total Students Available : {filteredStudents.length}</p>
+          </div>
 
           <table className="student-table">
             <thead>
@@ -178,11 +179,7 @@ const StudentsAdmin = () => {
               )}
             </tbody>
           </table>
-
-
-
         </div>
-
 
         {selectedStudent && (
           <div className="student-info">
@@ -204,7 +201,6 @@ const StudentsAdmin = () => {
           </div>
         )}
       </div>
-      
     </div>
   );
 };

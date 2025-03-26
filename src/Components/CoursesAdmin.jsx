@@ -74,45 +74,50 @@ const CoursesAdmin = () => {
           </div>
 
           <div className="stdadmin-controls">
-          <button>
-          <Link to="/admin/course/register" className="stdadmin-controls-button">
-            <FontAwesomeIcon icon={faPlus} />
-            <span>Add</span>
-          </Link>
-          </button>
-          <button>
-            <Link to="/admin/course/edit" className="stdadmin-controls-button">
+            <button>
+              <Link to="/admin/course/register" className="stdadmin-controls-button">
+                <FontAwesomeIcon icon={faPlus} />
+                <span>Add</span>
+              </Link>
+            </button>
+            <button>
+              <Link to="/admin/course/edit" className="stdadmin-controls-button">
                 <FontAwesomeIcon icon={faEdit} />
                 <span>Edit</span>
-            </Link >
-          </button>
-          <button
-            className="stdadmin-controls-button"
-            onClick={async () => {
-              const courseId = prompt("Enter Course ID to delete:");
-              if (courseId) {
-                try {
-                  const response = await fetch(`http://localhost:8000/courses/delete/${courseId}`, {
-                    method: "DELETE",
-                  });
+              </Link>
+            </button>
+            <button
+              className="stdadmin-controls-button"
+              onClick={async () => {
+                const courseId = prompt("Enter Course ID to delete:");
+                if (courseId) {
+                  try {
+                    const response = await fetch(`http://localhost:8000/courses/delete/${courseId}`, {
+                      method: "DELETE",
+                    });
 
-                  if (response.ok) {
-                    alert("Course deleted successfully");
-                  } else {
-                    alert("Failed to delete course");
+                    if (response.ok) {
+                      alert("Course deleted successfully");
+                    } else {
+                      alert("Failed to delete course");
+                    }
+                  } catch (error) {
+                    console.error("Error deleting course:", error);
                   }
-                } catch (error) {
-                  console.error("Error deleting course:", error);
                 }
-              }
-            }}
-          >
-            <FontAwesomeIcon icon={faDumpster} />
-            <span>Delete</span>
-          </button>
-        </div>
+              }}
+            >
+              <FontAwesomeIcon icon={faDumpster} />
+              <span>Delete</span>
+            </button>
+          </div>
 
           {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+
+          {/* Total Courses Count */}
+          <div className="total-students">
+            <p>Total Courses Available: {filteredCourses.length}</p>
+          </div>
 
           <table className="student-table">
             <thead>
@@ -140,9 +145,7 @@ const CoursesAdmin = () => {
               )}
             </tbody>
           </table>
-
         </div>
-
       </div>
     </div>
   );
