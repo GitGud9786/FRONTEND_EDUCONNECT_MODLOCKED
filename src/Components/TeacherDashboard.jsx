@@ -5,6 +5,7 @@ import '../styles/TeacherDashboard.css';
 
 const TeacherClass = () => {
     const [courses, setCourses] = useState([]);
+    const [studentCounts, setStudentCounts] = useState({});
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -13,15 +14,30 @@ const TeacherClass = () => {
             try {
                 const response = await fetch(`http://localhost:8000/teacherassign/courses/${id}`);
                 const data = await response.json();
-                console.log('Fetched courses:', data); // Log the fetched data
                 if (Array.isArray(data)) {
                     setCourses(data);
+                    fetchStudentCounts(data); // Fetch student counts for all courses
                 } else {
                     console.error('Fetched data is not an array:', data);
                 }
             } catch (error) {
                 console.error('Error loading courses:', error);
             }
+        };
+
+        const fetchStudentCounts = async (courses) => {
+            const counts = {};
+            for (const course of courses) {
+                try {
+                    const response = await fetch(`http://localhost:8000/studentenroll/student-count/${course.course_id}`);
+                    const data = await response.json();
+                    counts[course.course_id] = data.total_students || 0;
+                } catch (error) {
+                    console.error(`Error fetching student count for course ${course.course_id}:`, error);
+                    counts[course.course_id] = 0;
+                }
+            }
+            setStudentCounts(counts);
         };
 
         fetchCourses();
@@ -41,7 +57,7 @@ const TeacherClass = () => {
                             <p className='teachersection'><strong>Section :</strong> 1 & 2</p>
                         </div>
                         <div className='teachercountsemester'>
-                            {/* <p className='teachercount'>Student count: {course.student_count}</p> */}
+                            <p className='teachercount'>Student count: {studentCounts[course.course_id] || 0}</p>
                             <p className='teachersemester'>Semester: {course.semester}</p>
                         </div>
                     </button>
@@ -120,7 +136,6 @@ const CombinedTeacherComponents = () => {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-                console.log('Fetched teacher info:', data);
                 if (data.length > 0) {
                     setTeacherInfo(data[0]);
                 } else {
@@ -144,10 +159,10 @@ const CombinedTeacherComponents = () => {
                     <p><strong>Email:</strong> {teacherInfo.email}</p>    
                 </aside>
                 <TeacherClass />
-                <TeacherSchedule />
             </div>
         </div>
     );
 };
 
 export default CombinedTeacherComponents;
+
