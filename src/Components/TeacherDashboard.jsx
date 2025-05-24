@@ -159,6 +159,7 @@ const CombinedTeacherComponents = () => {
                     <p><strong>Email:</strong> {teacherInfo.email}</p>    
                 </aside>
                 <TeacherClass />
+                <TeacherSchedule />
             </div>
         </div>
     );
